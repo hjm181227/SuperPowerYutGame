@@ -7,8 +7,8 @@ public class YutGamePanel extends JPanel {
 
     private GameManager     gameManager;
     private UserPanel       user1Panel, user2Panel;
-    private ImagePanel          BoardPanel;
-    private Image           boardImg;
+    private ImagePanel      BoardPanel, YutPanelView;
+    
 
     public YutGamePanel(){
         gameManager = new GameManager();
@@ -16,18 +16,21 @@ public class YutGamePanel extends JPanel {
         setBackground(Color.white);
         setLayout(null);
 
-        user1Panel = new UserPanel();
+        user1Panel = new UserPanel(gameManager.player1);
         user1Panel.setBounds(0,0,200,600);
         user1Panel.setVisible(true);
         add(user1Panel);
 
-        user2Panel = new UserPanel();
+        user2Panel = new UserPanel(gameManager.player2);
         user2Panel.setBounds(800,0,200,600);
         add(user2Panel);
 
         BoardPanel = new ImagePanel(new ImageIcon("images/boardImage.png").getImage(), 600, 600, 200, 0);
         add(BoardPanel);
 
+        YutPanelView = new ImagePanel(new ImageIcon("").getImage(), 600,200,200,600);
+        YutPanelView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        add(YutPanelView);
     }//constructor
 
     /*public void paintComponent(Graphics page){
