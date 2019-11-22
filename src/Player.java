@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Player {
     public Pawn[]      pawns;
     public int         score;
-    private Ability[]   abilities;
-    public boolean     isMyturn;
+    public Ability[]   abilities;
+    public boolean     isMyTurn;
 
     public Player(){
 
@@ -17,9 +17,13 @@ public class Player {
         abilities[0] = new Ability();
         abilities[1] = new Ability();
         score = 0;
-        isMyturn = false;
+        isMyTurn = false;
     }
 
     //  methods
     public void movePawn(){}
+
+    public void throwYut(){
+
+    }
 }
