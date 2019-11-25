@@ -7,17 +7,14 @@ public class YutGamePanel extends JPanel {
 
     private GameManager     gameManager;
     private UserPanel       user1Panel, user2Panel;
-    private ImagePanel      BoardPanel;
-    private Image           boardImg;
-    //private Point[]
+    private ImagePanel      BoardPanel, YutPanelView;
+    
+
     public YutGamePanel(){
         gameManager = new GameManager();
         setPreferredSize(new Dimension(1000, 800));
         setBackground(Color.white);
         setLayout(null);
-
-        for(Pawn p : gameManager.player1.pawns) add(p);
-        for(Pawn p : gameManager.player2.pawns) add(p);
 
         user1Panel = new UserPanel(gameManager.player1);
         user1Panel.setBounds(0,0,200,600);
@@ -31,7 +28,17 @@ public class YutGamePanel extends JPanel {
         BoardPanel = new ImagePanel(new ImageIcon("images/boardImage.png").getImage(), 600, 600, 200, 0);
         add(BoardPanel);
 
+        YutPanelView = new ImagePanel(new ImageIcon("").getImage(), 600,200,200,600);
+        YutPanelView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        add(YutPanelView);
     }//constructor
+
+    /*public void paintComponent(Graphics page){
+
+        super.paintComponent(page);
+
+
+    }//paintComponent()*/
 
     private class PawnClickListener implements MouseListener {
 
