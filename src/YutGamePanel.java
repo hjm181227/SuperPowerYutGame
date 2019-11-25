@@ -19,12 +19,12 @@ public class YutGamePanel extends JPanel {
         for(Pawn p : gameManager.player1.pawns) add(p);
         for(Pawn p : gameManager.player2.pawns) add(p);
 
-        user1Panel = new UserPanel();
+        user1Panel = new UserPanel(gameManager.player1);
         user1Panel.setBounds(0,0,200,600);
         user1Panel.setVisible(true);
         add(user1Panel);
 
-        user2Panel = new UserPanel();
+        user2Panel = new UserPanel(gameManager.player2);
         user2Panel.setBounds(800,0,200,600);
         add(user2Panel);
 
