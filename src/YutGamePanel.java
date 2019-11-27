@@ -15,6 +15,10 @@ public class YutGamePanel extends JPanel {
         setPreferredSize(new Dimension(1000, 800));
         setBackground(Color.white);
         setLayout(null);
+        setVisible(false);
+
+        for(Pawn p:gameManager.player1.pawns) add(p);
+        for(Pawn p:gameManager.player2.pawns) add(p);
 
         user1Panel = new UserPanel(gameManager.player1);
         user1Panel.setBounds(0,0,200,600);
@@ -31,6 +35,8 @@ public class YutGamePanel extends JPanel {
         YutPanelView = new ImagePanel(new ImageIcon("").getImage(), 600,200,200,600);
         YutPanelView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         add(YutPanelView);
+
+        repaint();
     }//constructor
 
     /*public void paintComponent(Graphics page){

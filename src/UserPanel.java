@@ -6,15 +6,16 @@ public class UserPanel extends JPanel{
 
     public UserPanel(Player user){
 
-        setBackground(Color.darkGray);
+        setBackground(Color.white);
+        setLayout(null);
 
         btnAbility1 = new JButton("btn1");
-        btnAbility1.setBounds(0,300,100,50);
+        btnAbility1.setBounds(0,350,100,50);
         btnAbility1.setLayout(null);
         add(btnAbility1);
 
         btnAbility2 = new JButton("btn2");
-        btnAbility2.setBounds(100,300,100,50);
+        btnAbility2.setBounds(100,350,100,50);
         btnAbility2.setLayout(null);
         add(btnAbility2);
     }//constructor
