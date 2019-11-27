@@ -16,9 +16,9 @@ public class ExplainPanel extends JPanel {
         setPreferredSize(new Dimension(1000, 800));
         setBackground(Color.white);
         setLayout(null);
-
+        setVisible(false);
         //게임 방법 타이틀
-        lblTitle = new JLabel("게임 방법 !");
+        lblTitle = new JLabel("게임 설명 !");
         lblTitle.setBounds(320,100,600,100);
         lblTitle.setFont(new Font("Vernada",Font.BOLD,80));
         lblTitle.setVisible(true);
