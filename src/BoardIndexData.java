@@ -5,11 +5,11 @@ public class BoardIndexData {
     public boolean  hasOtherPath;
     public int      shortCut;
     public BoardIndexData(){}
-    public BoardIndexData(int x, int y, int next, boolean bl, int index2){
+    public BoardIndexData(int x, int y, int next, boolean bl, int index){
         p = new Point(x,y);
         nextIndex = next;
         hasOtherPath = bl;
-        shortCut = index2;
+        shortCut = index;
     }
 
 }

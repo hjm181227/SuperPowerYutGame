@@ -6,7 +6,7 @@ public class UserPanel extends JPanel{
 
     public UserPanel(Player user){
 
-        setBackground(Color.darkGray);
+        setBackground(Color.white);
         setLayout(null);
 
         btnAbility1 = new JButton("btn1");

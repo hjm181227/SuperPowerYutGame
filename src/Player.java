@@ -6,9 +6,11 @@ public class Player {
     public int         score;
     private Ability[]   abilities;
     public boolean     isMyTurn;
-
+    public int        pawnImgWidth, pawnImgHeight;
     public Player(String img, int width, int height){
 
+        pawnImgWidth = width;
+        pawnImgHeight = height;
         pawns = new Pawn[4];
         for(int i=0;i<4;i++){
             pawns[i] = new Pawn(img, 0,0, width, height);
