@@ -15,7 +15,7 @@ public class YutGamePanel extends JPanel {
         setPreferredSize(new Dimension(1000, 800));
         setBackground(Color.white);
         setLayout(null);
-
+        setVisible(false);
 
         for(Pawn p:gameManager.player1.pawns) add(p);
         for(Pawn p:gameManager.player2.pawns) add(p);

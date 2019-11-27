@@ -10,7 +10,7 @@ public class MenuPanel extends JPanel {
 
     private JLabel lblTitle;
     private ImagePanel BoardPanel, YutPanelView;
-    private JButton btnStart, btnExplain, btnExit;
+    public JButton btnStart, btnExplain, btnExit;
 
 
     public MenuPanel() {
@@ -29,7 +29,6 @@ public class MenuPanel extends JPanel {
         btnStart = new JButton("게임 시작");
         btnStart.setBounds(300, 300, 400, 100);
         btnStart.setFont(new Font("Vernada", Font.BOLD, 60));
-        btnStart.addActionListener(new ButtonClick());
         btnStart.setVisible(true);
         add(btnStart);
 
@@ -37,7 +36,6 @@ public class MenuPanel extends JPanel {
         btnExplain = new JButton("게임 방법");
         btnExplain.setBounds(300, 400, 400, 100);
         btnExplain.setFont(new Font("Vernada", Font.BOLD, 60));
-        btnExplain.addActionListener(new ButtonClick());
         btnExplain.setVisible(true);
         add(btnExplain);
 
@@ -45,7 +43,6 @@ public class MenuPanel extends JPanel {
         btnExit = new JButton("게임 종료");
         btnExit.setBounds(300, 500, 400, 100);
         btnExit.setFont(new Font("Vernada", Font.BOLD, 60));
-        btnExit.addActionListener(new ButtonClick());
         btnExit.setVisible(true);
         add(btnExit);
 
@@ -84,19 +81,4 @@ public class MenuPanel extends JPanel {
         }
     }
 
-    private class ButtonClick implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Object Button = e.getSource();
-
-            if (btnStart == Button) {
-                setVisible(false);
-            } else if (btnExplain == Button) {
-
-            } else if (btnExit == Button) { System.exit(0);}
-
-        }
-
-    }
 }

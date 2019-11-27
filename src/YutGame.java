@@ -6,10 +6,10 @@ public class YutGame {
         JFrame frame = new JFrame("Yut Game");
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(1000,800));
         frame.setResizable(false);
 
-        MenuPanel Primary = new MenuPanel();
-        YutGamePanel primary = new YutGamePanel();
+        MainPanel Primary = new MainPanel();
         frame.getContentPane().add(Primary);
 
         frame.pack();
