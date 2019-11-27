@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class YutGame {
     public static void main(String[] args) {
@@ -7,9 +8,9 @@ public class YutGame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        StartPanel Primary = new StartPanel();
+        MenuPanel Primary = new MenuPanel();
         YutGamePanel primary = new YutGamePanel();
-        frame.getContentPane().add(primary);
+        frame.getContentPane().add(Primary);
 
         frame.pack();
         frame.setVisible(true);
