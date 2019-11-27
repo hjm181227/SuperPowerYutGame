@@ -5,11 +5,26 @@ public class GameManager {
     public Player player1, player2;
     public int    whoseTurn;
     public BoardIndexData[] boardIndexer;
+    public Point[] leftPawnWaiting, rightPawnWaiting;
     private int x = 770, y = 770;
     public GameManager(){
         player1 = new Player("images/horsePawn.png", 70, 68);
         player2 = new Player("images/pigPawn.png", 100, 75);
 
+        leftPawnWaiting = new Point[4];
+        leftPawnWaiting[0] = new Point(25,410);
+        leftPawnWaiting[1] = new Point(125,410);
+        leftPawnWaiting[2] = new Point(25,510);
+        leftPawnWaiting[3] = new Point(125,510);
+
+        rightPawnWaiting = new Point[4];
+        rightPawnWaiting[0] = new Point(800,410);
+        rightPawnWaiting[1] = new Point(900,410);
+        rightPawnWaiting[2] = new Point(800,510);
+        rightPawnWaiting[3] = new Point(900,510);
+
+        for(int i=0;i<4;i++) movePawn(player1.pawns[i], leftPawnWaiting[i]);
+        for(int i=0;i<4;i++) movePawn(player2.pawns[i], rightPawnWaiting[i]);
 
         boardIndexer = new BoardIndexData[30];
         for(int i=1;i<=5;i++, y-=35) boardIndexer[i] = new BoardIndexData(x, y, i+1,false, 0);
@@ -29,5 +44,8 @@ public class GameManager {
 
     }//constructor
 
+    public void movePawn(Pawn pawn, Point pt){
+        pawn.setLocation(pt.x, pt.y);
+    }
 
 }

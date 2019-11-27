@@ -16,7 +16,7 @@ public class Pawn extends JLabel {
     public int getCurrentIndex(){ return currentIndex; }
     public boolean getIsFinished(){ return isFinished; }
 
-    public void setIndex(int idx){ currentIndex = idx; }
+    public void setIndex(int idx){ currentIndex = idx;}
     public void setFinished(boolean a){ isFinished = a; }
 
     //  methods

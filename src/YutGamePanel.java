@@ -35,6 +35,8 @@ public class YutGamePanel extends JPanel {
         YutPanelView = new ImagePanel(new ImageIcon("").getImage(), 600,200,200,600);
         YutPanelView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         add(YutPanelView);
+
+        repaint();
     }//constructor
 
     /*public void paintComponent(Graphics page){
