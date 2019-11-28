@@ -8,6 +8,7 @@ public class YutGamePanel extends JPanel {
     private GameManager     gameManager;
     private UserPanel       user1Panel, user2Panel;
     private ImagePanel      BoardPanel, YutPanelView;
+    private JButton         btnThrow1, btnThrow2;
     
 
     public YutGamePanel(){
@@ -35,6 +36,14 @@ public class YutGamePanel extends JPanel {
         YutPanelView = new ImagePanel(new ImageIcon("").getImage(), 600,200,200,600);
         YutPanelView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         add(YutPanelView);
+
+        btnThrow1 = new JButton("윷 던지기");
+        btnThrow1.setBounds(0,600,200,200);
+        add(btnThrow1);
+
+        btnThrow2 = new JButton("윷 던지기");
+        btnThrow2.setBounds(800,600,200,200);
+        add(btnThrow2);
 
         repaint();
     }//constructor
