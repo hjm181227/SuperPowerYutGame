@@ -16,10 +16,10 @@ public class ExplainPanel extends JPanel {
     public int     imageIndex;
 
     public ExplainPanel(){
-
         GameManager.getInstance().set_explain(this);
 
         setBounds(0,0,1000,800);
+      
         setBackground(Color.white);
         setLayout(null);
         //setVisible(false);
