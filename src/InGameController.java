@@ -1,20 +1,26 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class InGameController {
 
     InGameView _view;
-
-    public InGameController(){
+    InGameData _data;
+    public InGameController() {
         _view = GameManager.getInstance().get_inGame();
-        for(Pawn p:GameManager.getInstance().get_gameData().leftPlayer.pawns) {
+        _data = GameManager.getInstance().get_gameData();
+        for (Pawn p : GameManager.getInstance().get_gameData().leftPlayer.pawns) {
             //_view.add(p);
             p.addMouseListener(new PawnClickListener());
         }
-        for(Pawn p:GameManager.getInstance().get_gameData().rightPlayer.pawns) {
+        for (Pawn p : GameManager.getInstance().get_gameData().rightPlayer.pawns) {
             //_view.add(p);
             p.addMouseListener(new PawnClickListener());
         }
+        _view.leftYutThrowBtn.addActionListener(new ThrowingYut());
+        _view.rightThrowBtn.addActionListener(new ThrowingYut());
 
     }
 
@@ -26,16 +32,20 @@ public class InGameController {
         }
 
         @Override
-        public void mouseReleased(MouseEvent e) { }
+        public void mouseReleased(MouseEvent e) {
+        }
 
         @Override
-        public void mouseClicked(MouseEvent e) { }
+        public void mouseClicked(MouseEvent e) {
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) { }
+        public void mouseEntered(MouseEvent e) {
+        }
 
         @Override
-        public void mouseExited(MouseEvent e) { }
+        public void mouseExited(MouseEvent e) {
+        }
     }
 
     private class FocusedPawnMove implements MouseListener {
@@ -66,4 +76,17 @@ public class InGameController {
 
         }
     }
+
+
+    private class ThrowingYut implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton btn = (JButton)e.getSource();
+            _data.throwResult = (int) Math.random() * 6 + 1;
+            _view.lblThrowing.start();
+            //btn.setEnabled(false);
+        }
+    }
 }
+
+

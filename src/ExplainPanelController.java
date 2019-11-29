@@ -46,4 +46,5 @@ public class ExplainPanelController {
         @Override
         public void mouseExited(MouseEvent e) { }
     }
+
 }

@@ -10,6 +10,7 @@ public class InGameData {
 
     public InGameData(){
         GameManager.getInstance().set_gameData(this);
+
         leftPlayer = new Player("images/horsePawn.png", 70, 68);
         rightPlayer = new Player("images/pigPawn.png",100,75);
         focused = null;

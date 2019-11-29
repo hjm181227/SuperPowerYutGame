@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,16 +10,20 @@ public class MainPanel extends JPanel{
     private InGameData GameData;
 
     ExplainPanelController e_control;
+    InGameController g_control;
 
     public MainPanel()
     {
         GameManager.getInstance().set_view(this);
 
+        setPreferredSize(new Dimension(1000,800));
+        setLayout(null);
         Menu = new MenuPanel();
         GameExplain = new ExplainPanel();
         e_control = new ExplainPanelController();
         GameData = new InGameData();
         GameStart = new InGameView();
+        g_control = new InGameController();
         add(Menu);
         add(GameExplain);
         add(GameStart);

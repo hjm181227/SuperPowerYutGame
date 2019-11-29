@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 //게임 방법을 누르면 나오는 패널
 public class ExplainPanel extends JPanel {
 
+
     public JLabel lblTitle;
 
     public JButton btnPrev, btnNext;
@@ -16,7 +17,9 @@ public class ExplainPanel extends JPanel {
 
     public ExplainPanel(){
         GameManager.getInstance().set_explain(this);
-        setPreferredSize(new Dimension(1000, 800));
+
+        setBounds(0,0,1000,800);
+      
         setBackground(Color.white);
         setLayout(null);
         //setVisible(false);
