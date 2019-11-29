@@ -6,17 +6,23 @@ import java.awt.event.MouseListener;
 //게임 방법을 누르면 나오는 패널
 public class ExplainPanel extends JPanel {
 
-    private JLabel lblTitle;
-    private ImagePanel      BoardPanel, YutPanelView;
-    private JButton btnPrev, btnNext;
 
+    public JLabel lblTitle;
 
+    public JButton btnPrev, btnNext;
+
+    public ImageIcon[] explains;
+
+    public int     imageIndex;
 
     public ExplainPanel(){
-        setPreferredSize(new Dimension(1000, 800));
+
+        GameManager.getInstance().set_explain(this);
+
+        setBounds(0,0,1000,800);
         setBackground(Color.white);
         setLayout(null);
-        setVisible(false);
+        //setVisible(false);
         //게임 방법 타이틀
         lblTitle = new JLabel("게임 설명 !");
         lblTitle.setBounds(320,100,600,100);
@@ -38,6 +44,9 @@ public class ExplainPanel extends JPanel {
         btnNext.setVisible(true);
         add(btnNext);
 
+        explains = new ImageIcon[3];
+        for(int i=0;i<3;i++) explains[i] = new ImageIcon();
+
     }//constructor
 
     /*public void paintComponent(Graphics page){
@@ -47,25 +56,4 @@ public class ExplainPanel extends JPanel {
 
     }//paintComponent()*/
 
-    private class PawnClickListener implements MouseListener {
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) { }
-
-        @Override
-        public void mouseEntered(MouseEvent e) { }
-
-        @Override
-        public void mouseExited(MouseEvent e) { }
-    }
 }//YutGamePanel()
