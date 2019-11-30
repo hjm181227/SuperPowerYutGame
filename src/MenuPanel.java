@@ -9,11 +9,13 @@ import java.awt.event.MouseListener;
 public class MenuPanel extends JPanel {
 
     private JLabel lblTitle;
-    private ImagePanel BoardPanel, YutPanelView;
     public JButton btnStart, btnExplain, btnExit;
 
 
     public MenuPanel() {
+
+        GameManager.getInstance().set_menu(this);
+
         setPreferredSize(new Dimension(1000, 800));
         setBackground(Color.white);
         setLayout(null);
@@ -49,36 +51,5 @@ public class MenuPanel extends JPanel {
 
     }//constructor
 
-    /*public void paintComponent(Graphics page){
-
-        super.paintComponent(page);
-
-
-    }//paintComponent()*/
-
-    private class PawnClickListener implements MouseListener {
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
-    }
 
 }

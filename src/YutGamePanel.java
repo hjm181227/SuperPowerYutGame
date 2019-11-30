@@ -1,36 +1,54 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class YutGamePanel extends JPanel {
+public class InGameView extends JPanel {
 
-    private GameManager     gameManager;
     private UserPanel       user1Panel, user2Panel;
     private ImagePanel      BoardPanel, YutPanelView;
-    
+    private InGameData      _gameData;
 
-    public YutGamePanel(){
-        gameManager = new GameManager();
-        setPreferredSize(new Dimension(1000, 800));
+    private JButton         leftYutThrowBtn, rightThrowBtn;
+
+    public InGameView(){
+
+        GameManager.getInstance().set_inGame(this);
+        _gameData = GameManager.getInstance().get_gameData();
+
+        setBounds(0,0,1000,800);
         setBackground(Color.white);
         setLayout(null);
-        setVisible(false);
 
-        for(Pawn p:gameManager.player1.pawns) add(p);
-        for(Pawn p:gameManager.player2.pawns) add(p);
 
-        user1Panel = new UserPanel(gameManager.player1);
+        for(Pawn p:_gameData.leftPlayer.pawns) {
+            this.add(p);
+
+        }
+        for(Pawn p:_gameData.rightPlayer.pawns) {
+            this.add(p);
+        }
+
+        user1Panel = new UserPanel(_gameData.leftPlayer);
         user1Panel.setBounds(0,0,200,600);
         user1Panel.setVisible(true);
         add(user1Panel);
 
-        user2Panel = new UserPanel(gameManager.player2);
+        user2Panel = new UserPanel(_gameData.rightPlayer);
         user2Panel.setBounds(800,0,200,600);
         add(user2Panel);
 
         BoardPanel = new ImagePanel(new ImageIcon("images/boardImage.png").getImage(), 600, 600, 200, 0);
         add(BoardPanel);
+
+        leftYutThrowBtn = new JButton("윷 던지기");
+        leftYutThrowBtn.setBounds(0,599, 200,200);
+        leftYutThrowBtn.setLayout(null);
+        add(leftYutThrowBtn);
+
+        rightThrowBtn = new JButton("윷 던지기");
+        rightThrowBtn.setBounds(800,599,200,200);
+        rightThrowBtn.setLayout(null);
+
+        add(rightThrowBtn);
 
         YutPanelView = new ImagePanel(new ImageIcon("").getImage(), 600,200,200,600);
         YutPanelView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -46,25 +64,4 @@ public class YutGamePanel extends JPanel {
 
     }//paintComponent()*/
 
-    private class PawnClickListener implements MouseListener {
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) { }
-
-        @Override
-        public void mouseEntered(MouseEvent e) { }
-
-        @Override
-        public void mouseExited(MouseEvent e) { }
-    }
 }//YutGamePanel()

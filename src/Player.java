@@ -13,7 +13,7 @@ public class Player {
         pawnImgHeight = height;
         pawns = new Pawn[4];
         for(int i=0;i<4;i++){
-            pawns[i] = new Pawn(img, 0,0, width, height);
+            pawns[i] = new Pawn(img, 0,0, width, height, i);
         }
 
         abilities = new Ability[2];

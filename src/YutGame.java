@@ -5,8 +5,7 @@ public class YutGame {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Yut Game");
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(1000,800));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);;
         frame.setResizable(false);
 
         MainPanel Primary = new MainPanel();
