@@ -16,7 +16,7 @@ public class MenuPanel extends JPanel {
 
         GameManager.getInstance().set_menu(this);
 
-        setBounds(0,0,1000,800);
+        setPreferredSize(new Dimension(1000, 800));
         setBackground(Color.white);
         setLayout(null);
 
