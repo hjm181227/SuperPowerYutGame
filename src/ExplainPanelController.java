@@ -28,6 +28,7 @@ public class ExplainPanelController {
         public void mouseClicked(MouseEvent e) {
             JButton btn = (JButton)e.getSource();
             if(btn == _explain.btnNext){
+                if(_explain.imageIndex == 2) return;
                 _explain.imageIndex += 1;
             }
             else if(btn == _explain.btnPrev){

@@ -4,11 +4,14 @@ import java.awt.*;
 public class Pawn extends JLabel {
     private int         currentIndex;
     private boolean     isFinished;
-    private Image       pawnImg;
+    private String       pawnImg;
     public int pawnNumber;
+    //private Pawn[]        conbined;
+    public Pawn(){}
     public Pawn(String img, int x, int y, int width, int height, int number){
         currentIndex = 0;
         isFinished = false;
+        pawnImg = img;
         setIcon(new ImageIcon(img));
         setBounds(x,y,width,height);
 
@@ -18,7 +21,7 @@ public class Pawn extends JLabel {
     //  get, set
     public int getCurrentIndex(){ return currentIndex; }
     public boolean isFinished(){ return isFinished; }
-
+    public String ImgSource(){ return pawnImg; }
     public void setIndex(int idx){ currentIndex = idx;}
     public void setFinished(boolean a){ isFinished = a; }
 
