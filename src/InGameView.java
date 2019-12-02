@@ -4,12 +4,13 @@ import java.awt.*;
 public class InGameView extends JPanel {
 
     private UserPanel       user1Panel, user2Panel;
-    private ImagePanel      BoardPanel, YutPanelView;
+    //private ImagePanel      BoardPanel;
+    private JLabel          gameBoard;
     private JButton         btnThrow1, btnThrow2;
     public Yut             lblThrowing;
     private InGameData      _gameData;
 
-    public JButton         leftYutThrowBtn, rightThrowBtn;
+    public JButton         leftThrowBtn, rightThrowBtn;
 
     public InGameView(){
 
@@ -39,23 +40,22 @@ public class InGameView extends JPanel {
         user2Panel.setBounds(800,0,200,600);
         add(user2Panel);
 
-        BoardPanel = new ImagePanel(new ImageIcon("images/boardImage.png").getImage(), 600, 600, 200, 0);
-        add(BoardPanel);
+        gameBoard = new JLabel();
+        gameBoard.setIcon(new ImageIcon("images/boardImage.png"));
+        gameBoard.setBounds(200,0,600,600);
+        //BoardPanel.setLayout(null);
+        //add(gameBoard);
 
-        leftYutThrowBtn = new JButton("윷 던지기");
-        leftYutThrowBtn.setBounds(0,599, 200,200);
-        leftYutThrowBtn.setLayout(null);
-        add(leftYutThrowBtn);
+        leftThrowBtn = new JButton("윷 던지기");
+        leftThrowBtn.setBounds(0,599, 200,200);
+        leftThrowBtn.setLayout(null);
+        add(leftThrowBtn);
 
         rightThrowBtn = new JButton("윷 던지기");
         rightThrowBtn.setBounds(800,599,200,200);
         rightThrowBtn.setLayout(null);
 
         add(rightThrowBtn);
-
-       // YutPanelView = new ImagePanel(new ImageIcon("").getImage(), 600,200,200,600);
-        //YutPanelView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        //add(YutPanelView);
 
         btnThrow1 = new JButton("윷 던지기");
         btnThrow1.setBounds(0,600,200,200);
@@ -70,16 +70,17 @@ public class InGameView extends JPanel {
         lblThrowing.setVisible(true);
         add(lblThrowing);
 
+        _gameData.previewMovedPawn = new Pawn();
+        _gameData.previewMovedPawn.setEnabled(false);
+        _gameData.previewMovedPawn.setVisible(false);
 
+        _gameData.previewMovedPawn.setBounds(200,0,100,100);
+        add(_gameData.previewMovedPawn);
+        this.setComponentZOrder(_gameData.previewMovedPawn, 0);
         repaint();
     }//constructor
 
 
-    /*public void paintComponent(Graphics page){
 
-        super.paintComponent(page);
-
-
-    }//paintComponent()*/
 
 }//YutGamePanel()

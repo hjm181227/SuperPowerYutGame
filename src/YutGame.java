@@ -6,7 +6,7 @@ public class YutGame {
         JFrame frame = new JFrame("Yut Game");
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);;
-        frame.setResizable(false);
+        frame.setResizable(true);
 
         MainPanel Primary = new MainPanel();
 
