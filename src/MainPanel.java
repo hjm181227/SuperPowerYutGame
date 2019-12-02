@@ -43,12 +43,12 @@ public class MainPanel extends JPanel{
         Menu.setVisible(false);
         GameStart.setVisible(true);
         GameExplain.setVisible(false);
-    }
+    }//게임시작
     public void showExplain(){
         Menu.setVisible(false);
         GameStart.setVisible(false);
         GameExplain.setVisible(true);
-    }
+    }//게임방법
 
     private class MenuSelect implements ActionListener {
 

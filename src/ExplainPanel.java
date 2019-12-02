@@ -20,11 +20,16 @@ public class ExplainPanel extends JPanel {
 
         setBackground(Color.white);
         setLayout(null);
+        imageIndex=0;
+
+        explains = new ImageIcon[3];
+        for(int i=0;i<3;i++)
+            explains[i] = new ImageIcon("images/rule"+(i+1)+".png");
 
         //게임 방법 타이틀
-        lblTitle = new JLabel("게임 설명 !");
-        lblTitle.setBounds(320,100,600,100);
-        lblTitle.setFont(new Font("Vernada",Font.BOLD,80));
+        lblTitle = new JLabel();
+        lblTitle.setBounds(0,100,1000,562);
+        lblTitle.setIcon(explains[imageIndex]);
         lblTitle.setVisible(true);
         add(lblTitle);
 
@@ -42,8 +47,6 @@ public class ExplainPanel extends JPanel {
         btnNext.setVisible(true);
         add(btnNext);
 
-        explains = new ImageIcon[3];
-        for(int i=0;i<3;i++) explains[i] = new ImageIcon();
 
     }//constructor
 

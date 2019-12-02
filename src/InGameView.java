@@ -44,7 +44,7 @@ public class InGameView extends JPanel {
         gameBoard.setIcon(new ImageIcon("images/boardImage.png"));
         gameBoard.setBounds(200,0,600,600);
         //BoardPanel.setLayout(null);
-        //add(gameBoard);
+        add(gameBoard);
 
         leftThrowBtn = new JButton("윷 던지기");
         leftThrowBtn.setBounds(0,599, 200,200);
