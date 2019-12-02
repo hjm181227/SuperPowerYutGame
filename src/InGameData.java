@@ -34,10 +34,10 @@ public class InGameData {
 
         boardIndexer = new BoardIndexData[30];
         boardIndexer[0] = new BoardIndexData(0,0,0,false,0);
-        boardIndexer[5] = new BoardIndexData(697,32,0,false,0);
-        boardIndexer[10] = new BoardIndexData(237,35,0,false,0);
-        boardIndexer[15] = new BoardIndexData(237,490,0,false,0);
-        boardIndexer[20] = new BoardIndexData(699,496,0,false,0);
+        boardIndexer[5] = new BoardIndexData(697,32,5,false,0);
+        boardIndexer[10] = new BoardIndexData(237,35,10,false,0);
+        boardIndexer[15] = new BoardIndexData(237,490,15,false,0);
+        boardIndexer[20] = new BoardIndexData(699,496,20,false,0);
         x = 697; y = 400;
         for(int i=1;i<=4;i++, y-=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[5].hasOtherPath = true;
@@ -52,8 +52,6 @@ public class InGameData {
         for(int i=16;i<=19;i++, x+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[20].nextIndex = 0;
 
-        x = 740;
-        y = 30;
         for(int i=21;i<=25;i++, x-=30, y+=30) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[23].hasOtherPath = true;
         boardIndexer[23].shortCut = 28;
