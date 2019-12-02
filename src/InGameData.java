@@ -34,14 +34,22 @@ public class InGameData {
 
         boardIndexer = new BoardIndexData[30];
         boardIndexer[0] = new BoardIndexData(0,0,0,false,0);
-        for(int i=1;i<=5;i++, y-=35) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
+        boardIndexer[5] = new BoardIndexData(697,32,0,false,0);
+        boardIndexer[10] = new BoardIndexData(237,35,0,false,0);
+        boardIndexer[15] = new BoardIndexData(237,490,0,false,0);
+        boardIndexer[20] = new BoardIndexData(699,496,0,false,0);
+        x = 697; y = 400;
+        for(int i=1;i<=4;i++, y-=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[5].hasOtherPath = true;
         boardIndexer[5].shortCut = 21;
-        for(int i=6;i<=10;i++, x-=35) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
+        x = 601; y = 32;
+        for(int i=6;i<=9;i++, x-=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[10].hasOtherPath = true;
         boardIndexer[10].shortCut = 26;
-        for(int i=11;i<=15;i++, y+=35) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
-        for(int i=16;i<=20;i++, x+=35) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
+        x = 237; y = 129;
+        for(int i=11;i<=14;i++, y+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
+        x = 332; y = 493;
+        for(int i=16;i<=19;i++, x+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[20].nextIndex = 0;
 
         x = 740;
@@ -94,8 +102,8 @@ public class InGameData {
                 p.setFinished(true);
                 activatedPlayer.score++;
             }//완주시 대기실로 이동
-            else p.setLocation(boardIndexer[boardIndexer[end].currentIndex].p); //좌표 이동
-
+            else p.setBounds(boardIndexer[boardIndexer[end].currentIndex].p.x,boardIndexer[boardIndexer[end].currentIndex].p.y,focusedPawn.getWidth(),focusedPawn.getHeight()); //좌표 이동
+            System.out.println(boardIndexer[boardIndexer[end].currentIndex].p);
             catchOpponentPawns(boardIndexer[end]);
     }
 
