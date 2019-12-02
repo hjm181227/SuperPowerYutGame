@@ -73,10 +73,11 @@ public class InGameView extends JPanel {
         _gameData.previewMovedPawn = new Pawn();
         _gameData.previewMovedPawn.setEnabled(false);
         _gameData.previewMovedPawn.setVisible(false);
-        _gameData.previewMovedPawn.setBounds(0,0,100,100);
+
         add(_gameData.previewMovedPawn);
-        this.setComponentZOrder(_gameData.previewMovedPawn, 0);
+        setComponentZOrder(_gameData.previewMovedPawn, 0);
         repaint();
+
     }//constructor
 
 
