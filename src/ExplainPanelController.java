@@ -1,4 +1,6 @@
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -8,27 +10,20 @@ public class ExplainPanelController {
 
     public ExplainPanelController(){
         _explain = GameManager.getInstance().get_explain();
-        _explain.btnNext.addMouseListener(new moveExplainPageListener());
-        _explain.btnPrev.addMouseListener(new moveExplainPageListener());
+        _explain.btnNext.addActionListener(new moveExplainPageListener());
+        _explain.btnPrev.addActionListener(new moveExplainPageListener());
     }
 
-    private class moveExplainPageListener implements MouseListener {
+    private class moveExplainPageListener implements ActionListener{
 
         @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
+        public void actionPerformed(ActionEvent e) {
             JButton btn = (JButton)e.getSource();
             if(btn == _explain.btnNext){
-                if(_explain.imageIndex == 2) return;
+                if(_explain.imageIndex == 2) {
+                    GameManager.getInstance().get_view().showInGame(); //게임 바로시작
+                    return;
+                }
                 _explain.imageIndex += 1;
             }
             else if(btn == _explain.btnPrev){
@@ -41,11 +36,6 @@ public class ExplainPanelController {
             _explain.repaint();
         }
 
-        @Override
-        public void mouseEntered(MouseEvent e) { }
-
-        @Override
-        public void mouseExited(MouseEvent e) { }
     }
-
 }
+
