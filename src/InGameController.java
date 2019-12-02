@@ -62,9 +62,7 @@ public class InGameController {
         public void mouseClicked(MouseEvent e) { }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
+        public void mousePressed(MouseEvent e) { }
 
         @Override
         public void mouseReleased(MouseEvent e) {
@@ -132,7 +130,4 @@ public class InGameController {
         ready(_data.activatedPlayer);
     }
 
-    public void activate(){
-
-    }
 }

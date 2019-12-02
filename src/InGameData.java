@@ -84,7 +84,7 @@ public class InGameData {
                 break;
         }
         System.out.println(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
-        previewMovedPawn.setLocation(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
+        previewMovedPawn.setBounds(boardIndexer[previewMovedPawn.getCurrentIndex()].p.x, boardIndexer[previewMovedPawn.getCurrentIndex()].p.y, focusedPawn.getWidth(), focusedPawn.getHeight());
         GameManager.getInstance().get_inGame().repaint();
     }
 
@@ -96,7 +96,7 @@ public class InGameData {
                 p.setFinished(true);
                 activatedPlayer.score++;
             }//완주시 대기실로 이동
-            else p.setLocation(boardIndexer[boardIndexer[end].currentIndex].p); //좌표 이동
+            else p.setBounds(boardIndexer[boardIndexer[end].currentIndex].p.x, boardIndexer[boardIndexer[end].currentIndex].p.y,p.getWidth(),p.getHeight()); //좌표 이동
 
             catchOpponentPawns(boardIndexer[end]);
     }

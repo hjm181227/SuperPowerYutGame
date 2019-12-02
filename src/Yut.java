@@ -1,20 +1,22 @@
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
+import java.awt.*;
 
 public class Yut extends JLabel implements Runnable{
 
     Thread  myThread;
     int nSleepTime;
     public JLabel[] lblYut = new JLabel[2];
-    public String[] ImagName = new String[6];
+    public String[] ImageName = new String[6];
     public JLabel A;
 
     public Yut(){
         super();
-        ImagName[0] = "images/Do.png"; ImagName[1] = "images/Gae.png";
-        ImagName[2] = "images/Girl.png"; ImagName[3] = "images/Yut.png";
-        ImagName[4] = "images/Mo.png"; ImagName[5] = "images/Bdo.png";
+        ImageName[0] = "images/Do.png"; ImageName[1] = "images/Gae.png";
+        ImageName[2] = "images/Girl.png"; ImageName[3] = "images/Yut.png";
+        ImageName[4] = "images/Mo.png"; ImageName[5] = "images/Bdo.png";
         nSleepTime = 100;
+        setIcon(new ImageIcon(ImageName[0]));
     }
     public Yut(String arg){
         super(arg);
@@ -44,7 +46,7 @@ public class Yut extends JLabel implements Runnable{
     public void run(){
         for(int i=0;i<6;i++) {
             //setText(Integer.toString(i));
-            setIcon(new ImageIcon(ImagName[i]));
+            setIcon(new ImageIcon(ImageName[i]));
             try { myThread.sleep(nSleepTime); }
             catch (Exception e) { }
         }
