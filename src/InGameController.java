@@ -23,7 +23,7 @@ public class InGameController {
         _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
-        setPlayerImage();
+        change_playerImgnLabel();
         ready(_data.activatedPlayer);
     }
 
@@ -121,13 +121,16 @@ public class InGameController {
     }
 
 
-    public void setPlayerImage(){
+    public void change_playerImgnLabel(){
         //left player turn
         if(_data.activatedPlayer == _data.leftPlayer){
             _data.leftPlayer.imgPlayer.setIcon(_data.leftPlayer.iconPalyer[0]);
             _data.leftPlayer.imgPlayer.setBounds(-25,90,250,230);
             _data.rightPlayer.imgPlayer.setIcon(_data.rightPlayer.iconPalyer[1]);
             _data.rightPlayer.imgPlayer.setBounds(-1,90,250,230);
+
+            _data.leftPlayer.lblTurn.setVisible(true);
+            _data.rightPlayer.lblTurn.setVisible(false);
         }
         //right player turn
         else{
@@ -135,6 +138,9 @@ public class InGameController {
             _data.leftPlayer.imgPlayer.setBounds(-1,90,250,230);
             _data.rightPlayer.imgPlayer.setIcon(_data.rightPlayer.iconPalyer[0]);
             _data.rightPlayer.imgPlayer.setBounds(-25,90,250,230);
+
+            _data.leftPlayer.lblTurn.setVisible(false);
+            _data.rightPlayer.lblTurn.setVisible(true);
         }
     }
 
@@ -148,7 +154,7 @@ public class InGameController {
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
         _data.activatedPlayer.isMyTurn = true;
-        setPlayerImage();
+        change_playerImgnLabel();
         ready(_data.activatedPlayer);
     }
 
