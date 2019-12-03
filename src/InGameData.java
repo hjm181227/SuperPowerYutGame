@@ -24,10 +24,10 @@ public class InGameData {
         leftPawnWaiting[3] = new Point(125,510);
 
         rightPawnWaiting = new Point[4];
-        rightPawnWaiting[0] = new Point(800,410);
-        rightPawnWaiting[1] = new Point(900,410);
-        rightPawnWaiting[2] = new Point(800,510);
-        rightPawnWaiting[3] = new Point(900,510);
+        rightPawnWaiting[0] = new Point(811,410);
+        rightPawnWaiting[1] = new Point(911,410);
+        rightPawnWaiting[2] = new Point(811,510);
+        rightPawnWaiting[3] = new Point(911,510);
 
         for(int i=0;i<4;i++) leftPlayer.pawns[i].setLocation(leftPawnWaiting[i]);
         for(int i=0;i<4;i++) rightPlayer.pawns[i].setLocation(rightPawnWaiting[i]);
