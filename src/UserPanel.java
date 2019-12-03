@@ -2,12 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UserPanel extends JPanel{
+
     public JButton btnAbility1, btnAbility2;
 
     public UserPanel(Player user){
 
         setBackground(Color.white);
         setLayout(null);
+
+        add(user.imgPlayer);
 
         btnAbility1 = new JButton("btn1");
         btnAbility1.setBounds(0,350,100,50);
