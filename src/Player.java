@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -7,6 +8,9 @@ public class Player {
     private Ability[]   abilities;
     public boolean     isMyTurn;
     public int        pawnImgWidth, pawnImgHeight;
+    public JLabel       imgPlayer;
+    public ImageIcon    iconPalyer;
+
     public Player(String img, int width, int height){
 
         pawnImgWidth = width;
@@ -21,6 +25,7 @@ public class Player {
         abilities[1] = new Ability();
         score = 0;
         isMyTurn = false;
+
     }
 
     //  methods

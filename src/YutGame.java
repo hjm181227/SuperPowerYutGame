@@ -5,7 +5,7 @@ public class YutGame {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Yut Game");
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);;
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
 
         MainPanel Primary = new MainPanel();
@@ -15,4 +15,5 @@ public class YutGame {
         frame.pack();
         frame.setVisible(true);
     }
+
 }
