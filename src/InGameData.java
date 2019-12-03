@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 
 public class InGameData {
@@ -13,6 +14,16 @@ public class InGameData {
         GameManager.getInstance().set_gameData(this);
         leftPlayer = new Player("images/horsePawn.png", 70, 68);
         rightPlayer = new Player("images/pigPawn.png",100,75);
+
+        leftPlayer.imgPlayer = new JLabel();
+        leftPlayer.iconPalyer = new ImageIcon("images/bubble.gif");
+        leftPlayer.imgPlayer.setIcon(leftPlayer.iconPalyer);
+        leftPlayer.imgPlayer.setBounds(-25,90,250,230);
+
+        rightPlayer.imgPlayer = new JLabel();
+        rightPlayer.iconPalyer = new ImageIcon("images/dance.gif");
+        rightPlayer.imgPlayer.setIcon(rightPlayer.iconPalyer);
+        rightPlayer.imgPlayer.setBounds(-25,90,250,230);
 
         throwResult = 0;
         activatedPlayer = leftPlayer;

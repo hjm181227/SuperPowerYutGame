@@ -31,8 +31,8 @@ public class MainPanel extends JPanel{
         Menu.btnExplain.addActionListener(new MenuSelect());
         Menu.btnExit.addActionListener(new MenuSelect());
 
-        //showMenu();
-        showInGame();
+        showMenu();
+      //  showInGame();
 }
 
     public void showMenu(){
