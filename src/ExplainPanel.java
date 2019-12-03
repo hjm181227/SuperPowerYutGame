@@ -34,7 +34,7 @@ public class ExplainPanel extends JPanel {
         add(lblTitle);
 
         //이전 페이지로 넘어가게 하는 버튼
-        btnPrev = new JButton("이전 페이지");
+        btnPrev = new JButton("메뉴로");
         btnPrev.setBounds(50,720,220,50);
         btnPrev.setFont(new Font("Vernada",Font.BOLD,30));
         btnPrev.setVisible(true);
