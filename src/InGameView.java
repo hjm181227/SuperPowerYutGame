@@ -55,7 +55,6 @@ public class InGameView extends JPanel {
         rightThrowBtn = new JButton("윷 던지기");
         rightThrowBtn.setBounds(800,599,200,200);
         rightThrowBtn.setLayout(null);
-
         add(rightThrowBtn);
 
         btnThrow1 = new JButton("윷 던지기");

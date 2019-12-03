@@ -9,7 +9,7 @@ public class Player {
     public boolean     isMyTurn;
     public int        pawnImgWidth, pawnImgHeight;
     public JLabel       imgPlayer;
-    public ImageIcon    iconPalyer;
+    public ImageIcon[]    iconPalyer;
 
     public Player(String img, int width, int height){
 
@@ -25,6 +25,9 @@ public class Player {
         abilities[1] = new Ability();
         score = 0;
         isMyTurn = false;
+
+        iconPalyer = new ImageIcon[2];
+        imgPlayer = new JLabel();
 
     }
 
