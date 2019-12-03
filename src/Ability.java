@@ -1,5 +1,3 @@
-import sun.plugin2.applet.Applet2Manager;
-
 public class Ability {
 
     private InGameData _gameData;
