@@ -91,13 +91,15 @@ public class InGameData {
     ///////////////////////////
 
 
-    /////////////////////
+    ////////////////////
     ///말 이동 관련 메소드///
     ////////////////////
     public void findNextPoint(){
 
         switch(focusedPawn.getCurrentIndex()) {
             case 0:
+                if(throwResult == 6)
+                    return;
                 previewMovedPawn.setIndex(throwResult);
                 break;
             case 5:
@@ -111,11 +113,15 @@ public class InGameData {
                 break;
             default:
                 if(throwResult == 6) {//빽도가 나오면 뒤로 한칸
+                    previewMovedPawn.setIndex((boardIndexer[focusedPawn.getCurrentIndex()].prevIndex));
                     break;
                 }
-                previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].nextIndex);
-                for(int i=1;i<throwResult;i++) previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
-                break;
+                else {
+                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].nextIndex);
+                    for (int i = 1; i < throwResult; i++)
+                        previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
+                    break;
+                }
         }
         System.out.println(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
         previewMovedPawn.setLocation(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
