@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 
 public class Player {
     public Pawn[]      pawns;
@@ -21,8 +19,32 @@ public class Player {
         }
 
         abilities = new Ability[2];
-        abilities[0] = new Ability();
-        abilities[1] = new Ability();
+        int random;
+        random = (int)(Math.random() * 4);
+        switch (random){
+            case 0:
+                abilities[0] = new MovementAbility.MoOrDo();
+                break;
+            case 1:
+                abilities[0] = new MovementAbility.GaeOrGirl();
+                break;
+            case 2:
+                abilities[0] = new MovementAbility.BackStep();
+            case 3:
+                abilities[0] = new MovementAbility.OnlyYut();
+        }
+        random = (int)(Math.random() * 4);
+        switch (random){
+            case 0:
+                abilities[1] = new LocationAbility.Exchange();
+                break;
+            case 1:
+                abilities[1] = new LocationAbility.GoHome();
+                break;
+            case 2:
+                abilities[1] = new LocationAbility.UpSideDown();
+        }
+
         score = 0;
         isMyTurn = false;
 
