@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.lang.management.PlatformLoggingMXBean;
 
 public class InGameData {
     public Player  leftPlayer, rightPlayer;
@@ -103,25 +104,24 @@ public class InGameData {
         GameManager.getInstance().get_inGame().repaint();
     }
 
-    public void moveOnePawn(Pawn p, int end){
+    public void moveOnePawn(Player owner, Pawn p, int end){
 
             p.setIndex(boardIndexer[end].currentIndex);//칸 인덱스 갱신
             if (boardIndexer[end].currentIndex == 0) {
-                goWaitingRoom(p, activatedPlayer);
+                goWaitingRoom(p, owner);
                 p.setFinished(true);
                 activatedPlayer.score++;
             }//완주시 대기실로 이동
             else p.setBounds(boardIndexer[boardIndexer[end].currentIndex].p.x,boardIndexer[boardIndexer[end].currentIndex].p.y,focusedPawn.getWidth(),focusedPawn.getHeight()); //좌표 이동
             System.out.println(boardIndexer[boardIndexer[end].currentIndex].p);
-            catchOpponentPawns(boardIndexer[end]);
+            catchOpponentPawns(owner == leftPlayer ? rightPlayer : leftPlayer, boardIndexer[end]);
     }
 
     public void goWaitingRoom(Pawn pawn, Player owner) {
         pawn.setLocation(owner == leftPlayer ? leftPawnWaiting[pawn.pawnNumber] : rightPawnWaiting[pawn.pawnNumber]);
     }
 
-    public void catchOpponentPawns(BoardIndexData index) {
-        Player opponent = activatedPlayer == leftPlayer ? rightPlayer : leftPlayer;
+    public void catchOpponentPawns(Player opponent, BoardIndexData index) {
         for(Pawn pawn:opponent.pawns){
             if(pawn.getCurrentIndex() == index.currentIndex){
                 pawn.setIndex(0);
@@ -131,8 +131,8 @@ public class InGameData {
 
     }//catchOpponentPawns()
 
-    public void moveAllPawns(){
-        Player opponent = activatedPlayer == leftPlayer ? rightPlayer : leftPlayer;
+    public void moveAllPawns(Player owner){
+        Player opponent = owner == leftPlayer ? rightPlayer : leftPlayer;
         BoardIndexData start = boardIndexer[focusedPawn.getCurrentIndex()], end = boardIndexer[previewMovedPawn.getCurrentIndex()];
 
         for(Pawn p: activatedPlayer.pawns){
@@ -141,13 +141,13 @@ public class InGameData {
                 if(end.currentIndex == 0) {
                     goWaitingRoom(p,activatedPlayer);
                     p.setFinished(true);
-                    activatedPlayer.score++;
+                    owner.score++;
                 }//완주시 대기실로 이동
                 else p.setLocation(boardIndexer[end.currentIndex].p); //좌표 이동
             }//출발지에 있는 말들 이동
         }
 
-        if(end.currentIndex != 0) catchOpponentPawns(end);  //이동한 자리에 있는 상대말 잡기
+        if(end.currentIndex != 0) catchOpponentPawns(opponent, end);  //이동한 자리에 있는 상대말 잡기
     }
 
 
