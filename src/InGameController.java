@@ -107,11 +107,11 @@ public class InGameController {
             if((_data.leftPlayer.isMyTurn && btn == _view.rightThrowBtn) || (_data.rightPlayer.isMyTurn && btn == _view.leftThrowBtn)) return;
             YutResult = Math.random();
             if(YutResult <= 0.1536)
-                _data.throwResult = 6;
+                _data.throwResult = 1;
             else if(YutResult <= 0.4992)
-                _data.throwResult = 4;
+                _data.throwResult = 2;
             else if(YutResult <= 0.7584)
-                _data.throwResult = 4;
+                _data.throwResult = 3;
             else if (YutResult <= 0.8880)
                 _data.throwResult = 4;
             else if (YutResult <= 0.9136)
