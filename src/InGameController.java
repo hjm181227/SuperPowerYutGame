@@ -107,11 +107,11 @@ public class InGameController {
             if((_data.leftPlayer.isMyTurn && btn == _view.rightThrowBtn) || (_data.rightPlayer.isMyTurn && btn == _view.leftThrowBtn)) return;
             YutResult = Math.random();
             if(YutResult <= 0.1536)
-                _data.throwResult = 1;
+                _data.throwResult = 6;
             else if(YutResult <= 0.4992)
-                _data.throwResult = 2;
+                _data.throwResult = 4;
             else if(YutResult <= 0.7584)
-                _data.throwResult = 3;
+                _data.throwResult = 4;
             else if (YutResult <= 0.8880)
                 _data.throwResult = 4;
             else if (YutResult <= 0.9136)
@@ -120,10 +120,19 @@ public class InGameController {
                 _data.throwResult = 6;
 
             _view.lblThrowing.start();
-
-            for(Pawn p:_data.activatedPlayer.pawns) if(p.isFinished()==false) p.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             btn.setEnabled(false);
             System.out.println(_data.throwResult);
+            if(_data.throwResult == 6) {
+                for(Pawn p:_data.activatedPlayer.pawns) {
+                    if(p.isFinished() == false && p.getCurrentIndex() != 0){
+                        for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        return;
+                    }
+                }
+                passPlayerTurn();
+            }
+            for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+
         }
     }
 
