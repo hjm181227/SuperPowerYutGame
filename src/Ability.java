@@ -1,22 +1,15 @@
-public class Ability {
+public abstract class Ability {
+    private boolean isUsed;
+    public InGameData _data = GameManager.getInstance().get_gameData();
+    public InGameView _view = GameManager.getInstance().get_inGame();
 
-    private InGameData _gameData;
-
-    public Ability() {
-        _gameData = GameManager.getInstance().get_gameData();
+    public Ability(){
+        isUsed = false;
     }//constructor
 
-    public void RandomIndex() {
-
-    }
-
-    public int MoOrDo() {
-        return 3;
-    }
-
-    public int GaeOrGirl() {
-        return 5;
-    }
+    public abstract void use();
+    public boolean isUsed(){ return isUsed; }
+    public void setUsed(boolean b){isUsed = b;}
 
 }
 

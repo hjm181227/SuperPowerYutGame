@@ -15,9 +15,15 @@ public class MenuPanel extends JPanel {
 
         GameManager.getInstance().set_menu(this);
 
-        setBounds(0,0,1000,800);
+        setPreferredSize(new Dimension(1000, 800));
         setBackground(Color.white);
         setLayout(null);
+////gif 넣기 테스트
+//        imglabel = new JLabel();
+//        ii= new ImageIcon("images/mini.gif");
+//        imglabel.setIcon(ii);
+//        imglabel.setBounds(10,10,320,320);
+//        add(imglabel);
 
         //게임의 타이틀
         lblTitle = new JLabel("초능력 윷놀이 !");

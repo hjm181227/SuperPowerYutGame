@@ -48,7 +48,9 @@ public class InGameView extends JPanel {
 
         leftThrowBtn = new JButton("윷 던지기");
         leftThrowBtn.setBounds(0,599, 200,200);
+
         leftThrowBtn.setFont(new Font("vernada",Font.BOLD,30));
+
         leftThrowBtn.setLayout(null);
         add(leftThrowBtn);
 

@@ -23,6 +23,7 @@ public class InGameController {
         _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
+
         change_playerImgnLabel();
         ready(_data.activatedPlayer);
     }
@@ -63,9 +64,7 @@ public class InGameController {
         public void mouseClicked(MouseEvent e) { }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
+        public void mousePressed(MouseEvent e) { }
 
         @Override
         public void mouseReleased(MouseEvent e) {
