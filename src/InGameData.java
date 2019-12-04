@@ -45,6 +45,7 @@ public class InGameData {
         for(int i=0;i<4;i++) leftPlayer.pawns[i].setLocation(leftPawnWaiting[i]);
         for(int i=0;i<4;i++) rightPlayer.pawns[i].setLocation(rightPawnWaiting[i]);
 
+        //기본적인 길 인덱스
         boardIndexer = new BoardIndexData[30];
         boardIndexer[0] = new BoardIndexData(0,0,0,false,0);
         boardIndexer[5] = new BoardIndexData(697,32,5,true,26);
@@ -53,28 +54,36 @@ public class InGameData {
         boardIndexer[20] = new BoardIndexData(699,496,20,false,0);
         x = 697; y = 400;
         for(int i=1;i<=4;i++, y-=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
-        boardIndexer[5].hasOtherPath = true;
         x = 601; y = 32;
         for(int i=6;i<=9;i++, x-=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
-        boardIndexer[10].hasOtherPath = true;
         x = 237; y = 129;
         for(int i=11;i<=14;i++, y+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         x = 332; y = 493;
         for(int i=16;i<=19;i++, x+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
-        for(int i=21;i<=25;i++, x-=30, y+=30) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
-        boardIndexer[23].hasOtherPath = true;
-        boardIndexer[23].shortCut = 28;
-        for(int i=26;i<=29;i++, x+=30, y+=30) boardIndexer[i] = new BoardIndexData(x,y, i, false, 0);
+
+        //지름길 인덱스 (왼쪽위 -> 오른쪽 아래, 중간 지점 인덱스 포함)
+        boardIndexer[21] = new BoardIndexData(323, 123,21,false,0);
+        boardIndexer[22] = new BoardIndexData(388, 188,22,false,0);
+        boardIndexer[23] = new BoardIndexData(468, 263,23,true,24);
+        boardIndexer[24] = new BoardIndexData(542, 343,24,false,0);
+        boardIndexer[25] = new BoardIndexData(607, 408,25,false,0);
+        //지름길 인덱스 (오른쪽위 -> 왼쪽아래, 중간 지점 인덱스 제외)
+        boardIndexer[26] = new BoardIndexData(607, 123,26,false,0);
+        boardIndexer[27] = new BoardIndexData(542, 188,27,false,0);
+        boardIndexer[28] = new BoardIndexData(388, 343,28,false,0);
+        boardIndexer[29] = new BoardIndexData(323, 408,29,false,0);
 
         //set exceptional index
+        boardIndexer[0].nextIndex = 0;
         boardIndexer[1].prevIndex = 20;
-        boardIndexer[20].nextIndex = 0;
         boardIndexer[21].prevIndex = 10;
-        boardIndexer[25].nextIndex = 20;
+        boardIndexer[23].nextIndex = 28;
         boardIndexer[26].prevIndex = 5;
+        boardIndexer[25].nextIndex = 20;
         boardIndexer[27].nextIndex = 23;
         boardIndexer[28].prevIndex = 23;
         boardIndexer[29].nextIndex = 15;
+        boardIndexer[20].nextIndex = 0;
     }//constructor
 
     ///////////////////////////
@@ -88,6 +97,9 @@ public class InGameData {
     public void findNextPoint(){
 
         switch(focusedPawn.getCurrentIndex()) {
+            case 0:
+                previewMovedPawn.setIndex(throwResult);
+                break;
             case 5:
             case 10:
             case 23:
