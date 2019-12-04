@@ -8,26 +8,27 @@ public class InGameData {
     public int     throwResult;
     public BoardIndexData[] boardIndexer;
     public Point[] leftPawnWaiting, rightPawnWaiting;
-    private int x = 720, y = 720;
+
+
     public Player activatedPlayer;
 
     public InGameData(){
+
+        int x = 720, y = 720;
+
         GameManager.getInstance().set_gameData(this);
         leftPlayer = new Player("images/horsePawn.png", 70, 68);
         rightPlayer = new Player("images/pigPawn.png",100,75);
 
-        leftPlayer.imgPlayer = new JLabel();
-        leftPlayer.iconPalyer = new ImageIcon("images/bubble.gif");
-        leftPlayer.imgPlayer.setIcon(leftPlayer.iconPalyer);
-        leftPlayer.imgPlayer.setBounds(-25,90,250,230);
-
-        rightPlayer.imgPlayer = new JLabel();
-        rightPlayer.iconPalyer = new ImageIcon("images/dance.gif");
-        rightPlayer.imgPlayer.setIcon(rightPlayer.iconPalyer);
-        rightPlayer.imgPlayer.setBounds(-25,90,250,230);
-
         throwResult = 0;
         activatedPlayer = leftPlayer;
+
+        //플레이어 움직이는 사진지정
+        leftPlayer.iconPalyer[0]= new ImageIcon("images/Left_move.gif");
+        leftPlayer.iconPalyer[1]= new ImageIcon("images/Left_stop.png");
+
+        rightPlayer.iconPalyer[0] = new ImageIcon("images/Right_move.gif");
+        rightPlayer.iconPalyer[1] = new ImageIcon("images/Right_stop.png");
 
         leftPawnWaiting = new Point[4];
         leftPawnWaiting[0] = new Point(25,410);
@@ -46,29 +47,34 @@ public class InGameData {
 
         boardIndexer = new BoardIndexData[30];
         boardIndexer[0] = new BoardIndexData(0,0,0,false,0);
-        boardIndexer[5] = new BoardIndexData(697,32,5,false,0);
-        boardIndexer[10] = new BoardIndexData(237,35,10,false,0);
+        boardIndexer[5] = new BoardIndexData(697,32,5,true,26);
+        boardIndexer[10] = new BoardIndexData(237,35,10,true,21);
         boardIndexer[15] = new BoardIndexData(237,490,15,false,0);
         boardIndexer[20] = new BoardIndexData(699,496,20,false,0);
         x = 697; y = 400;
         for(int i=1;i<=4;i++, y-=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[5].hasOtherPath = true;
-        boardIndexer[5].shortCut = 21;
         x = 601; y = 32;
         for(int i=6;i<=9;i++, x-=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[10].hasOtherPath = true;
-        boardIndexer[10].shortCut = 26;
         x = 237; y = 129;
         for(int i=11;i<=14;i++, y+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         x = 332; y = 493;
         for(int i=16;i<=19;i++, x+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
-        boardIndexer[20].nextIndex = 0;
-
         for(int i=21;i<=25;i++, x-=30, y+=30) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[23].hasOtherPath = true;
         boardIndexer[23].shortCut = 28;
         for(int i=26;i<=29;i++, x+=30, y+=30) boardIndexer[i] = new BoardIndexData(x,y, i, false, 0);
 
+        //set exceptional index
+        boardIndexer[1].prevIndex = 20;
+        boardIndexer[20].nextIndex = 0;
+        boardIndexer[21].prevIndex = 10;
+        boardIndexer[25].nextIndex = 20;
+        boardIndexer[26].prevIndex = 5;
+        boardIndexer[27].nextIndex = 23;
+        boardIndexer[28].prevIndex = 23;
+        boardIndexer[29].nextIndex = 15;
     }//constructor
 
     ///////////////////////////
@@ -102,6 +108,7 @@ public class InGameData {
         System.out.println(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
         previewMovedPawn.setLocation(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
         GameManager.getInstance().get_inGame().repaint();
+
     }
 
     public void moveOnePawn(Player owner, Pawn p, int end){
@@ -149,6 +156,5 @@ public class InGameData {
 
         if(end.currentIndex != 0) catchOpponentPawns(opponent, end);  //이동한 자리에 있는 상대말 잡기
     }
-
 
 }

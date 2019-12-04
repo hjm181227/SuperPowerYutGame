@@ -9,7 +9,6 @@ public class YutGame {
         frame.setResizable(true);
 
         MainPanel Primary = new MainPanel();
-
         frame.getContentPane().add(Primary);
 
         frame.pack();

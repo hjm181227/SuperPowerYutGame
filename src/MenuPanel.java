@@ -11,14 +11,11 @@ public class MenuPanel extends JPanel {
     private JLabel lblTitle;
     public JButton btnStart, btnExplain, btnExit;
 
-//    public JLabel imglabel;
-//    public ImageIcon ii;
-
     public MenuPanel() {
 
         GameManager.getInstance().set_menu(this);
 
-        setBounds(0,0,1000,800);
+        setBounds(0,0,1000, 800);
         setBackground(Color.white);
         setLayout(null);
 ////gif 넣기 테스트
