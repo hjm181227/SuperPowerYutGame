@@ -3,6 +3,7 @@ public abstract class Ability {
     public InGameData _data = GameManager.getInstance().get_gameData();
     public InGameView _view = GameManager.getInstance().get_inGame();
 
+
     public Ability(){
         isUsed = false;
     }//constructor
@@ -10,6 +11,7 @@ public abstract class Ability {
     public abstract void use();
     public boolean isUsed(){ return isUsed; }
     public void setUsed(boolean b){isUsed = b;}
+
 
 }
 
