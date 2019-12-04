@@ -9,6 +9,7 @@ public class InGameView extends JPanel {
     private JButton         btnThrow1, btnThrow2;
     public Yut             lblThrowing;
     private InGameData      _gameData;
+    public JLabel           Horse;
 
     public JButton         leftThrowBtn, rightThrowBtn;
 
@@ -30,6 +31,12 @@ public class InGameView extends JPanel {
         for(Pawn p:_gameData.rightPlayer.pawns) {
             this.add(p);
         }
+
+        Horse = new JLabel();
+        Horse.setIcon(new ImageIcon("images/horsePawn.png"));
+        Horse.setBounds(323,408,70,68);
+        Horse.setVisible(true);
+        add(Horse);
 
         user1Panel = new UserPanel(_gameData.leftPlayer);
         user1Panel.setBounds(0,0,200,600);
@@ -58,14 +65,6 @@ public class InGameView extends JPanel {
         rightThrowBtn.setBounds(800,599,200,200);
         rightThrowBtn.setLayout(null);
         add(rightThrowBtn);
-
-        btnThrow1 = new JButton("윷 던지기");
-        btnThrow1.setBounds(0,600,200,200);
-        add(btnThrow1);
-
-        btnThrow2 = new JButton("윷 던지기");
-        btnThrow2.setBounds(800,600,200,200);
-        add(btnThrow2);
 
         lblThrowing = new Yut();
         lblThrowing.setBounds(200,600,600,200);
