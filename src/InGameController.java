@@ -9,6 +9,7 @@ public class InGameController {
     private InGameView _view;
     private InGameData _data;
     private PawnClickListener leftPawnListener, rightPawnListener;
+    private double YutResult;
     public InGameController() {
 
         _view = GameManager.getInstance().get_inGame();
@@ -104,8 +105,22 @@ public class InGameController {
         public void actionPerformed(ActionEvent e) {
             JButton btn = (JButton) e.getSource();
             if((_data.leftPlayer.isMyTurn && btn == _view.rightThrowBtn) || (_data.rightPlayer.isMyTurn && btn == _view.leftThrowBtn)) return;
-            _data.throwResult = (int) (Math.random() * 5 + 1);
+            YutResult = Math.random();
+            if(YutResult <= 0.1536)
+                _data.throwResult = 1;
+            else if(YutResult <= 0.4992)
+                _data.throwResult = 2;
+            else if(YutResult <= 0.7584)
+                _data.throwResult = 3;
+            else if (YutResult <= 0.8880)
+                _data.throwResult = 4;
+            else if (YutResult <= 0.9136)
+                _data.throwResult = 5;
+            else if (YutResult < 1)
+                _data.throwResult = 6;
+
             _view.lblThrowing.start();
+
             for(Pawn p:_data.activatedPlayer.pawns) if(p.isFinished()==false) p.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             btn.setEnabled(false);
             System.out.println(_data.throwResult);
