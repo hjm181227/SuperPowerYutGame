@@ -23,6 +23,8 @@ public class InGameController {
         _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
+
+        change_playerImgnLabel();
         ready(_data.activatedPlayer);
     }
 
@@ -117,6 +119,30 @@ public class InGameController {
         _view.rightThrowBtn.setEnabled(false);
     }
 
+
+    public void change_playerImgnLabel(){
+        //left player turn
+        if(_data.activatedPlayer == _data.leftPlayer){
+            _data.leftPlayer.imgPlayer.setIcon(_data.leftPlayer.iconPalyer[0]);
+            _data.leftPlayer.imgPlayer.setBounds(-25,90,250,230);
+            _data.rightPlayer.imgPlayer.setIcon(_data.rightPlayer.iconPalyer[1]);
+            _data.rightPlayer.imgPlayer.setBounds(-1,90,250,230);
+
+            _data.leftPlayer.lblTurn.setVisible(true);
+            _data.rightPlayer.lblTurn.setVisible(false);
+        }
+        //right player turn
+        else{
+            _data.leftPlayer.imgPlayer.setIcon(_data.leftPlayer.iconPalyer[1]);
+            _data.leftPlayer.imgPlayer.setBounds(-1,90,250,230);
+            _data.rightPlayer.imgPlayer.setIcon(_data.rightPlayer.iconPalyer[0]);
+            _data.rightPlayer.imgPlayer.setBounds(-25,90,250,230);
+
+            _data.leftPlayer.lblTurn.setVisible(false);
+            _data.rightPlayer.lblTurn.setVisible(true);
+        }
+    }
+
     public void ready(Player player){
         if(player == _data.leftPlayer) GameManager.getInstance().get_inGame().leftThrowBtn.setEnabled(true);
         else if(player == _data.rightPlayer) GameManager.getInstance().get_inGame().rightThrowBtn.setEnabled(true);
@@ -127,7 +153,11 @@ public class InGameController {
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
         _data.activatedPlayer.isMyTurn = true;
+        change_playerImgnLabel();
         ready(_data.activatedPlayer);
     }
 
+    public void activate(){
+
+    }
 }

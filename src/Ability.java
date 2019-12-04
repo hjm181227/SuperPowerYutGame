@@ -10,4 +10,6 @@ public abstract class Ability {
     public abstract void use();
     public boolean isUsed(){ return isUsed; }
     public void setUsed(boolean b){isUsed = b;}
+
 }
+

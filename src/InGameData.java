@@ -8,6 +8,7 @@ public class InGameData {
     public BoardIndexData[] boardIndexer;
     public Point[] leftPawnWaiting, rightPawnWaiting;
 
+
     public Player activatedPlayer;
 
     public InGameData(){
@@ -18,18 +19,15 @@ public class InGameData {
         leftPlayer = new Player("images/horsePawn.png", 70, 68);
         rightPlayer = new Player("images/pigPawn.png",100,75);
 
-        leftPlayer.imgPlayer = new JLabel();
-        leftPlayer.iconPalyer = new ImageIcon("images/bubble.gif");
-        leftPlayer.imgPlayer.setIcon(leftPlayer.iconPalyer);
-        leftPlayer.imgPlayer.setBounds(-25,90,250,230);
-
-        rightPlayer.imgPlayer = new JLabel();
-        rightPlayer.iconPalyer = new ImageIcon("images/dance.gif");
-        rightPlayer.imgPlayer.setIcon(rightPlayer.iconPalyer);
-        rightPlayer.imgPlayer.setBounds(-25,90,250,230);
-
         throwResult = 0;
         activatedPlayer = leftPlayer;
+
+        //플레이어 움직이는 사진지정
+        leftPlayer.iconPalyer[0]= new ImageIcon("images/Left_move.gif");
+        leftPlayer.iconPalyer[1]= new ImageIcon("images/Left_stop.png");
+
+        rightPlayer.iconPalyer[0] = new ImageIcon("images/Right_move.gif");
+        rightPlayer.iconPalyer[1] = new ImageIcon("images/Right_stop.png");
 
         leftPawnWaiting = new Point[4];
         leftPawnWaiting[0] = new Point(25,410);
@@ -38,10 +36,10 @@ public class InGameData {
         leftPawnWaiting[3] = new Point(125,510);
 
         rightPawnWaiting = new Point[4];
-        rightPawnWaiting[0] = new Point(800,410);
-        rightPawnWaiting[1] = new Point(900,410);
-        rightPawnWaiting[2] = new Point(800,510);
-        rightPawnWaiting[3] = new Point(900,510);
+        rightPawnWaiting[0] = new Point(811,410);
+        rightPawnWaiting[1] = new Point(911,410);
+        rightPawnWaiting[2] = new Point(811,510);
+        rightPawnWaiting[3] = new Point(911,510);
 
         for(int i=0;i<4;i++) leftPlayer.pawns[i].setLocation(leftPawnWaiting[i]);
         for(int i=0;i<4;i++) rightPlayer.pawns[i].setLocation(rightPawnWaiting[i]);
@@ -62,8 +60,6 @@ public class InGameData {
         for(int i=11;i<=14;i++, y+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         x = 332; y = 493;
         for(int i=16;i<=19;i++, x+=90) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
-
-
         for(int i=21;i<=25;i++, x-=30, y+=30) boardIndexer[i] = new BoardIndexData(x, y, i,false, 0);
         boardIndexer[23].hasOtherPath = true;
         boardIndexer[23].shortCut = 28;
@@ -73,7 +69,6 @@ public class InGameData {
         boardIndexer[1].prevIndex = 20;
         boardIndexer[20].nextIndex = 0;
         boardIndexer[21].prevIndex = 10;
-
         boardIndexer[25].nextIndex = 20;
         boardIndexer[26].prevIndex = 5;
         boardIndexer[27].nextIndex = 23;
@@ -112,6 +107,7 @@ public class InGameData {
         System.out.println(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
         previewMovedPawn.setLocation(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
         GameManager.getInstance().get_inGame().repaint();
+
     }
 
     public void moveOnePawn(Pawn p, int end){
@@ -160,6 +156,5 @@ public class InGameData {
 
         if(end.currentIndex != 0) catchOpponentPawns(end);  //이동한 자리에 있는 상대말 잡기
     }
-
 
 }

@@ -11,9 +11,6 @@ public class MenuPanel extends JPanel {
     private JLabel lblTitle;
     public JButton btnStart, btnExplain, btnExit;
 
-//    public JLabel imglabel;
-//    public ImageIcon ii;
-
     public MenuPanel() {
 
         GameManager.getInstance().set_menu(this);

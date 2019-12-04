@@ -21,6 +21,8 @@ public class UserPanel extends JPanel{
         btnAbility2.setBounds(100,350,100,50);
         btnAbility2.setLayout(null);
         add(btnAbility2);
+
+        add(user.lblTurn);
     }//constructor
 
 }

@@ -19,6 +19,7 @@ public class Pawn extends JLabel {
     }// constructor
 
     //  get, set
+
     public int getCurrentIndex(){ return currentIndex; }
     public boolean isFinished(){ return isFinished; }
     public String ImgSource(){ return pawnImg; }

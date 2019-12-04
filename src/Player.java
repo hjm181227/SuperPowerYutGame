@@ -1,13 +1,16 @@
 import javax.swing.*;
 
+
 public class Player {
     public Pawn[]      pawns;
     public int         score;
     private Ability[]   abilities;
     public boolean     isMyTurn;
     public int        pawnImgWidth, pawnImgHeight;
-    public JLabel       imgPlayer;
-    public ImageIcon    iconPalyer;
+
+    public JLabel       imgPlayer, lblTurn;
+    public ImageIcon[]    iconPalyer;
+
 
     public Player(String img, int width, int height){
 
@@ -47,6 +50,15 @@ public class Player {
 
         score = 0;
         isMyTurn = false;
+
+        iconPalyer = new ImageIcon[2];
+        imgPlayer = new JLabel();
+
+        lblTurn= new JLabel();
+        lblTurn.setBounds(20,10,160,80);
+        lblTurn.setFont(new Font("Verdana", Font.BOLD, 30));
+        lblTurn.setText("My Turn!");
+        lblTurn.setVisible(false);
 
     }
 
