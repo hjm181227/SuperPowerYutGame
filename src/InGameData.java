@@ -90,17 +90,40 @@ public class InGameData {
     ///////////////////////////
 
 
-    /////////////////////
+    ////////////////////
     ///말 이동 관련 메소드///
     ////////////////////
     public void findNextPoint(){
 
         switch(focusedPawn.getCurrentIndex()) {
             case 0:
+                if(throwResult == 6)
+                    return;
                 previewMovedPawn.setIndex(throwResult);
                 break;
             case 5:
             case 10:
+                if(throwResult == 6)
+                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                else
+                    previewMovedPawn.setIndex(21 + throwResult - 1);
+                    break;
+            case 21:
+                if(throwResult == 6)
+                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                else if(throwResult == 5)
+                    previewMovedPawn.setIndex(20);
+                else
+                    previewMovedPawn.setIndex(22 + throwResult - 1);
+                break;
+            case 22:
+                if(throwResult == 6)
+                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                else if(throwResult == 5)
+                    previewMovedPawn.setIndex(0);
+                else
+                    previewMovedPawn.setIndex(23 + throwResult - 1);
+                break;
             case 23:
                 if(throwResult == 6) {//빽도가 나오면 뒤로 한칸
                     break;
@@ -110,11 +133,15 @@ public class InGameData {
                 break;
             default:
                 if(throwResult == 6) {//빽도가 나오면 뒤로 한칸
+                    previewMovedPawn.setIndex((boardIndexer[focusedPawn.getCurrentIndex()].prevIndex));
                     break;
                 }
-                previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].nextIndex);
-                for(int i=1;i<throwResult;i++) previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
-                break;
+                else {
+                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].nextIndex);
+                    for (int i = 1; i < throwResult; i++)
+                        previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
+                    break;
+                }
         }
         System.out.println(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
         previewMovedPawn.setLocation(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
