@@ -10,6 +10,7 @@ public class InGameController {
     private InGameData _data;
     private PawnClickListener leftPawnListener, rightPawnListener;
     private double YutResult;
+
     public InGameController() {
 
         _view = GameManager.getInstance().get_inGame();
@@ -121,7 +122,15 @@ public class InGameController {
 
             _view.lblThrowing.start();
 
-            for(Pawn p:_data.activatedPlayer.pawns) if(p.isFinished()==false) p.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+            // 여기서 윷 결과값 바꾸기 들어감
+
+            _view.lblThrowing.setResultYutImg(_data.throwResult);
+       //    _view.lblThrowing.setIcon(new ImageIcon(_view.lblThrowing.ImageName[4]));
+
+            for(Pawn p:_data.activatedPlayer.pawns){
+                if(p.isFinished()==false)
+                    p.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+            }
             btn.setEnabled(false);
             System.out.println(_data.throwResult);
         }
