@@ -5,11 +5,11 @@ public class InGameView extends JPanel {
 
     private UserPanel       user1Panel, user2Panel;
     //private ImagePanel      BoardPanel;
-    private JLabel          gameBoard;
+    private JLabel          gameBoard ,Horse;
     private JButton         btnThrow1, btnThrow2;
-    public Yut             lblThrowing;
+    public Yut              lblThrowing;
     private InGameData      _gameData;
-    public JLabel           Horse;
+    public JLabel          lblYutResult;
 
     public JButton         leftThrowBtn, rightThrowBtn;
 
@@ -67,9 +67,15 @@ public class InGameView extends JPanel {
         add(rightThrowBtn);
 
         lblThrowing = new Yut();
-        lblThrowing.setBounds(200,600,600,200);
+        lblThrowing.setBounds(210,600,400,200);
         lblThrowing.setVisible(true);
         add(lblThrowing);
+
+        lblYutResult= new JLabel();
+        lblYutResult.setBounds(650,650,100,100);
+        lblYutResult.setFont(new Font("Verdana", Font.BOLD, 35));
+        add(lblYutResult);
+
 
         _gameData.previewMovedPawn = new Pawn();
         _gameData.previewMovedPawn.setEnabled(false);

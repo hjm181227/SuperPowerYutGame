@@ -8,6 +8,9 @@ public class InGameData {
     public BoardIndexData[] boardIndexer;
     public Point[] leftPawnWaiting, rightPawnWaiting;
 
+    public ImageIcon[]    iconYutText;
+    public String[]  iconYutTextName = new String[6];
+
 
     public Player activatedPlayer;
 
@@ -21,6 +24,8 @@ public class InGameData {
 
         throwResult = 0;
         activatedPlayer = leftPlayer;
+
+
 
         //플레이어 움직이는 사진지정
         leftPlayer.iconPalyer[0]= new ImageIcon("images/Left_move.gif");
@@ -83,7 +88,27 @@ public class InGameData {
         boardIndexer[28].prevIndex = 23;
         boardIndexer[29].nextIndex = 15;
         boardIndexer[20].nextIndex = 0;
+
+
+
+        //윷던지고 결과 텍스트 이미지 변경
+        iconYutTextName[0]="images/imgDO.png";
+        iconYutTextName[1]="images/imgGAE.png";
+        iconYutTextName[2]="images/imgGIRL.png";
+        iconYutTextName[3]="images/imgYUT.png";
+        iconYutTextName[4]="images/imgMO.png";
+        iconYutTextName[5]="images/imgBDO.png";
+
+        iconYutText = new ImageIcon[6];
+        for(int i=0; i<6; i++)
+            iconYutText[i]= new ImageIcon(iconYutTextName[i]);
+
+
+
+
+
     }//constructor
+
 
     ///////////////////////////
     ///플레이어 턴 변경 관련 메소드///
