@@ -67,7 +67,6 @@ public class Yut extends JLabel implements Runnable{
 
         setIcon(new ImageIcon(iconImageName[nResult-1]));
 
-
     }//run()
 
 
