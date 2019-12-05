@@ -103,6 +103,10 @@ public class InGameData {
                 previewMovedPawn.setIndex(throwResult);
                 break;
             case 5:
+                previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].shortCut);
+                for (int i = 1; i < throwResult; i++)
+                    previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
+                    break;
             case 10:
                 if(throwResult == 6)
                     previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
