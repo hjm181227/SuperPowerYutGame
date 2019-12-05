@@ -120,10 +120,19 @@ public class InGameController {
                 _data.throwResult = 6;
 
             _view.lblThrowing.start();
-
-            for(Pawn p:_data.activatedPlayer.pawns) if(p.isFinished()==false) p.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             btn.setEnabled(false);
             System.out.println(_data.throwResult);
+            if(_data.throwResult == 6) {
+                for(Pawn p:_data.activatedPlayer.pawns) {
+                    if(p.isFinished() == false && p.getCurrentIndex() != 0){
+                        for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        return;
+                    }
+                }
+                passPlayerTurn();
+            }
+            for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+
         }
     }
 
