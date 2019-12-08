@@ -8,6 +8,7 @@ public abstract class Ability {
         isUsed = false;
     }//constructor
 
+
     public abstract void use();
     public boolean isUsed(){ return isUsed; }
     public void setUsed(boolean b){isUsed = b;}
