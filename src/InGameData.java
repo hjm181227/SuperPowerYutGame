@@ -78,6 +78,7 @@ public class InGameData {
         boardIndexer[1].prevIndex = 20;
         boardIndexer[21].prevIndex = 10;
         boardIndexer[23].nextIndex = 28;
+        boardIndexer[23].prevIndex = 27;
         boardIndexer[26].prevIndex = 5;
         boardIndexer[25].nextIndex = 20;
         boardIndexer[27].nextIndex = 23;
@@ -103,10 +104,15 @@ public class InGameData {
                 previewMovedPawn.setIndex(throwResult);
                 break;
             case 5:
-                previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].shortCut);
-                for (int i = 1; i < throwResult; i++)
-                    previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
+                if(throwResult == 6) {
+                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                }
+                else {
+                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].shortCut);
+                    for (int i = 1; i < throwResult; i++)
+                        previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
                     break;
+                }
             case 10:
                 if(throwResult == 6)
                     previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
@@ -181,9 +187,8 @@ public class InGameData {
 
     }//catchOpponentPawns()
 
-    public void moveAllPawns(Player owner){
+    public void moveAllPawns(Player owner,BoardIndexData start , BoardIndexData end){
         Player opponent = owner == leftPlayer ? rightPlayer : leftPlayer;
-        BoardIndexData start = boardIndexer[focusedPawn.getCurrentIndex()], end = boardIndexer[previewMovedPawn.getCurrentIndex()];
 
         for(Pawn p: activatedPlayer.pawns){
             if(p.getCurrentIndex() == start.currentIndex) {

@@ -69,9 +69,8 @@ public class InGameController {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
             if(_data.focusedPawn.getCurrentIndex()==0) _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, _data.previewMovedPawn.getCurrentIndex());
-            else _data.moveAllPawns(_data.activatedPlayer);
+            else _data.moveAllPawns(_data.activatedPlayer,_data.boardIndexer[_data.focusedPawn.getCurrentIndex()],_data.boardIndexer[_data.previewMovedPawn.getCurrentIndex()]);
             for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             _data.previewMovedPawn.setVisible(false);
             //finish turn(pass turn)
