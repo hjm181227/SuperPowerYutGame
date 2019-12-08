@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class InGameData {
     public Player  leftPlayer, rightPlayer;
@@ -14,9 +15,12 @@ public class InGameData {
 
     public Player activatedPlayer;
 
+    public ArrayList<ThrowData> previewPawns;
+    public int throwableNCnt;
+
     public InGameData(){
 
-        int x = 720, y = 720;
+        int x, y;
 
         GameManager.getInstance().set_gameData(this);
         leftPlayer = new Player("images/horsePawn.png", 70, 68);
@@ -25,7 +29,7 @@ public class InGameData {
         throwResult = 0;
         activatedPlayer = leftPlayer;
 
-
+        previewPawns = new ArrayList<ThrowData>();
 
         //플레이어 움직이는 사진지정
         leftPlayer.iconPalyer[0]= new ImageIcon("images/Left_move.gif");
@@ -108,7 +112,6 @@ public class InGameData {
 
 
     }//constructor
-
 
     ///////////////////////////
     ///플레이어 턴 변경 관련 메소드///

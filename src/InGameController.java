@@ -124,13 +124,11 @@ public class InGameController {
             btn.setEnabled(false);
             System.out.println(_data.throwResult);
 
-
-
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
             //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
             _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult-1]);
 
-        //    _view.lblYutResult.setText( _view.lblThrowing.getstrResult() );
+            _data.throwableNCnt--;
 
             if(_data.throwResult == 6) {
                 for(Pawn p:_data.activatedPlayer.pawns) {
@@ -139,10 +137,10 @@ public class InGameController {
                         return;
                     }
                 }
-                passPlayerTurn();
+                if(_data.throwableNCnt==0) passPlayerTurn();
             }
 
-            for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+            if(_data.throwableNCnt == 0) for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
 
         }
     }
@@ -181,6 +179,7 @@ public class InGameController {
     public void ready(Player player){
         if(player == _data.leftPlayer) GameManager.getInstance().get_inGame().leftThrowBtn.setEnabled(true);
         else if(player == _data.rightPlayer) GameManager.getInstance().get_inGame().rightThrowBtn.setEnabled(true);
+        _data.throwableNCnt = 1;
     }
 
     public void passPlayerTurn(){
