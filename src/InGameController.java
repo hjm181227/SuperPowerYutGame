@@ -21,6 +21,8 @@ public class InGameController {
         _view.leftThrowBtn.addActionListener(new ThrowingYut());
         _view.rightThrowBtn.addActionListener(new ThrowingYut());
 
+        _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
+
         _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
@@ -131,7 +133,18 @@ public class InGameController {
                 passPlayerTurn();
             }
             for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+        }
+    }
+    private class UseAbility implements ActionListener{
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           Object obj = e.getSource();
+            if(obj ==_view.leftUserPanel.btnAbility2)
+            {
+                _data.leftPlayer.abilities[1].use();
+                _view.repaint();
+            }
         }
     }
 

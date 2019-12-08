@@ -19,6 +19,7 @@ public class LocationAbility {
 
         @Override
         public void use() {
+
             //밥상뒤집기
             for (Pawn p : _data.leftPlayer.pawns) {
                 if (p.isFinished() == false && p.getCurrentIndex() != 0) {
@@ -52,6 +53,13 @@ public class LocationAbility {
             public void use() {
                 //상대 말과 자리바꾸기
             }
+        }
+    }
+
+    public static class Exchange extends Ability {
+        @Override
+        public void use() {
+            //상대 말과 자리바꾸기
         }
     }
 }
