@@ -10,6 +10,7 @@ public class InGameController {
     private InGameData _data;
     private PawnClickListener leftPawnListener, rightPawnListener;
     private double YutResult;
+
     public InGameController() {
 
         _view = GameManager.getInstance().get_inGame();
@@ -123,6 +124,15 @@ public class InGameController {
             _view.lblThrowing.start();
             btn.setEnabled(false);
             System.out.println(_data.throwResult);
+
+
+
+            _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
+            //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
+            _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult-1]);
+
+        //    _view.lblYutResult.setText( _view.lblThrowing.getstrResult() );
+
             if(_data.throwResult == 6) {
                 for(Pawn p:_data.activatedPlayer.pawns) {
                     if(p.isFinished() == false && p.getCurrentIndex() != 0){
@@ -132,6 +142,7 @@ public class InGameController {
                 }
                 passPlayerTurn();
             }
+
             for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
         }
     }
