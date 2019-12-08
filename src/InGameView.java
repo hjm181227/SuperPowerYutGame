@@ -4,8 +4,7 @@ import java.awt.*;
 public class InGameView extends JPanel {
 
     public UserPanel leftUserPanel, rightUserPanel;
-    //private ImagePanel      BoardPanel;
-    private JLabel          gameBoard ,Horse;
+    private JLabel          gameBoard;
     private JButton         btnThrow1, btnThrow2;
     public Yut              lblThrowing;
     private InGameData      _gameData;
@@ -31,12 +30,6 @@ public class InGameView extends JPanel {
         for(Pawn p:_gameData.rightPlayer.pawns) {
             this.add(p);
         }
-
-        Horse = new JLabel();
-        Horse.setIcon(new ImageIcon("images/horsePawn.png"));
-        Horse.setBounds(323,408,70,68);
-        Horse.setVisible(true);
-        add(Horse);
 
         leftUserPanel = new UserPanel(_gameData.leftPlayer);
         leftUserPanel.setBounds(0,0,200,600);
