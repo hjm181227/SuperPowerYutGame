@@ -24,6 +24,9 @@ public class Player {
 
         abilities = new Ability[2];
         int random;
+
+
+        /*
         random = (int)(Math.random() * 4);
         switch (random){
             case 0:
@@ -37,6 +40,9 @@ public class Player {
             case 3:
                 abilities[0] = new MovementAbility.OnlyYut();
         }
+        */
+
+
         /*
         random = (int)(Math.random() * 4);
         switch (random){
@@ -52,7 +58,7 @@ public class Player {
 
          */
         abilities[1] = new LocationAbility.UpSideDown();
-
+        abilities[0] = new LocationAbility.GoHome();
         score = 0;
         isMyTurn = false;
 

@@ -124,8 +124,10 @@ public class InGameData {
 
         switch(focusedPawn.getCurrentIndex()) {
             case 0:
-                if(throwResult == 6)
+                if(throwResult == 6) {
+                    previewMovedPawn.setVisible(false);
                     return;
+                }
                 previewMovedPawn.setIndex(throwResult);
                 break;
             case 5:
