@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.security.acl.Owner;
 
 public class InGameData {
     public Player  leftPlayer, rightPlayer;
@@ -211,22 +212,22 @@ public class InGameData {
 
     }//catchOpponentPawns()
 
-    public void moveAllPawns(Player owner,BoardIndexData start , BoardIndexData end){
+    public void moveAllPawns(Player owner,int start , int end){
         Player opponent = owner == leftPlayer ? rightPlayer : leftPlayer;
 
-        for(Pawn p: activatedPlayer.pawns){
-            if(p.getCurrentIndex() == start.currentIndex) {
-                p.setIndex(end.currentIndex);//칸 인덱스 갱신
-                if(end.currentIndex == 0) {
-                    goWaitingRoom(p,activatedPlayer);
+        for(Pawn p: owner.pawns){
+            if(p.getCurrentIndex() == boardIndexer[start].currentIndex) {
+                p.setIndex(boardIndexer[end].currentIndex);//칸 인덱스 갱신
+                if(boardIndexer[end].currentIndex == 0) {
+                    goWaitingRoom(p,owner);
                     p.setFinished(true);
                     owner.score++;
                 }//완주시 대기실로 이동
-                else p.setLocation(boardIndexer[end.currentIndex].p); //좌표 이동
+                else p.setLocation(boardIndexer[boardIndexer[end].currentIndex].p); //좌표 이동
             }//출발지에 있는 말들 이동
         }
 
-        if(end.currentIndex != 0) catchOpponentPawns(opponent, end);  //이동한 자리에 있는 상대말 잡기
+        if(boardIndexer[end].currentIndex != 0) catchOpponentPawns(opponent, boardIndexer[end]);  //이동한 자리에 있는 상대말 잡기
     }
 
 }

@@ -1,4 +1,5 @@
 import com.sun.jnlp.JNLPRandomAccessFileNSBImpl;
+import sun.security.krb5.internal.crypto.Des;
 
 public class LocationAbility {
 
@@ -12,16 +13,22 @@ public class LocationAbility {
     }
 
     public static class UpSideDown extends Ability {
-        public int[] CurrentIdx = new int[8];
         public int[] Destination = new int [8];
-        private int PawnCount = 0;
-        private int i = 0, j = 0, flag = 0, RandomIdx;
-
         @Override
         public void use() {
 
             //밥상뒤집기
-            for (Pawn p : _data.leftPlayer.pawns) {
+            UpSide(_data.leftPlayer);
+            UpSide(_data.rightPlayer);
+
+        }
+
+        public void UpSide(Player Player)
+        {
+            int[] CurrentIdx = new int[8];
+            int PawnCount = 0;
+            int i = 0, j = 0, flag = 0, RandomIdx;
+            for (Pawn p : Player.pawns) {
                 if (p.isFinished() == false && p.getCurrentIndex() != 0) {
                     for (j = 0, flag = 0; j < PawnCount; j++) {
                         if (CurrentIdx[j] == p.getCurrentIndex())
@@ -32,19 +39,26 @@ public class LocationAbility {
                 }
             }
             for(i = 0 ; i < PawnCount; i++) {
-                RandomIdx = ((int) Math.random() * 29) + 1;
                 while (true) {
+                    RandomIdx = (int) (Math.random() * 29) + 1;
                     for (j = 0, flag = 0; j < i; j++) {
                         if (Destination[i] == Destination[j])
                             flag = 1;
                     }
-                    if (flag == 0)
+                    if (flag == 0) {
                         Destination[i] = RandomIdx;
+                        break;
+                    }
                 }
             }
+            System.out.println(">>>>>>>>>>>>" + i +"<<<<<<<<<<");
             for(i = 0; i < PawnCount; i++)
             {
-                System.out.println(CurrentIdx[i] + Destination[i]);
+
+                System.out.println(CurrentIdx[i]);
+                System.out.println(">>"+Destination[i]+"<<");
+
+                _data.moveAllPawns(Player, CurrentIdx[i], Destination[i]);
             }
         }
 

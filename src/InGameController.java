@@ -22,7 +22,7 @@ public class InGameController {
         _view.leftThrowBtn.addActionListener(new ThrowingYut());
         _view.rightThrowBtn.addActionListener(new ThrowingYut());
 
-        _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
+        _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
 
         _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
@@ -73,7 +73,7 @@ public class InGameController {
         @Override
         public void mouseReleased(MouseEvent e) {
             if(_data.focusedPawn.getCurrentIndex()==0) _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, _data.previewMovedPawn.getCurrentIndex());
-            else _data.moveAllPawns(_data.activatedPlayer,_data.boardIndexer[_data.focusedPawn.getCurrentIndex()],_data.boardIndexer[_data.previewMovedPawn.getCurrentIndex()]);
+            else _data.moveAllPawns(_data.activatedPlayer,_data.focusedPawn.getCurrentIndex(),_data.previewMovedPawn.getCurrentIndex());
             for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             _data.previewMovedPawn.setVisible(false);
             //finish turn(pass turn)
