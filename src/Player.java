@@ -58,7 +58,7 @@ public class Player {
 
          */
         abilities[1] = new LocationAbility.UpSideDown();
-        abilities[0] = new LocationAbility.GoHome();
+        abilities[0] = new LocationAbility.Exchange();
         score = 0;
         isMyTurn = false;
 
