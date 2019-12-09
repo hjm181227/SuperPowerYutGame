@@ -31,14 +31,16 @@ public class InGameController {
 
         change_playerImgnLabel();
         ready(_data.activatedPlayer);
+
+
+
+
     }
 
     private class PawnClickListener implements MouseListener {
 
         @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
+        public void mousePressed(MouseEvent e) {        }
 
         @Override
         public void mouseReleased(MouseEvent e) {
@@ -53,17 +55,11 @@ public class InGameController {
         }
 
         @Override
-        public void mouseClicked(MouseEvent e) {
-
-        }
-
+        public void mouseClicked(MouseEvent e) {       }
         @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-
+        public void mouseEntered(MouseEvent e) {       }
         @Override
-        public void mouseExited(MouseEvent e) {
-        }
+        public void mouseExited(MouseEvent e) {       }
     }
 
     private class MoveSelectedPawn implements MouseListener {
@@ -240,6 +236,9 @@ public class InGameController {
     }
 
     public void passPlayerTurn(){
+
+        //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
+        if(_data.activatedPlayer.score ==4)
 
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
