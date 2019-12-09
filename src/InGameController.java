@@ -44,9 +44,9 @@ public class InGameController {
         @Override
         public void mouseReleased(MouseEvent e) {
             _data.focusedPawn = (Pawn)e.getSource();
-            System.out.println("폰을 클릭했다");
+            System.out.println(_data.focusedPawn.pawnNumber + "번 폰을 클릭했다");
             for(ThrowData data:_data.previewPawns){
-                data.preview.setVisible(true);
+                data.preview.setVisible(false);
                 data.preview.setIcon(new ImageIcon(_data.focusedPawn.ImgSource()));
             }
             _data.showAllPreviews();
@@ -94,6 +94,23 @@ public class InGameController {
                 for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
                 passPlayerTurn();
             }
+            else {
+                boolean flag = true;
+                for(ThrowData data:_data.previewPawns) {
+                    if(data.result != 6) flag = false;
+                }
+                if(flag == true){   //throw Result들이 모두 빽도인 경우
+                    for(Pawn pawn:_data.activatedPlayer.pawns){
+                        if(pawn.getCurrentIndex()!=0) flag = false;
+                    }
+                    if(flag == true){   //게임판에 올라온 말이 없는 경우(빽도 이동이 가능한 말이 없는 경우)
+                        for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        passPlayerTurn();
+                        _data.previewPawns.clear();
+                        _data.previewPawns.trimToSize();
+                    }
+                }
+            }
 
             //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
             if(_data.activatedPlayer.score ==4){
@@ -137,17 +154,17 @@ public class InGameController {
                 return;
             YutResult = Math.random();
             if (YutResult <= 0.1536)
-                _data.throwResult = 1;
+                _data.throwResult = 5;
             else if (YutResult <= 0.4992)
                 _data.throwResult = 2;
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 4;
+                _data.throwResult = 5;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
-                _data.throwResult = 5;
+                _data.throwResult = 6;
 
             _view.lblThrowing.start();
             btn.setEnabled(false);
@@ -164,28 +181,37 @@ public class InGameController {
             _view.add(data.preview);
             _view.setComponentZOrder(data.preview, 0);
 
-
-            /*
-            if(_data.throwResult == 6) {
-                for(Pawn p:_data.activatedPlayer.pawns) {
-                    if(p.isFinished() == false && p.getCurrentIndex() != 0){
-                        for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
-                        return;
-                    }
-                }
-                if(_data.throwableNCnt==0) passPlayerTurn();
-            }
-            */
             System.out.println(_data.throwableNCnt);
-            if (_data.throwableNCnt == 0) {
-                for (Pawn P : _data.activatedPlayer.pawns) {
-                    if (P.isFinished() == false) {
-                        P.addMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+            if (_data.throwableNCnt == 0) { //윷 던질 기회 모두 사용한 경우
+                boolean flag = true;
+                for(ThrowData d:_data.previewPawns) {
+                    if(d.result != 6) flag = false;
+                }
+                if(flag == true){   //throw Result들이 모두 빽도인 경우 말을 이동할 준비
+                    for(Pawn pawn:_data.activatedPlayer.pawns){
+                        if(pawn.getCurrentIndex()!=0) flag = false;
+                    }
+                    if(flag == true){   //게임판에 올라온 말이 없는 경우(빽도 이동이 가능한 말이 없는 경우)
+                        for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        passPlayerTurn();
+                        _data.previewPawns.clear();
+                        _data.previewPawns.trimToSize();
+                    }
+                    else{
+                        for (Pawn P : _data.activatedPlayer.pawns)
+                            if (P.isFinished() == false)
+                                P.addMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                    }
+                }
+                else {
+                    for (Pawn P : _data.activatedPlayer.pawns) {
+                        if (P.isFinished() == false) {
+                            P.addMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        }
                     }
                 }
             }
-            else {
-                System.out.println("!23");
+            else {  //던질 기회가 남았다면 다시 던질 준비
                 ready(_data.activatedPlayer);
             }
         }

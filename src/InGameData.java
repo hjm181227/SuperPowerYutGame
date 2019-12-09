@@ -132,7 +132,7 @@ public class InGameData {
         switch(focusedPawn.getCurrentIndex()) {
             case 0:
                 if(data.result == 6) {
-                    previewMovedPawn.setVisible(false);
+                    data.preview.setVisible(false);
                     return;
                 }
                 data.preview.setIndex(data.result);
@@ -195,8 +195,9 @@ public class InGameData {
 
     public void showAllPreviews(){
         for(ThrowData data:previewPawns) {
-            if(data.result == 6 && focusedPawn.getCurrentIndex() == 0) continue;
-            findNextPoint(data);
+            data.preview.setVisible(true);
+            if(data.result == 6 && focusedPawn.getCurrentIndex() == 0) data.preview.setVisible(false);
+            else findNextPoint(data);
         }
         GameManager.getInstance().get_inGame().repaint();
     }
