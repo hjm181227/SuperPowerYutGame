@@ -29,7 +29,7 @@ public class InGameData {
         leftPlayer = new Player("images/horsePawn.png", 80, 80);
         rightPlayer = new Player("images/pigPawn.png",100,75);
 
-//        throwResult = 0;
+        throwResult = 0;
         activatedPlayer = leftPlayer;
 
         previewPawns = new ArrayList<ThrowData>();
