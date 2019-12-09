@@ -195,8 +195,8 @@ public class InGameData {
 
     public void showAllPreviews(){
         for(ThrowData data:previewPawns) {
+            if(data.result == 6 && focusedPawn.getCurrentIndex() == 0) continue;
             findNextPoint(data);
-            System.out.println(data.result);
         }
         GameManager.getInstance().get_inGame().repaint();
     }

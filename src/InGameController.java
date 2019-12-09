@@ -25,7 +25,6 @@ public class InGameController {
         _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
         _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
 
-        //_data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
 
@@ -162,7 +161,6 @@ public class InGameController {
                 }
             }
             else {
-                System.out.println("!23");
                 ready(_data.activatedPlayer);
             }
         }
@@ -232,9 +230,6 @@ public class InGameController {
     }
 
     public void passPlayerTurn(){
-
-        //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
-        if(_data.activatedPlayer.score ==4)
 
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
