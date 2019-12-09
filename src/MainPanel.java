@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class MainPanel extends JPanel{
+
     private MenuPanel Menu;
     private ExplainPanel GameExplain;
     private InGameView GameStart;
@@ -27,9 +27,14 @@ public class MainPanel extends JPanel{
         add(Menu);
         add(GameExplain);
         add(GameStart);
+
         Menu.btnStart.addActionListener(new MenuSelect());
+        Menu.btnStart.addMouseListener(new MenuSelectMouseEvent());
         Menu.btnExplain.addActionListener(new MenuSelect());
+        Menu.btnExplain.addMouseListener(new MenuSelectMouseEvent());
         Menu.btnExit.addActionListener(new MenuSelect());
+        Menu.btnExit.addMouseListener(new MenuSelectMouseEvent());
+
 
         showMenu();
       //  showInGame();
@@ -60,6 +65,29 @@ public class MainPanel extends JPanel{
             if (Menu.btnStart == Button) showInGame();
             else if (Menu.btnExplain == Button) showExplain();
             else if (Menu.btnExit == Button) { System.exit(0);}
+
+        }
+    }
+
+    private class MenuSelectMouseEvent implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) { }
+        @Override
+        public void mousePressed(MouseEvent e) {  }
+        @Override
+        public void mouseReleased(MouseEvent e) { }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            JButton btn = (JButton)e.getSource();
+            btn.setForeground(new Color(150,100,50));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            JButton btn = (JButton)e.getSource();
+            btn.setForeground(Color.black);
 
         }
     }

@@ -175,6 +175,8 @@ public class InGameController {
             }
         }
     }
+
+    
     private class UseAbility implements ActionListener{
 
         @Override
