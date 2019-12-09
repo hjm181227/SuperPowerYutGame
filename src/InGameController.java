@@ -96,6 +96,32 @@ public class InGameController {
                 passPlayerTurn();
             }
 
+            //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
+            if(_data.activatedPlayer.score ==4){
+
+                int result = JOptionPane.showConfirmDialog( _view, "Continue?");
+                switch(result) {
+                    case JOptionPane.YES_OPTION:
+
+                        for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        if( _data.activatedPlayer == _data.rightPlayer) passPlayerTurn();
+                        ready(_data.leftPlayer);
+                        _data.InGameData_init();
+                        _data.previewPawns.clear();  //안에잇는거 없애기
+                        _data.previewPawns.trimToSize();   //없앤대로 사이즈 압축
+                        _view.lblThrowing.setIcon(_view.lblThrowing.iconYut[0]);
+                        _view.lblYutResult.setIcon(_data.iconYutText[6]);
+
+                        GameManager.getInstance().get_view().showMenu(); //메인메뉴로 넘어감
+                        System.out.println("YESYES");
+
+                        return;
+                    case JOptionPane.NO_OPTION:
+                        System.exit(0);
+                        break;
+                } // switch
+            }
+
         }
 
         @Override
@@ -112,9 +138,9 @@ public class InGameController {
                 return;
             YutResult = Math.random();
             if (YutResult <= 0.1536)
-                _data.throwResult = 1;
+                _data.throwResult = 5;
             else if (YutResult <= 0.4992)
-                _data.throwResult = 2;
+                _data.throwResult = 5;
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
@@ -231,33 +257,14 @@ public class InGameController {
 
 
     /*
-      public void set_view(MainPanel view){this._view = view;}
     public void set_inGame(InGameView inGame){this._inGame = inGame;}
+      public void set_view(MainPanel view){this._view = view;}
     public void set_explain(ExplainPanel explain){this._explain = explain;}
     public void set_menu(MenuPanel menu){this._menu = menu;}
     public void set_gameData(InGameData data){this._gameData = data;}
      */
     public void passPlayerTurn(){
 
-        //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
-        if(_data.activatedPlayer.score ==4){
-
-            int result = JOptionPane.showConfirmDialog( _view, "Continue?");
-            switch(result) {
-                case JOptionPane.YES_OPTION:
-//                  GameManager.getInstance().get_view().showMenu(); //메인메뉴로 넘어감
-
-
-
-
-                    System.out.println("YESYES");
-                    break;
-                case JOptionPane.NO_OPTION:
-                    System.exit(0);
-                    break;
-            } // switch
-
-        }
 
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
@@ -272,4 +279,10 @@ public class InGameController {
     public void activate(){
 
     }
+
+    public void InGameController_init(){
+
+
+    }
+
 }

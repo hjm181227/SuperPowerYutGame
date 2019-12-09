@@ -252,21 +252,17 @@ public class InGameData {
 
     public void InGameData_init(){
 
-        leftPawnWaiting[0] = new Point(25,410);
-        leftPawnWaiting[1] = new Point(125,410);
-        leftPawnWaiting[2] = new Point(25,510);
-        leftPawnWaiting[3] = new Point(125,510);
+        //left, rigght goroom(pawn[i], this)
+        leftPlayer.Player_init();
+        rightPlayer.Player_init();
+        for(Pawn p:leftPlayer.pawns)
+            goWaitingRoom(p, leftPlayer);
+        for(Pawn p:rightPlayer.pawns)
+            goWaitingRoom(p, rightPlayer);
 
-        rightPawnWaiting[0] = new Point(811,410);
-        rightPawnWaiting[1] = new Point(911,410);
-        rightPawnWaiting[2] = new Point(811,510);
-        rightPawnWaiting[3] = new Point(911,510);
+        activatedPlayer= leftPlayer;
+        throwResult=0;
 
-
-        for(int i=0;i<4;i++) leftPlayer.pawns[i].setLocation(leftPawnWaiting[i]);
-        for(int i=0;i<4;i++) rightPlayer.pawns[i].setLocation(rightPawnWaiting[i]);
-
-        //하다가 말았음.
 
     }
 
