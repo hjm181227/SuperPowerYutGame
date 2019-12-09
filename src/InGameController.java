@@ -25,7 +25,6 @@ public class InGameController {
         _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
         _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
 
-
         init_Game();
 
         change_playerImgnLabel();
@@ -118,7 +117,7 @@ public class InGameController {
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 5;
+                _data.throwResult = 4;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
