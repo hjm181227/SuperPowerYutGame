@@ -18,12 +18,6 @@ public class MenuPanel extends JPanel {
         setBounds(0,0,1000, 800);
         setBackground(Color.white);
         setLayout(null);
-////gif 넣기 테스트
-//        imglabel = new JLabel();
-//        ii= new ImageIcon("images/mini.gif");
-//        imglabel.setIcon(ii);
-//        imglabel.setBounds(10,10,320,320);
-//        add(imglabel);
 
         //게임의 타이틀
         lblTitle = new JLabel("초능력 윷놀이 !");
@@ -31,8 +25,6 @@ public class MenuPanel extends JPanel {
         lblTitle.setFont(new Font("Vernada", Font.BOLD, 80));
         lblTitle.setVisible(true);
         add(lblTitle);
-
-
 
         //게임시작 버튼 세팅
         btnStart = new JButton("게임 시작");

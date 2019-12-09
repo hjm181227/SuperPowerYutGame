@@ -127,13 +127,7 @@ public class InGameController {
             System.out.println(_data.throwResult);
 
 
-
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
-
-            //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
-            _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult-1]);
-
-        //    _view.lblYutResult.setText( _view.lblThrowing.getstrResult() );
 
             if(_data.throwResult == 6) {
                 for(Pawn p:_data.activatedPlayer.pawns) {
@@ -214,6 +208,9 @@ public class InGameController {
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
         _data.activatedPlayer.isMyTurn = true;
+        //윷 결과 지우기
+        _view.lblYutResult.setIcon(_data.iconYutText[6]);
+
         change_playerImgnLabel();
         ready(_data.activatedPlayer);
     }
