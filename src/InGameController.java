@@ -154,13 +154,13 @@ public class InGameController {
                 return;
             YutResult = Math.random();
             if (YutResult <= 0.1536)
-                _data.throwResult = 5;
+                _data.throwResult = 1;
             else if (YutResult <= 0.4992)
                 _data.throwResult = 2;
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 5;
+                _data.throwResult = 4;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
@@ -170,6 +170,7 @@ public class InGameController {
             btn.setEnabled(false);
 
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
+            //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
             _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult - 1]);
 
             if (_data.throwResult != 4 && _data.throwResult != 5)
@@ -280,16 +281,7 @@ public class InGameController {
         _data.throwableNCnt = 1;
     }
 
-
-    /*
-    public void set_inGame(InGameView inGame){this._inGame = inGame;}
-      public void set_view(MainPanel view){this._view = view;}
-    public void set_explain(ExplainPanel explain){this._explain = explain;}
-    public void set_menu(MenuPanel menu){this._menu = menu;}
-    public void set_gameData(InGameData data){this._gameData = data;}
-     */
     public void passPlayerTurn(){
-
 
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
@@ -304,10 +296,4 @@ public class InGameController {
     public void activate(){
 
     }
-
-    public void InGameController_init(){
-
-
-    }
-
 }
