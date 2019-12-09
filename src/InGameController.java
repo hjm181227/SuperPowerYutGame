@@ -25,8 +25,6 @@ public class InGameController {
         _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
         _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
 
-        //_data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
-
         init_Game();
 
         change_playerImgnLabel();
@@ -138,13 +136,13 @@ public class InGameController {
                 return;
             YutResult = Math.random();
             if (YutResult <= 0.1536)
-                _data.throwResult = 5;
+                _data.throwResult = 1;
             else if (YutResult <= 0.4992)
-                _data.throwResult = 5;
+                _data.throwResult = 2;
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 5;
+                _data.throwResult = 4;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
