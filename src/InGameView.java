@@ -76,6 +76,10 @@ public class InGameView extends JPanel {
     }//constructor
 
 
+    public void MainPanel_init(){
+
+
+    }
 
 
 }//YutGamePanel()

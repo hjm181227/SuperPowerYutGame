@@ -75,4 +75,12 @@ public class Player {
 
     //  methods
     public void movePawn(){}
+
+
+
+    public void Player_init(){
+        this.score=0;
+        this.isMyTurn=false;
+    }
+
 }

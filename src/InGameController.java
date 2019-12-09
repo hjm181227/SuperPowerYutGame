@@ -99,14 +99,9 @@ public class InGameController {
         }
 
         @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
+        public void mouseEntered(MouseEvent e) {        }
         @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
+        public void mouseExited(MouseEvent e) {        }
     }
 
     private class ThrowingYut implements ActionListener {
@@ -133,7 +128,6 @@ public class InGameController {
             btn.setEnabled(false);
 
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
-            //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
             _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult - 1]);
 
             if (_data.throwResult != 4 && _data.throwResult != 5)
@@ -235,10 +229,35 @@ public class InGameController {
         _data.throwableNCnt = 1;
     }
 
+
+    /*
+      public void set_view(MainPanel view){this._view = view;}
+    public void set_inGame(InGameView inGame){this._inGame = inGame;}
+    public void set_explain(ExplainPanel explain){this._explain = explain;}
+    public void set_menu(MenuPanel menu){this._menu = menu;}
+    public void set_gameData(InGameData data){this._gameData = data;}
+     */
     public void passPlayerTurn(){
 
         //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
-        if(_data.activatedPlayer.score ==4)
+        if(_data.activatedPlayer.score ==4){
+
+            int result = JOptionPane.showConfirmDialog( _view, "Continue?");
+            switch(result) {
+                case JOptionPane.YES_OPTION:
+//                  GameManager.getInstance().get_view().showMenu(); //메인메뉴로 넘어감
+
+
+
+
+                    System.out.println("YESYES");
+                    break;
+                case JOptionPane.NO_OPTION:
+                    System.exit(0);
+                    break;
+            } // switch
+
+        }
 
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
