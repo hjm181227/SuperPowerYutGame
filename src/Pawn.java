@@ -20,7 +20,7 @@ public class Pawn extends JLabel {
 
     //  get, set
 
-    public int getCurrentIndex(){ return currentIndex; }
+    public int getCurrentIndex(){ return currentIndex; } //
     public boolean isFinished(){ return isFinished; }
     public String ImgSource(){ return pawnImg; }
     public void setIndex(int idx){ currentIndex = idx;}

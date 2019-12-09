@@ -25,8 +25,6 @@ public class InGameController {
         _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
         _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
 
-        //_data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
-
         init_Game();
 
         change_playerImgnLabel();
@@ -62,14 +60,16 @@ public class InGameController {
         public void mouseExited(MouseEvent e) {       }
     }
 
+
+
+
+
     private class MoveSelectedPawn implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) { }
-
         @Override
         public void mousePressed(MouseEvent e) { }
-
         @Override
         public void mouseReleased(MouseEvent e) {
             Pawn p = (Pawn)e.getSource();
@@ -80,6 +80,7 @@ public class InGameController {
             for(ThrowData data:_data.previewPawns){
                 if(data.preview == p) clicked = data;
             }
+
             //말 이동
             if(_data.focusedPawn.getCurrentIndex()==0) catched = _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, p.getCurrentIndex());
             else catched = _data.moveAllPawns(_data.activatedPlayer,_data.focusedPawn.getCurrentIndex(),p.getCurrentIndex());
@@ -87,19 +88,13 @@ public class InGameController {
             _data.previewPawns.remove(clicked);
             _data.previewPawns.trimToSize();
 
-            if(catched) {
-                ready(_data.activatedPlayer);
-                for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
-            }
-            else if(_data.previewPawns.size()==0) {
-                for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
-                passPlayerTurn();
-            }
-
             //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
             if(_data.activatedPlayer.score ==4){
+                String str;
+                if(_data.activatedPlayer== _data.leftPlayer) str="Left Player Win!! \n Continue?" ;
+                else str= "Right Player Win!! \n Continue?";
 
-                int result = JOptionPane.showConfirmDialog( _view, "Continue?");
+                int result = JOptionPane.showConfirmDialog( _view, str);
                 switch(result) {
                     case JOptionPane.YES_OPTION:
 
@@ -121,6 +116,16 @@ public class InGameController {
                         break;
                 } // switch
             }
+
+            if(catched) {
+                ready(_data.activatedPlayer);
+                for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+            }
+            else if(_data.previewPawns.size()==0) {
+                for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                passPlayerTurn();
+            }
+
 
         }
 
@@ -144,7 +149,7 @@ public class InGameController {
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 5;
+                _data.throwResult = 4;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
@@ -177,6 +182,7 @@ public class InGameController {
                 if(_data.throwableNCnt==0) passPlayerTurn();
             }
             */
+
             System.out.println(_data.throwableNCnt);
             if (_data.throwableNCnt == 0) {
                 for (Pawn P : _data.activatedPlayer.pawns) {
@@ -264,8 +270,6 @@ public class InGameController {
     public void set_gameData(InGameData data){this._gameData = data;}
      */
     public void passPlayerTurn(){
-
-
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
         _data.activatedPlayer.isMyTurn = true;
