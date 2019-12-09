@@ -26,7 +26,7 @@ public class InGameData {
         int x, y;
 
         GameManager.getInstance().set_gameData(this);
-        leftPlayer = new Player("images/horsePawn.png", 70, 68);
+        leftPlayer = new Player("images/horsePawn.png", 80, 80);
         rightPlayer = new Player("images/pigPawn.png",100,75);
 
         throwResult = 0;
@@ -42,10 +42,10 @@ public class InGameData {
         rightPlayer.iconPalyer[1] = new ImageIcon("images/Right_stop.png");
 
         leftPawnWaiting = new Point[4];
-        leftPawnWaiting[0] = new Point(25,410);
-        leftPawnWaiting[1] = new Point(125,410);
-        leftPawnWaiting[2] = new Point(25,510);
-        leftPawnWaiting[3] = new Point(125,510);
+        leftPawnWaiting[0] = new Point(10,410);
+        leftPawnWaiting[1] = new Point(110,410);
+        leftPawnWaiting[2] = new Point(10,510);
+        leftPawnWaiting[3] = new Point(110,510);
 
         rightPawnWaiting = new Point[4];
         rightPawnWaiting[0] = new Point(811,410);
@@ -233,11 +233,12 @@ public class InGameData {
         Player opponent = owner == leftPlayer ? rightPlayer : leftPlayer;
 
         for(Pawn p: owner.pawns){
-            if(p.getCurrentIndex() == boardIndexer[start].currentIndex) {
+            if(p.getCurrentIndex() == start) {
                 p.setIndex(boardIndexer[end].currentIndex);//칸 인덱스 갱신
                 if(boardIndexer[end].currentIndex == 0) {
                     goWaitingRoom(p,owner);
                     p.setFinished(true);
+                    p.setIcon(new ImageIcon("images/FinishedPawn.png"));
                     owner.score++;
                 }//완주시 대기실로 이동
                 else p.setLocation(boardIndexer[boardIndexer[end].currentIndex].p); //좌표 이동
