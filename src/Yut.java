@@ -19,7 +19,6 @@ public class Yut extends JLabel implements Runnable{
         super();
 
         _view = GameManager.getInstance().get_inGame();
-        _data = GameManager.getInstance().get_gameData();
 
         iconImageName[0] = "images/Do.png";
         iconImageName[1] = "images/Gae.png";
@@ -78,10 +77,5 @@ public class Yut extends JLabel implements Runnable{
 
     }//run()
 
-
-    public void Yut_init(){
-
-
-    }
 
 }//LabelThread Class
