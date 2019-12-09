@@ -79,12 +79,42 @@ public class InGameController {
             for(ThrowData data:_data.previewPawns){
                 if(data.preview == p) clicked = data;
             }
+
             //말 이동
             if(_data.focusedPawn.getCurrentIndex()==0) catched = _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, p.getCurrentIndex());
             else catched = _data.moveAllPawns(_data.activatedPlayer,_data.focusedPawn.getCurrentIndex(),p.getCurrentIndex());
             for(ThrowData data:_data.previewPawns) data.preview.setVisible(false);
             _data.previewPawns.remove(clicked);
             _data.previewPawns.trimToSize();
+
+            //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
+            if(_data.activatedPlayer.score ==4){
+                String str;
+                if(_data.activatedPlayer== _data.leftPlayer) str="Left Player Win!! \n Continue?" ;
+                else str= "Right Player Win!! \n Continue?";
+
+                int result = JOptionPane.showConfirmDialog( _view, str);
+                switch(result) {
+                    case JOptionPane.YES_OPTION:
+
+                        for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        if( _data.activatedPlayer == _data.rightPlayer) passPlayerTurn();
+                        ready(_data.leftPlayer);
+                        _data.InGameData_init();
+                        _data.previewPawns.clear();  //안에잇는거 없애기
+                        _data.previewPawns.trimToSize();   //없앤대로 사이즈 압축
+                        _view.lblThrowing.setIcon(_view.lblThrowing.iconYut[0]);
+                        _view.lblYutResult.setIcon(_data.iconYutText[6]);
+
+                        GameManager.getInstance().get_view().showMenu(); //메인메뉴로 넘어감
+                        System.out.println("YESYES");
+
+                        return;
+                    case JOptionPane.NO_OPTION:
+                        System.exit(0);
+                        break;
+                } // switch
+            }
 
             if(catched) {
                 ready(_data.activatedPlayer);
@@ -110,32 +140,6 @@ public class InGameController {
                         _data.previewPawns.trimToSize();
                     }
                 }
-            }
-
-            //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
-            if(_data.activatedPlayer.score ==4){
-
-                int result = JOptionPane.showConfirmDialog( _view, "Continue?");
-                switch(result) {
-                    case JOptionPane.YES_OPTION:
-
-                        for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
-                        if( _data.activatedPlayer == _data.rightPlayer) passPlayerTurn();
-                        ready(_data.leftPlayer);
-                        _data.InGameData_init();
-                        _data.previewPawns.clear();  //안에잇는거 없애기
-                        _data.previewPawns.trimToSize();   //없앤대로 사이즈 압축
-                        _view.lblThrowing.setIcon(_view.lblThrowing.iconYut[0]);
-                        _view.lblYutResult.setIcon(_data.iconYutText[6]);
-
-                        GameManager.getInstance().get_view().showMenu(); //메인메뉴로 넘어감
-                        System.out.println("YESYES");
-
-                        return;
-                    case JOptionPane.NO_OPTION:
-                        System.exit(0);
-                        break;
-                } // switch
             }
 
         }
@@ -170,7 +174,6 @@ public class InGameController {
             btn.setEnabled(false);
 
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
-            //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
             _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult - 1]);
 
             if (_data.throwResult != 4 && _data.throwResult != 5)

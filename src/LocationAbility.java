@@ -52,31 +52,52 @@ public class LocationAbility {
         public void use() {
 
             //밥상뒤집기
-            UpSide(_data.leftPlayer);
-            UpSide(_data.rightPlayer);
+            LeftUpSide();
+
 
         }
 
-        public void UpSide(Player Player)
+        public void LeftUpSide()
         {
             int[] CurrentIdx = new int[8];
-            int PawnCount = 0;
+            int LeftCount = 0,CurrentCount = 0;
             int i = 0, j = 0, flag = 0, RandomIdx;
-            for (Pawn p : Player.pawns) {
+
+            for (Pawn p : _data.leftPlayer.pawns) {
                 if (p.isFinished() == false && p.getCurrentIndex() != 0) {
-                    for (j = 0, flag = 0; j < PawnCount; j++) {
+                    flag = 0;
+                    for (j = 0; j < CurrentCount; j++) {
                         if (CurrentIdx[j] == p.getCurrentIndex())
                             flag = 1;
                     }
-                    if (flag == 0)
-                        CurrentIdx[PawnCount++] = p.getCurrentIndex();
+                    if (flag == 0) {
+                        CurrentIdx[CurrentCount++] = (p.getCurrentIndex() * -1);
+                        p.setIndex(p.getCurrentIndex() * -1);
+                        LeftCount++;
+                    }
                 }
             }
-            for(i = 0 ; i < PawnCount; i++) {
+            for(i = 0 ; i < LeftCount;i++)System.out.println("왼쪽유저의 현재 폰넘버" + CurrentIdx[i]);
+            for (Pawn p : _data.rightPlayer.pawns) {
+                if (p.isFinished() == false && p.getCurrentIndex() != 0) {
+                    for (j = LeftCount, flag = 0; j < CurrentCount; j++) {
+                        if (CurrentIdx[j] == p.getCurrentIndex())
+                            flag = 1;
+                    }
+                    if (flag == 0) {
+                        CurrentIdx[CurrentCount++] = (p.getCurrentIndex() * -1);
+                        p.setIndex(p.getCurrentIndex() * -1);
+                    }
+                }
+            }
+
+            System.out.println(LeftCount);
+            for(i = 0 ; i < LeftCount; i++) {
                 while (true) {
                     RandomIdx = (int) (Math.random() * 29) + 1;
-                    for (j = 0, flag = 0; j < i; j++) {
-                        if (Destination[i] == Destination[j])
+                    flag = 0;
+                    for (j = 0; j < i; j++) {
+                        if (RandomIdx == Destination[j])
                             flag = 1;
                     }
                     if (flag == 0) {
@@ -85,15 +106,24 @@ public class LocationAbility {
                     }
                 }
             }
-            System.out.println(">>>>>>>>>>>>" + i +"<<<<<<<<<<");
-            for(i = 0; i < PawnCount; i++)
-            {
-
-                System.out.println(CurrentIdx[i]);
-                System.out.println(">>"+Destination[i]+"<<");
-
-                _data.moveAllPawns(Player, CurrentIdx[i], Destination[i]);
+            for(i = LeftCount ; i < CurrentCount; i++) {
+                while (true) {
+                    RandomIdx = (int) (Math.random() * 29) + 1;
+                    for (j = 0, flag = 0; j < CurrentCount; j++) {
+                        if (RandomIdx == Destination[j])
+                            flag = 1;
+                    }
+                    if (flag == 0) {
+                        Destination[i] = RandomIdx;
+                        break;
+                    }
+                }
             }
+            for(i = 0 ; i < CurrentCount; i++) System.out.println("걸러진" + Destination[i] + "인덱스");
+            for(i = 0; i < LeftCount; i++) _data.moveAllPawns(_data.leftPlayer, CurrentIdx[i], Destination[i]);
+            for(i = LeftCount; i < CurrentCount; i++) _data.moveAllPawns(_data.rightPlayer, CurrentIdx[i], Destination[i]);
+
+
         }
 
     }
