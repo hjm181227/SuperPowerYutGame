@@ -8,7 +8,6 @@ public class Yut extends JLabel implements Runnable{
 
     Thread  myThread;
     int nSleepTime, nResult;
-//    String[] strYut = new String[6];
     public String[] iconImageName = new String[6];
     public ImageIcon[]    iconYut;
 
