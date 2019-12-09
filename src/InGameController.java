@@ -127,11 +127,11 @@ public class InGameController {
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 5;
+                _data.throwResult = 4;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
-                _data.throwResult = 5;
+                _data.throwResult = 6;
 
             _view.lblThrowing.start();
             btn.setEnabled(false);
@@ -149,7 +149,7 @@ public class InGameController {
             _view.add(data.preview);
             _view.setComponentZOrder(data.preview, 0);
 
-            /*
+
             if(_data.throwResult == 6) {
                 for(Pawn p:_data.activatedPlayer.pawns) {
                     if(p.isFinished() == false && p.getCurrentIndex() != 0){
@@ -159,8 +159,8 @@ public class InGameController {
                 }
                 if(_data.throwableNCnt==0) passPlayerTurn();
             }
-            */
-            System.out.println(_data.throwableNCnt);
+
+
             if (_data.throwableNCnt == 0) {
                 for (Pawn P : _data.activatedPlayer.pawns) {
                     if (P.isFinished() == false) {
@@ -169,7 +169,6 @@ public class InGameController {
                 }
             }
             else {
-                System.out.println("!23");
                 ready(_data.activatedPlayer);
             }
         }
