@@ -6,22 +6,22 @@ import java.awt.*;
 public class ExplainPanel extends JPanel {
 
     public JLabel lblTitle;
-
     public JButton btnPrev, btnNext;
-
     public ImageIcon[] explains;
-
     public int     imageIndex;
+
+    public btnMouseEvent btnlistener;
+
 
     public ExplainPanel(){
         GameManager.getInstance().set_explain(this);
+        btnlistener = new btnMouseEvent();
 
         setBounds(0,0,1000,800);
-
         setBackground(Color.white);
         setLayout(null);
-        imageIndex=0;
 
+        imageIndex=0;
         explains = new ImageIcon[3];
         for(int i=0;i<3;i++)
             explains[i] = new ImageIcon("images/rule"+(i+1)+".png");
@@ -37,6 +37,7 @@ public class ExplainPanel extends JPanel {
         btnPrev = new JButton("Menu");
         btnPrev.setBounds(50,720,220,50);
         btnPrev.setFont(new Font("OCR A Extended",Font.BOLD,30));
+        btnPrev.addMouseListener(btnlistener);
         GameManager.setBtnInit(btnPrev);
         add(btnPrev);
 
@@ -44,6 +45,7 @@ public class ExplainPanel extends JPanel {
         btnNext = new JButton("Next Page");
         btnNext.setBounds(730,720,220,50);
         btnNext.setFont(new Font("OCR A Extended",Font.BOLD,30));
+        btnNext.addMouseListener(btnlistener);
         GameManager.setBtnInit(btnNext);
         add(btnNext);
 
