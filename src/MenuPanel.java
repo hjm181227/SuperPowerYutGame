@@ -56,5 +56,4 @@ public class MenuPanel extends JPanel {
 
 
 
-
 }

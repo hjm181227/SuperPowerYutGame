@@ -79,6 +79,9 @@ public class Yut extends JLabel implements Runnable{
     }//run()
 
 
+    public void Yut_init(){
 
+
+    }
 
 }//LabelThread Class
