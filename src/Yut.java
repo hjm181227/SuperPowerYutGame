@@ -50,6 +50,15 @@ public class Yut extends JLabel implements Runnable{
     public void start(){
         myThread = new Thread(this);
         myThread.start();
+
+        try{
+            myThread.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void stop(){
