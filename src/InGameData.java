@@ -105,7 +105,6 @@ public class InGameData {
         iconYutTextName[5]="images/imgBDO.png";
         iconYutTextName[6]="images/none.png";
 
-
         iconYutText = new ImageIcon[7];
         for(int i=0; i<7; i++)
             iconYutText[i]= new ImageIcon(iconYutTextName[i]);

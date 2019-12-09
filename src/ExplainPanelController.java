@@ -25,20 +25,22 @@ public class ExplainPanelController {
                     return;
                 }
                 _explain.imageIndex += 1;
-                if(_explain.imageIndex == 2){ btn.setText("START"); }  //마지막 설명페이지에서 게임시작으로 버튼 이름 변경
-                _explain.btnPrev.setText("이전 페이지"); //게임설명 첫페이지를 제외하고 prev버튼 이름 변경
+                if(_explain.imageIndex == 2){ btn.setText("Start"); }  //마지막 설명페이지에서 게임시작으로 버튼 이름 변경
+                _explain.btnPrev.setText("Prev Page"); //게임설명 첫페이지를 제외하고 prev버튼 이름 변경
             }
             else if(btn == _explain.btnPrev){
                 if(_explain.imageIndex == 0){
                     GameManager.getInstance().get_view().showMenu();
                 }
                 else _explain.imageIndex -= 1;
-                if(_explain.imageIndex ==0) btn.setText("메뉴로"); 
+                if(_explain.imageIndex ==0) btn.setText("Menu");
+                _explain.btnNext.setText("Next Page");
             }
             _explain.lblTitle.setIcon(_explain.explains[_explain.imageIndex]);
             _explain.repaint();
         }
-
     }
+
+
 }
 

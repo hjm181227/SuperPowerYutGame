@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class MainPanel extends JPanel{
+
     private MenuPanel Menu;
     private ExplainPanel GameExplain;
     private InGameView GameStart;
     private InGameData GameData;
+    public btnMouseEvent btnlistener;
 
     ExplainPanelController e_control;
     InGameController g_control;
@@ -27,9 +28,16 @@ public class MainPanel extends JPanel{
         add(Menu);
         add(GameExplain);
         add(GameStart);
+
+        btnlistener= new btnMouseEvent();
+
         Menu.btnStart.addActionListener(new MenuSelect());
+        Menu.btnStart.addMouseListener(btnlistener);
         Menu.btnExplain.addActionListener(new MenuSelect());
+        Menu.btnExplain.addMouseListener(btnlistener);
         Menu.btnExit.addActionListener(new MenuSelect());
+        Menu.btnExit.addMouseListener(btnlistener);
+
 
         showMenu();
       //  showInGame();
@@ -63,5 +71,7 @@ public class MainPanel extends JPanel{
 
         }
     }
+
+
 
 }
