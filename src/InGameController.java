@@ -138,9 +138,9 @@ public class InGameController {
                 return;
             YutResult = Math.random();
             if (YutResult <= 0.1536)
-                _data.throwResult = 5;
+                _data.throwResult = 1;
             else if (YutResult <= 0.4992)
-                _data.throwResult = 5;
+                _data.throwResult = 2;
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
@@ -203,7 +203,7 @@ public class InGameController {
             {
                 if(_data.leftPlayer.abilities[1].isUsed() == false) {
                     _data.leftPlayer.abilities[1].use();
-                    _data.leftPlayer.abilities[1].setUsed(true);
+                   // _data.leftPlayer.abilities[1].setUsed(true);
                     _view.repaint();
                 }
             }
@@ -211,7 +211,7 @@ public class InGameController {
             {
                 if(_data.leftPlayer.abilities[0].isUsed() == false) {
                     _data.leftPlayer.abilities[0].use();
-                    _data.leftPlayer.abilities[0].setUsed(true);
+                    //_data.leftPlayer.abilities[0].setUsed(true);
                     _view.repaint();
                 }
             }

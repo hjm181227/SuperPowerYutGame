@@ -233,7 +233,7 @@ public class InGameData {
         Player opponent = owner == leftPlayer ? rightPlayer : leftPlayer;
 
         for(Pawn p: owner.pawns){
-            if(p.getCurrentIndex() == boardIndexer[start].currentIndex) {
+            if(p.getCurrentIndex() == start) {
                 p.setIndex(boardIndexer[end].currentIndex);//칸 인덱스 갱신
                 if(boardIndexer[end].currentIndex == 0) {
                     goWaitingRoom(p,owner);
