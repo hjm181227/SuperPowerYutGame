@@ -159,7 +159,6 @@ public class InGameController {
             btn.setEnabled(false);
 
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
-            _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult - 1]);
 
             if (_data.throwResult != 4 && _data.throwResult != 5)
                 _data.throwableNCnt--;  //던질 수 있는 횟수 -1
