@@ -149,6 +149,7 @@ public class InGameController {
             _view.add(data.preview);
             _view.setComponentZOrder(data.preview, 0);
 
+
             /*
             if(_data.throwResult == 6) {
                 for(Pawn p:_data.activatedPlayer.pawns) {
@@ -241,6 +242,9 @@ public class InGameController {
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
         _data.activatedPlayer.isMyTurn = true;
+        //윷 결과 지우기
+        _view.lblYutResult.setIcon(_data.iconYutText[6]);
+
         change_playerImgnLabel();
         ready(_data.activatedPlayer);
     }

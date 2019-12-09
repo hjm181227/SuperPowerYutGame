@@ -21,7 +21,6 @@ public class InGameView extends JPanel {
         setBounds(0,0,1000, 800);
         setBackground(Color.white);
         setLayout(null);
-        //setVisible(false);
 
         for(Pawn p:_gameData.leftPlayer.pawns) {
             this.add(p);
@@ -48,8 +47,6 @@ public class InGameView extends JPanel {
 
         leftThrowBtn = new JButton("윷 던지기");
         leftThrowBtn.setBounds(0,599, 200,200);
-
-        leftThrowBtn.setFont(new Font("vernada",Font.BOLD,30));
 
         leftThrowBtn.setLayout(null);
         add(leftThrowBtn);
