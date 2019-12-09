@@ -236,6 +236,7 @@ public class InGameData {
                 if(boardIndexer[end].currentIndex == 0) {
                     goWaitingRoom(p,owner);
                     p.setFinished(true);
+                    p.setIcon(new ImageIcon("images/FinishedPawn.png"));
                     owner.score++;
                 }//완주시 대기실로 이동
                 else p.setLocation(boardIndexer[boardIndexer[end].currentIndex].p); //좌표 이동
