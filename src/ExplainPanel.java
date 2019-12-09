@@ -6,22 +6,22 @@ import java.awt.*;
 public class ExplainPanel extends JPanel {
 
     public JLabel lblTitle;
-
     public JButton btnPrev, btnNext;
-
     public ImageIcon[] explains;
-
     public int     imageIndex;
+
+    public btnMouseEvent btnlistener;
+
 
     public ExplainPanel(){
         GameManager.getInstance().set_explain(this);
+        btnlistener = new btnMouseEvent();
 
         setBounds(0,0,1000,800);
-
         setBackground(Color.white);
         setLayout(null);
-        imageIndex=0;
 
+        imageIndex=0;
         explains = new ImageIcon[3];
         for(int i=0;i<3;i++)
             explains[i] = new ImageIcon("images/rule"+(i+1)+".png");
@@ -34,17 +34,19 @@ public class ExplainPanel extends JPanel {
         add(lblTitle);
 
         //이전 페이지로 넘어가게 하는 버튼
-        btnPrev = new JButton("메뉴로");
+        btnPrev = new JButton("Menu");
         btnPrev.setBounds(50,720,220,50);
-        btnPrev.setFont(new Font("Vernada",Font.BOLD,30));
-        btnPrev.setVisible(true);
+        btnPrev.setFont(new Font("OCR A Extended",Font.BOLD,30));
+        btnPrev.addMouseListener(btnlistener);
+        GameManager.setBtnInit(btnPrev);
         add(btnPrev);
 
         //다음 페이지로 넘어가게 하는 버튼
-        btnNext = new JButton("다음 페이지");
+        btnNext = new JButton("Next Page");
         btnNext.setBounds(730,720,220,50);
-        btnNext.setFont(new Font("Vernada",Font.BOLD,30));
-        btnNext.setVisible(true);
+        btnNext.setFont(new Font("OCR A Extended",Font.BOLD,30));
+        btnNext.addMouseListener(btnlistener);
+        GameManager.setBtnInit(btnNext);
         add(btnNext);
 
 

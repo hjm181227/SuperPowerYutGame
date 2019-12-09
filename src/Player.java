@@ -66,8 +66,8 @@ public class Player {
         imgPlayer = new JLabel();
 
         lblTurn= new JLabel();
-        lblTurn.setBounds(20,10,160,80);
-        lblTurn.setFont(new Font("Verdana", Font.BOLD, 30));
+        lblTurn.setBounds(21 ,10,160,80);
+        lblTurn.setFont(new Font("OCR A Extended", Font.BOLD, 30));
         lblTurn.setText("My Turn!");
         lblTurn.setVisible(false);
 

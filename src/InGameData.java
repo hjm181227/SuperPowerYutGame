@@ -10,7 +10,7 @@ public class InGameData {
     public Point[] leftPawnWaiting, rightPawnWaiting;
 
     public ImageIcon[]    iconYutText;
-    public String[]  iconYutTextName = new String[6];
+    public String[]  iconYutTextName = new String[7];
 
 
     public Player activatedPlayer;
@@ -95,6 +95,7 @@ public class InGameData {
 
 
 
+
         //윷던지고 결과 텍스트 이미지 변경
         iconYutTextName[0]="images/imgDO.png";
         iconYutTextName[1]="images/imgGAE.png";
@@ -102,9 +103,10 @@ public class InGameData {
         iconYutTextName[3]="images/imgYUT.png";
         iconYutTextName[4]="images/imgMO.png";
         iconYutTextName[5]="images/imgBDO.png";
+        iconYutTextName[6]="images/none.png";
 
-        iconYutText = new ImageIcon[6];
-        for(int i=0; i<6; i++)
+        iconYutText = new ImageIcon[7];
+        for(int i=0; i<7; i++)
             iconYutText[i]= new ImageIcon(iconYutTextName[i]);
 
 

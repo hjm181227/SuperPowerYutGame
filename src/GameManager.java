@@ -1,3 +1,4 @@
+import javax.swing.*;
 
 public class GameManager {
 
@@ -26,5 +27,13 @@ public class GameManager {
     public static GameManager getInstance(){
         if(s_instance == null) s_instance = new GameManager();
         return s_instance;
+    }
+
+    //버튼 초기화 메소드 : 외곽선삭제, 배경 투명, 화면에 보이기
+    public static void setBtnInit(JButton btn){
+        btn.setBorderPainted(false);  //외곽선
+        btn.setFocusPainted(false);  //선택시 테두리 사용x
+        btn.setContentAreaFilled(false); //내용영역- 배경투명
+        btn.setVisible(true);
     }
 }
