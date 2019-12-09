@@ -166,6 +166,8 @@ public class InGameData {
                     data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
                 else if(data.result == 5)
                     data.preview.setIndex(0);
+                else if(data.result == 4)
+                    data.preview.setIndex(20);
                 else
                     data.preview.setIndex(23 + data.result - 1);
                 break;
@@ -254,16 +256,19 @@ public class InGameData {
 
     public void InGameData_init(){
 
-        //left, rigght goroom(pawn[i], this)
         leftPlayer.Player_init();
         rightPlayer.Player_init();
-        for(Pawn p:leftPlayer.pawns)
+
+        for(Pawn p:leftPlayer.pawns){
             goWaitingRoom(p, leftPlayer);
-        for(Pawn p:rightPlayer.pawns)
+            p.setPawnImg("images/horsePawn.png");
+        }
+        for(Pawn p:rightPlayer.pawns){
             goWaitingRoom(p, rightPlayer);
+            p.setPawnImg("images/pigPawn.png");
+        }
 
         activatedPlayer= leftPlayer;
-//        throwResult=0;
 
 
     }
