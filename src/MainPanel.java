@@ -8,6 +8,7 @@ public class MainPanel extends JPanel{
     private ExplainPanel GameExplain;
     private InGameView GameStart;
     private InGameData GameData;
+    public btnMouseEvent btnlistener;
 
     ExplainPanelController e_control;
     InGameController g_control;
@@ -28,12 +29,14 @@ public class MainPanel extends JPanel{
         add(GameExplain);
         add(GameStart);
 
+        btnlistener= new btnMouseEvent();
+
         Menu.btnStart.addActionListener(new MenuSelect());
-        Menu.btnStart.addMouseListener(new MenuSelectMouseEvent());
+        Menu.btnStart.addMouseListener(btnlistener);
         Menu.btnExplain.addActionListener(new MenuSelect());
-        Menu.btnExplain.addMouseListener(new MenuSelectMouseEvent());
+        Menu.btnExplain.addMouseListener(btnlistener);
         Menu.btnExit.addActionListener(new MenuSelect());
-        Menu.btnExit.addMouseListener(new MenuSelectMouseEvent());
+        Menu.btnExit.addMouseListener(btnlistener);
 
 
         showMenu();
@@ -69,27 +72,6 @@ public class MainPanel extends JPanel{
         }
     }
 
-    private class MenuSelectMouseEvent implements MouseListener {
 
-        @Override
-        public void mouseClicked(MouseEvent e) { }
-        @Override
-        public void mousePressed(MouseEvent e) {  }
-        @Override
-        public void mouseReleased(MouseEvent e) { }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            JButton btn = (JButton)e.getSource();
-            btn.setForeground(new Color(150,100,50));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            JButton btn = (JButton)e.getSource();
-            btn.setForeground(Color.black);
-
-        }
-    }
 
 }

@@ -39,7 +39,8 @@ public class ExplainPanelController {
             _explain.lblTitle.setIcon(_explain.explains[_explain.imageIndex]);
             _explain.repaint();
         }
-
     }
+
+
 }
 
