@@ -25,7 +25,7 @@ public class InGameController {
         _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
         _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
 
-        _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
+        //_data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
 
@@ -43,11 +43,13 @@ public class InGameController {
         @Override
         public void mouseReleased(MouseEvent e) {
             _data.focusedPawn = (Pawn)e.getSource();
+            System.out.println("폰을 클릭했다");
             for(ThrowData data:_data.previewPawns){
                 data.preview.setVisible(true);
                 data.preview.setIcon(new ImageIcon(_data.focusedPawn.ImgSource()));
             }
-            _data.findNextPoint();
+            _data.showAllPreviews();
+            _view.repaint();
         }
 
         @Override
@@ -74,23 +76,30 @@ public class InGameController {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if(_data.focusedPawn.getCurrentIndex()==0) _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, _data.previewMovedPawn.getCurrentIndex());
-            else _data.moveAllPawns(_data.activatedPlayer,_data.focusedPawn.getCurrentIndex(),_data.previewMovedPawn.getCurrentIndex());
-            for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
-            _data.previewMovedPawn.setVisible(false);
-            //finish turn(pass turn)
-            switch(_data.throwResult){
-                case 4:
-                case 5:
-                    ready(_data.activatedPlayer);
-                    break;
-                default:
-                    _data.activatedPlayer.isMyTurn = false;
-                    passPlayerTurn();
-                    _data.activatedPlayer.isMyTurn = true;
+            Pawn p = (Pawn)e.getSource();
+            ThrowData clicked = null;
+            boolean catched;
+
+
+            for(ThrowData data:_data.previewPawns){
+                if(data.preview == p) clicked = data;
+            }
+            //말 이동
+            if(_data.focusedPawn.getCurrentIndex()==0) catched = _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, p.getCurrentIndex());
+            else catched = _data.moveAllPawns(_data.activatedPlayer,_data.focusedPawn.getCurrentIndex(),p.getCurrentIndex());
+            for(ThrowData data:_data.previewPawns) data.preview.setVisible(false);
+            _data.previewPawns.remove(clicked);
+            _data.previewPawns.trimToSize();
+
+            if(catched) {
+                ready(_data.activatedPlayer);
+                for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+            }
+            else if(_data.previewPawns.size()==0) {
+                for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                passPlayerTurn();
             }
 
-            for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
         }
 
         @Override
@@ -108,30 +117,37 @@ public class InGameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton btn = (JButton) e.getSource();
-            if((_data.leftPlayer.isMyTurn && btn == _view.rightThrowBtn) || (_data.rightPlayer.isMyTurn && btn == _view.leftThrowBtn)) return;
+            if ((_data.leftPlayer.isMyTurn && btn == _view.rightThrowBtn) || (_data.rightPlayer.isMyTurn && btn == _view.leftThrowBtn))
+                return;
             YutResult = Math.random();
-            if(YutResult <= 0.1536)
+            if (YutResult <= 0.1536)
                 _data.throwResult = 1;
-            else if(YutResult <= 0.4992)
+            else if (YutResult <= 0.4992)
                 _data.throwResult = 2;
-            else if(YutResult <= 0.7584)
+            else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 4;
+                _data.throwResult = 5;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
-                _data.throwResult = 6;
+                _data.throwResult = 5;
 
             _view.lblThrowing.start();
             btn.setEnabled(false);
 
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
             //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
-            _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult-1]);
+            _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult - 1]);
 
-            _data.throwableNCnt--;
-            _data.previewPawns.add(new ThrowData(_data.throwResult));
+            if (_data.throwResult != 4 && _data.throwResult != 5)
+                _data.throwableNCnt--;  //던질 수 있는 횟수 -1
+
+            ThrowData data = new ThrowData(_data.throwResult);
+            data.preview.addMouseListener(new MoveSelectedPawn());
+            _data.previewPawns.add(data);   //던진 결과 저장
+            _view.add(data.preview);
+            _view.setComponentZOrder(data.preview, 0);
 
             /*
             if(_data.throwResult == 6) {
@@ -144,12 +160,20 @@ public class InGameController {
                 if(_data.throwableNCnt==0) passPlayerTurn();
             }
             */
-
-            if(_data.throwableNCnt == 0) for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
-
+            System.out.println(_data.throwableNCnt);
+            if (_data.throwableNCnt == 0) {
+                for (Pawn P : _data.activatedPlayer.pawns) {
+                    if (P.isFinished() == false) {
+                        P.addMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                    }
+                }
+            }
+            else {
+                System.out.println("!23");
+                ready(_data.activatedPlayer);
+            }
         }
     }
-
     private class UseAbility implements ActionListener{
 
         @Override
