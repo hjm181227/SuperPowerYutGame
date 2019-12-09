@@ -209,7 +209,7 @@ public class InGameController {
             {
                 if(_data.leftPlayer.abilities[1].isUsed() == false) {
                     _data.leftPlayer.abilities[1].use();
-                    _data.leftPlayer.abilities[1].setUsed(true);
+                   // _data.leftPlayer.abilities[1].setUsed(true);
                     _view.repaint();
                 }
             }
@@ -217,7 +217,7 @@ public class InGameController {
             {
                 if(_data.leftPlayer.abilities[0].isUsed() == false) {
                     _data.leftPlayer.abilities[0].use();
-                    _data.leftPlayer.abilities[0].setUsed(true);
+                    //_data.leftPlayer.abilities[0].setUsed(true);
                     _view.repaint();
                 }
             }
