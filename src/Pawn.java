@@ -27,6 +27,11 @@ public class Pawn extends JLabel {
     public void setFinished(boolean a){ isFinished = a; }
 
     //  methods
+    public void setPawnImg(String img){
+        pawnImg= img;
+        setIcon(new ImageIcon(img));
+    }
+
     public void Pawn_init(){
         this.currentIndex=0;
         this.isFinished=false;

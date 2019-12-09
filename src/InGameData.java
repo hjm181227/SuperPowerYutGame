@@ -253,16 +253,19 @@ public class InGameData {
 
     public void InGameData_init(){
 
-        //left, rigght goroom(pawn[i], this)
         leftPlayer.Player_init();
         rightPlayer.Player_init();
-        for(Pawn p:leftPlayer.pawns)
+
+        for(Pawn p:leftPlayer.pawns){
             goWaitingRoom(p, leftPlayer);
-        for(Pawn p:rightPlayer.pawns)
+            p.setPawnImg("images/horsePawn.png");
+        }
+        for(Pawn p:rightPlayer.pawns){
             goWaitingRoom(p, rightPlayer);
+            p.setPawnImg("images/pigPawn.png");
+        }
 
         activatedPlayer= leftPlayer;
-//        throwResult=0;
 
 
     }
