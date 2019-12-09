@@ -26,9 +26,8 @@ public class MenuPanel extends JPanel {
 //        add(imglabel);
 
         //게임의 타이틀
-        lblTitle = new JLabel("초능력 윷놀이 !");
-        lblTitle.setBounds(220, 150, 600, 100);
-        lblTitle.setFont(new Font("Vernada", Font.BOLD, 80));
+        lblTitle = new JLabel(new ImageIcon("images/Title.PNG"));
+        lblTitle.setBounds(220, 150, 600, 120);
         lblTitle.setVisible(true);
         add(lblTitle);
 
