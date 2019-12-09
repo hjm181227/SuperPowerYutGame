@@ -22,6 +22,9 @@ public class InGameController {
         _view.leftThrowBtn.addActionListener(new ThrowingYut());
         _view.rightThrowBtn.addActionListener(new ThrowingYut());
 
+        _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
+        _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
+
         _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
@@ -70,9 +73,8 @@ public class InGameController {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
             if(_data.focusedPawn.getCurrentIndex()==0) _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, _data.previewMovedPawn.getCurrentIndex());
-            else _data.moveAllPawns(_data.activatedPlayer);
+            else _data.moveAllPawns(_data.activatedPlayer,_data.focusedPawn.getCurrentIndex(),_data.previewMovedPawn.getCurrentIndex());
             for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             _data.previewMovedPawn.setVisible(false);
             //finish turn(pass turn)
@@ -112,7 +114,7 @@ public class InGameController {
             else if(YutResult <= 0.4992)
                 _data.throwResult = 2;
             else if(YutResult <= 0.7584)
-                _data.throwResult = 3;
+                _data.throwResult = 6;
             else if (YutResult <= 0.8880)
                 _data.throwResult = 4;
             else if (YutResult <= 0.9136)
@@ -143,7 +145,30 @@ public class InGameController {
             }
 
             for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
+        }
+    }
+    private class UseAbility implements ActionListener{
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           Object obj = e.getSource();
+
+            if(obj ==_view.leftUserPanel.btnAbility2)
+            {
+                if(_data.leftPlayer.abilities[1].isUsed() == false) {
+                    _data.leftPlayer.abilities[1].use();
+                    _data.leftPlayer.abilities[1].setUsed(true);
+                    _view.repaint();
+                }
+            }
+            else if(obj ==_view.leftUserPanel.btnAbility1)
+            {
+                if(_data.leftPlayer.abilities[0].isUsed() == false) {
+                    _data.leftPlayer.abilities[0].use();
+                    _data.leftPlayer.abilities[0].setUsed(true);
+                    _view.repaint();
+                }
+            }
         }
     }
 
