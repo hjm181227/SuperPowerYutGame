@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.security.acl.Owner;
+import java.util.ArrayList;
 
 public class InGameData {
     public Player  leftPlayer, rightPlayer;
@@ -15,9 +15,12 @@ public class InGameData {
 
     public Player activatedPlayer;
 
+    public ArrayList<ThrowData> previewPawns;
+    public int throwableNCnt;
+
     public InGameData(){
 
-        int x = 720, y = 720;
+        int x, y;
 
         GameManager.getInstance().set_gameData(this);
         leftPlayer = new Player("images/horsePawn.png", 70, 68);
@@ -26,7 +29,7 @@ public class InGameData {
         throwResult = 0;
         activatedPlayer = leftPlayer;
 
-
+        previewPawns = new ArrayList<ThrowData>();
 
         //플레이어 움직이는 사진지정
         leftPlayer.iconPalyer[0]= new ImageIcon("images/Left_move.gif");
@@ -83,7 +86,6 @@ public class InGameData {
         boardIndexer[1].prevIndex = 20;
         boardIndexer[21].prevIndex = 10;
         boardIndexer[23].nextIndex = 28;
-        boardIndexer[23].prevIndex = 27;
         boardIndexer[26].prevIndex = 5;
         boardIndexer[25].nextIndex = 20;
         boardIndexer[27].nextIndex = 23;
@@ -123,75 +125,81 @@ public class InGameData {
     ////////////////////
     ///말 이동 관련 메소드///
     ////////////////////
-    public void findNextPoint(){
+    public void findNextPoint(ThrowData data){
 
         switch(focusedPawn.getCurrentIndex()) {
             case 0:
-                if(throwResult == 6) {
+                if(data.result == 6) {
                     previewMovedPawn.setVisible(false);
                     return;
                 }
-                previewMovedPawn.setIndex(throwResult);
+                data.preview.setIndex(data.result);
                 break;
             case 5:
-                if(throwResult == 6) {
-                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                if(data.result == 6) {
+                    data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
                 }
                 else {
-                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].shortCut);
-                    for (int i = 1; i < throwResult; i++)
-                        previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
+                    data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].shortCut);
+                    for (int i = 1; i < data.result; i++)
+                        data.preview.setIndex(boardIndexer[data.preview.getCurrentIndex()].nextIndex);
                     break;
                 }
             case 10:
-                if(throwResult == 6)
-                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                if(data.result == 6)
+                    data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
                 else
-                    previewMovedPawn.setIndex(21 + throwResult - 1);
+                    data.preview.setIndex(21 + data.result - 1);
                     break;
             case 21:
-                if(throwResult == 6)
-                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
-                else if(throwResult == 5)
-                    previewMovedPawn.setIndex(20);
+                if(data.result == 6)
+                    data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                else if(data.result == 5)
+                    data.preview.setIndex(20);
                 else
-                    previewMovedPawn.setIndex(22 + throwResult - 1);
+                    data.preview.setIndex(22 + data.result - 1);
                 break;
             case 22:
-                if(throwResult == 6)
-                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
-                else if(throwResult == 5)
-                    previewMovedPawn.setIndex(0);
+                if(data.result == 6)
+                    data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
+                else if(data.result == 5)
+                    data.preview.setIndex(0);
                 else
-                    previewMovedPawn.setIndex(23 + throwResult - 1);
+                    data.preview.setIndex(23 + data.result - 1);
                 break;
             case 23:
-                if(throwResult == 6) {//빽도가 나오면 뒤로 한칸
+                if(data.result == 6) {//빽도가 나오면 뒤로 한칸
+                    data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].prevIndex);
                     break;
                 }
-                previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].shortCut);
-                for(int i=1;i<throwResult;i++) previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
+                data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].shortCut);
+                for(int i=1;i<data.result;i++) data.preview.setIndex(boardIndexer[data.preview.getCurrentIndex()].nextIndex);
                 break;
             default:
-                if(throwResult == 6) {//빽도가 나오면 뒤로 한칸
-                    previewMovedPawn.setIndex((boardIndexer[focusedPawn.getCurrentIndex()].prevIndex));
+                if(data.result == 6) {//빽도가 나오면 뒤로 한칸
+                    data.preview.setIndex((boardIndexer[focusedPawn.getCurrentIndex()].prevIndex));
                     break;
                 }
                 else {
-                    previewMovedPawn.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].nextIndex);
-                    for (int i = 1; i < throwResult; i++)
-                        previewMovedPawn.setIndex(boardIndexer[previewMovedPawn.getCurrentIndex()].nextIndex);
+                    data.preview.setIndex(boardIndexer[focusedPawn.getCurrentIndex()].nextIndex);
+                    for (int i = 1; i < data.result; i++)
+                        data.preview.setIndex(boardIndexer[data.preview.getCurrentIndex()].nextIndex);
                     break;
                 }
         }
-        System.out.println(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
-        previewMovedPawn.setLocation(boardIndexer[previewMovedPawn.getCurrentIndex()].p);
-        GameManager.getInstance().get_inGame().repaint();
 
+        data.preview.setLocation(boardIndexer[data.preview.getCurrentIndex()].p);
     }
 
-    public void moveOnePawn(Player owner, Pawn p, int end){
+    public void showAllPreviews(){
+        for(ThrowData data:previewPawns) {
+            findNextPoint(data);
+            System.out.println(data.result);
+        }
+        GameManager.getInstance().get_inGame().repaint();
+    }
 
+    public boolean moveOnePawn(Player owner, Pawn p, int end){
             p.setIndex(boardIndexer[end].currentIndex);//칸 인덱스 갱신
             if (boardIndexer[end].currentIndex == 0) {
                 goWaitingRoom(p, owner);
@@ -200,24 +208,26 @@ public class InGameData {
             }//완주시 대기실로 이동
             else p.setBounds(boardIndexer[boardIndexer[end].currentIndex].p.x,boardIndexer[boardIndexer[end].currentIndex].p.y,focusedPawn.getWidth(),focusedPawn.getHeight()); //좌표 이동
             System.out.println(boardIndexer[boardIndexer[end].currentIndex].p);
-            catchOpponentPawns(owner == leftPlayer ? rightPlayer : leftPlayer, boardIndexer[end]);
+            return catchOpponentPawns(owner == leftPlayer ? rightPlayer : leftPlayer, boardIndexer[end]);
     }
 
     public void goWaitingRoom(Pawn pawn, Player owner) {
         pawn.setLocation(owner == leftPlayer ? leftPawnWaiting[pawn.pawnNumber] : rightPawnWaiting[pawn.pawnNumber]);
     }
 
-    public void catchOpponentPawns(Player opponent, BoardIndexData index) {
+    public boolean catchOpponentPawns(Player opponent, BoardIndexData index) {
+        boolean result = false;
         for(Pawn pawn:opponent.pawns){
             if(pawn.getCurrentIndex() == index.currentIndex){
+                result = true;
                 pawn.setIndex(0);
                 goWaitingRoom(pawn, opponent);
             }//if
         }//for
-
+        return result;
     }//catchOpponentPawns()
 
-    public void moveAllPawns(Player owner,int start , int end){
+    public boolean moveAllPawns(Player owner,int start , int end){
         Player opponent = owner == leftPlayer ? rightPlayer : leftPlayer;
 
         for(Pawn p: owner.pawns){
@@ -232,7 +242,8 @@ public class InGameData {
             }//출발지에 있는 말들 이동
         }
 
-        if(boardIndexer[end].currentIndex != 0) catchOpponentPawns(opponent, boardIndexer[end]);  //이동한 자리에 있는 상대말 잡기
+        if(boardIndexer[end].currentIndex != 0) return catchOpponentPawns(opponent, boardIndexer[end]);  //이동한 자리에 있는 상대말 잡기
+        return false;
     }
 
 }
