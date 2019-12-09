@@ -142,6 +142,8 @@ public class InGameController {
             for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
         }
     }
+
+    
     private class UseAbility implements ActionListener{
 
         @Override

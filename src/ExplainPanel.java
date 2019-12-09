@@ -34,17 +34,17 @@ public class ExplainPanel extends JPanel {
         add(lblTitle);
 
         //이전 페이지로 넘어가게 하는 버튼
-        btnPrev = new JButton("메뉴로");
+        btnPrev = new JButton("Menu");
         btnPrev.setBounds(50,720,220,50);
-        btnPrev.setFont(new Font("Vernada",Font.BOLD,30));
-        btnPrev.setVisible(true);
+        btnPrev.setFont(new Font("OCR A Extended",Font.BOLD,30));
+        GameManager.setBtnInit(btnPrev);
         add(btnPrev);
 
         //다음 페이지로 넘어가게 하는 버튼
-        btnNext = new JButton("다음 페이지");
+        btnNext = new JButton("Next Page");
         btnNext.setBounds(730,720,220,50);
-        btnNext.setFont(new Font("Vernada",Font.BOLD,30));
-        btnNext.setVisible(true);
+        btnNext.setFont(new Font("OCR A Extended",Font.BOLD,30));
+        GameManager.setBtnInit(btnNext);
         add(btnNext);
 
 
