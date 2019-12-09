@@ -39,10 +39,11 @@ public class InGameController {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            System.out.println(3333);
             _data.focusedPawn = (Pawn)e.getSource();
-            _data.previewMovedPawn.setVisible(true);
-            _data.previewMovedPawn.setIcon(new ImageIcon(_data.focusedPawn.ImgSource()));
+            for(ThrowData data:_data.previewPawns){
+                data.preview.setVisible(true);
+                data.preview.setIcon(new ImageIcon(_data.focusedPawn.ImgSource()));
+            }
             _data.findNextPoint();
         }
 
@@ -76,15 +77,16 @@ public class InGameController {
             for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             _data.previewMovedPawn.setVisible(false);
             //finish turn(pass turn)
-            switch(_data.throwResult){
-                case 4:
-                case 5:
-                    ready(_data.activatedPlayer);
-                    break;
-                default:
+
+            switch(_data.previewPawns.size()){
+                case 0:
                     _data.activatedPlayer.isMyTurn = false;
                     passPlayerTurn();
                     _data.activatedPlayer.isMyTurn = true;
+                    break;
+                default:
+                    ready(_data.activatedPlayer);
+                    break;
             }
 
             for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
@@ -121,15 +123,17 @@ public class InGameController {
                 _data.throwResult = 6;
 
             _view.lblThrowing.start();
+
             btn.setEnabled(false);
-            System.out.println(_data.throwResult);
 
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
             //윷 사진이 바뀌기 전에 글자가 먼저 바뀜...
             _view.lblYutResult.setIcon(_data.iconYutText[_data.throwResult-1]);
 
             _data.throwableNCnt--;
+            _data.previewPawns.add(new ThrowData(_data.throwResult));
 
+            /*
             if(_data.throwResult == 6) {
                 for(Pawn p:_data.activatedPlayer.pawns) {
                     if(p.isFinished() == false && p.getCurrentIndex() != 0){
@@ -139,6 +143,7 @@ public class InGameController {
                 }
                 if(_data.throwableNCnt==0) passPlayerTurn();
             }
+            */
 
             if(_data.throwableNCnt == 0) for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
 
