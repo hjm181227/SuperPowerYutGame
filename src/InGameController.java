@@ -22,6 +22,9 @@ public class InGameController {
         _view.leftThrowBtn.addActionListener(new ThrowingYut());
         _view.rightThrowBtn.addActionListener(new ThrowingYut());
 
+        _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
+        _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
+
         _data.previewMovedPawn.addMouseListener(new MoveSelectedPawn());
 
         init_Game();
@@ -71,22 +74,20 @@ public class InGameController {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
             if(_data.focusedPawn.getCurrentIndex()==0) _data.moveOnePawn(_data.activatedPlayer, _data.focusedPawn, _data.previewMovedPawn.getCurrentIndex());
-            else _data.moveAllPawns(_data.activatedPlayer);
+            else _data.moveAllPawns(_data.activatedPlayer,_data.focusedPawn.getCurrentIndex(),_data.previewMovedPawn.getCurrentIndex());
             for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
             _data.previewMovedPawn.setVisible(false);
             //finish turn(pass turn)
-
-            switch(_data.previewPawns.size()){
-                case 0:
+            switch(_data.throwResult){
+                case 4:
+                case 5:
+                    ready(_data.activatedPlayer);
+                    break;
+                default:
                     _data.activatedPlayer.isMyTurn = false;
                     passPlayerTurn();
                     _data.activatedPlayer.isMyTurn = true;
-                    break;
-                default:
-                    ready(_data.activatedPlayer);
-                    break;
             }
 
             for(Pawn p:_data.activatedPlayer.pawns) p.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
@@ -123,7 +124,6 @@ public class InGameController {
                 _data.throwResult = 6;
 
             _view.lblThrowing.start();
-
             btn.setEnabled(false);
 
             _view.lblThrowing.setResult(_data.throwResult); //Yut으로 결과값보내서 결과이미지 띄우기
@@ -147,6 +147,31 @@ public class InGameController {
 
             if(_data.throwableNCnt == 0) for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
 
+        }
+    }
+
+    private class UseAbility implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           Object obj = e.getSource();
+
+            if(obj ==_view.leftUserPanel.btnAbility2)
+            {
+                if(_data.leftPlayer.abilities[1].isUsed() == false) {
+                    _data.leftPlayer.abilities[1].use();
+                    _data.leftPlayer.abilities[1].setUsed(true);
+                    _view.repaint();
+                }
+            }
+            else if(obj ==_view.leftUserPanel.btnAbility1)
+            {
+                if(_data.leftPlayer.abilities[0].isUsed() == false) {
+                    _data.leftPlayer.abilities[0].use();
+                    _data.leftPlayer.abilities[0].setUsed(true);
+                    _view.repaint();
+                }
+            }
         }
     }
 

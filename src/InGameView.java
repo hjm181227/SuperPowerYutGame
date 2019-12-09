@@ -3,9 +3,8 @@ import java.awt.*;
 
 public class InGameView extends JPanel {
 
-    private UserPanel       user1Panel, user2Panel;
-    //private ImagePanel      BoardPanel;
-    private JLabel          gameBoard ,Horse;
+    public UserPanel leftUserPanel, rightUserPanel;
+    private JLabel          gameBoard;
     private JButton         btnThrow1, btnThrow2;
     public Yut              lblThrowing;
     private InGameData      _gameData;
@@ -32,20 +31,14 @@ public class InGameView extends JPanel {
             this.add(p);
         }
 
-        Horse = new JLabel();
-        Horse.setIcon(new ImageIcon("images/horsePawn.png"));
-        Horse.setBounds(323,408,70,68);
-        Horse.setVisible(true);
-        add(Horse);
+        leftUserPanel = new UserPanel(_gameData.leftPlayer);
+        leftUserPanel.setBounds(0,0,200,600);
+        leftUserPanel.setVisible(true);
+        add(leftUserPanel);
 
-        user1Panel = new UserPanel(_gameData.leftPlayer);
-        user1Panel.setBounds(0,0,200,600);
-        user1Panel.setVisible(true);
-        add(user1Panel);
-
-        user2Panel = new UserPanel(_gameData.rightPlayer);
-        user2Panel.setBounds(800,0,200,600);
-        add(user2Panel);
+        rightUserPanel = new UserPanel(_gameData.rightPlayer);
+        rightUserPanel.setBounds(800,0,200,600);
+        add(rightUserPanel);
 
         gameBoard = new JLabel();
         gameBoard.setIcon(new ImageIcon("images/boardImage.png"));

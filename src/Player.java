@@ -5,7 +5,7 @@ import java.awt.*;
 public class Player {
     public Pawn[]      pawns;
     public int         score;
-    private Ability[]   abilities;
+    public Ability[]   abilities;
     public boolean     isMyTurn;
     public int        pawnImgWidth, pawnImgHeight;
 
@@ -24,6 +24,9 @@ public class Player {
 
         abilities = new Ability[2];
         int random;
+
+
+        /*
         random = (int)(Math.random() * 4);
         switch (random){
             case 0:
@@ -37,6 +40,10 @@ public class Player {
             case 3:
                 abilities[0] = new MovementAbility.OnlyYut();
         }
+        */
+
+
+        /*
         random = (int)(Math.random() * 4);
         switch (random){
             case 0:
@@ -49,6 +56,9 @@ public class Player {
                 abilities[1] = new LocationAbility.UpSideDown();
         }
 
+         */
+        abilities[1] = new LocationAbility.UpSideDown();
+        abilities[0] = new LocationAbility.Exchange();
         score = 0;
         isMyTurn = false;
 
