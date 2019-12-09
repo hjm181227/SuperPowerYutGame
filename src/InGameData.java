@@ -18,6 +18,9 @@ public class InGameData {
     public ArrayList<ThrowData> previewPawns;
     public int throwableNCnt;
 
+
+
+
     public InGameData(){
 
         int x, y;
@@ -243,6 +246,24 @@ public class InGameData {
 
         if(boardIndexer[end].currentIndex != 0) return catchOpponentPawns(opponent, boardIndexer[end]);  //이동한 자리에 있는 상대말 잡기
         return false;
+    }
+
+
+
+    public void InGameData_init(){
+
+        //left, rigght goroom(pawn[i], this)
+        leftPlayer.Player_init();
+        rightPlayer.Player_init();
+        for(Pawn p:leftPlayer.pawns)
+            goWaitingRoom(p, leftPlayer);
+        for(Pawn p:rightPlayer.pawns)
+            goWaitingRoom(p, rightPlayer);
+
+        activatedPlayer= leftPlayer;
+        throwResult=0;
+
+
     }
 
 }

@@ -119,11 +119,11 @@ public class InGameController {
             else if (YutResult <= 0.7584)
                 _data.throwResult = 3;
             else if (YutResult <= 0.8880)
-                _data.throwResult = 4;
+                _data.throwResult = 5;
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
-                _data.throwResult = 6;
+                _data.throwResult = 5;
 
             _view.lblThrowing.start();
             btn.setEnabled(false);
@@ -142,6 +142,7 @@ public class InGameController {
             _view.setComponentZOrder(data.preview, 0);
 
 
+            /*
             if(_data.throwResult == 6) {
                 for(Pawn p:_data.activatedPlayer.pawns) {
                     if(p.isFinished() == false && p.getCurrentIndex() != 0){
@@ -151,7 +152,7 @@ public class InGameController {
                 }
                 if(_data.throwableNCnt==0) passPlayerTurn();
             }
-
+            */
             System.out.println(_data.throwableNCnt);
             if (_data.throwableNCnt == 0) {
                 for (Pawn P : _data.activatedPlayer.pawns) {
@@ -167,7 +168,7 @@ public class InGameController {
         }
     }
 
-
+    
     private class UseAbility implements ActionListener{
 
         @Override
@@ -233,7 +234,7 @@ public class InGameController {
     public void passPlayerTurn(){
 
         //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
-        if(_data.activatedPlayer.score ==4);
+        if(_data.activatedPlayer.score ==4)
 
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
