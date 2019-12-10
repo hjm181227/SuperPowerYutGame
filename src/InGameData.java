@@ -26,8 +26,8 @@ public class InGameData {
         int x, y;
 
         GameManager.getInstance().set_gameData(this);
-        leftPlayer = new Player("images/horsePawn.png", 80, 80);
-        rightPlayer = new Player("images/pigPawn.png",100,75);
+        leftPlayer = new Player("images/left_pawn.png", 80, 80);
+        rightPlayer = new Player("images/right_pawn.png",100,75);
 
         throwResult = 0;
         activatedPlayer = leftPlayer;
