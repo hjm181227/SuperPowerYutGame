@@ -29,13 +29,6 @@ public class MovementAbility {
         }
     }
 
-//    public static class BackStep extends Ability{
-//        @Override
-//        public void use() {
-//            //던진 윷만큼 뒤로 가기
-//        }
-//    }
-
     public static class OnlyYut extends Ability{
         //던지면 무조건 윷
         @Override
