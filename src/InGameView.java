@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
 public class InGameView extends JPanel {
@@ -44,14 +46,23 @@ public class InGameView extends JPanel {
         //BoardPanel.setLayout(null);
         add(gameBoard);
 
-        leftThrowBtn = new JButton("윷 던지기");
+
+        leftThrowBtn = new JButton("Throw YUT");
         leftThrowBtn.setBounds(0,599, 200,200);
+        leftThrowBtn.setFont(new Font("OCR A Extended", Font.BOLD, 25));
         leftThrowBtn.setLayout(null);
+        leftThrowBtn.setBorderPainted(false);  //외곽선
+        leftThrowBtn.setFocusPainted(false);  //선택시 테두리 사용x
+        leftThrowBtn.setBackground(new Color(225,213,191));
         add(leftThrowBtn);
 
-        rightThrowBtn = new JButton("윷 던지기");
+        rightThrowBtn = new JButton("Throw Yut");
         rightThrowBtn.setBounds(800,599,200,200);
+        rightThrowBtn.setFont(new Font("OCR A Extended", Font.BOLD, 25));
         rightThrowBtn.setLayout(null);
+        rightThrowBtn.setBorderPainted(false);  //외곽선
+        rightThrowBtn.setFocusPainted(false);  //선택시 테두리 사용x
+        rightThrowBtn.setBackground(new Color(225,213,191));
         add(rightThrowBtn);
 
         lblThrowing = new Yut();

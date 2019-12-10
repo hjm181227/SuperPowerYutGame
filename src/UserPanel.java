@@ -12,14 +12,22 @@ public class UserPanel extends JPanel{
 
         add(user.imgPlayer);
 
-        btnAbility1 = new JButton("이동 능력");
+        btnAbility1 = new JButton("move");
         btnAbility1.setBounds(0,350,100,50);
         btnAbility1.setLayout(null);
+        btnAbility1.setFont(new Font("OCR A Extended", Font.BOLD, 15));
+        btnAbility1.setBorderPainted(false);  //외곽선
+        btnAbility1.setFocusPainted(false);  //선택시 테두리 사용x
+        btnAbility1.setBackground(new Color(225,213,191));
         add(btnAbility1);
 
-        btnAbility2 = new JButton("위치 능력");
+        btnAbility2 = new JButton("loca");
         btnAbility2.setBounds(100,350,100,50);
         btnAbility2.setLayout(null);
+        btnAbility2.setFont(new Font("OCR A Extended", Font.BOLD, 15));
+        btnAbility2.setBorderPainted(false);  //외곽선
+        btnAbility2.setFocusPainted(false);  //선택시 테두리 사용x
+        btnAbility2.setBackground(new Color(225,213,191));
         add(btnAbility2);
 
         add(user.lblTurn);
