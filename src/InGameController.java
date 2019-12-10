@@ -91,7 +91,10 @@ public class InGameController {
                 if(_data.activatedPlayer== _data.leftPlayer) str="Left Player Win!! \n Continue?" ;
                 else str= "Right Player Win!! \n Continue?";
 
-                int result = JOptionPane.showConfirmDialog( _view, str);
+                JOptionPane dialog = new JOptionPane();
+//                dialog= s
+                int result = JOptionPane.showConfirmDialog( _view, str,"Game End",JOptionPane.YES_NO_OPTION);
+//                int result = JOptionPane.showConfirmDialog( _view, str);
                 switch(result) {
                     case JOptionPane.YES_OPTION:
 
