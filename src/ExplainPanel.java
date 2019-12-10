@@ -38,7 +38,7 @@ public class ExplainPanel extends JPanel {
         btnPrev.setBounds(50,720,220,50);
         btnPrev.setFont(new Font("OCR A Extended",Font.BOLD,30));
         btnPrev.addMouseListener(btnlistener);
-        GameManager.setBtnInit(btnPrev);
+        GameManager.getInstance().setBtnInit(btnPrev);
         add(btnPrev);
 
         //다음 페이지로 넘어가게 하는 버튼
@@ -46,7 +46,7 @@ public class ExplainPanel extends JPanel {
         btnNext.setBounds(730,720,220,50);
         btnNext.setFont(new Font("OCR A Extended",Font.BOLD,30));
         btnNext.addMouseListener(btnlistener);
-        GameManager.setBtnInit(btnNext);
+        GameManager.getInstance().setBtnInit(btnNext);
         add(btnNext);
 
 

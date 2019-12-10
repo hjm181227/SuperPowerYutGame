@@ -30,7 +30,7 @@ public class GameManager {
     }
 
     //버튼 초기화 메소드 : 외곽선삭제, 배경 투명, 화면에 보이기
-    public static void setBtnInit(JButton btn){
+    public void setBtnInit(JButton btn){
         btn.setBorderPainted(false);  //외곽선
         btn.setFocusPainted(false);  //선택시 테두리 사용x
         btn.setContentAreaFilled(false); //내용영역- 배경투명

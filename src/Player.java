@@ -30,28 +30,33 @@ public class Player {
         switch (random){
             case 0:
                 abilities[0] = new MovementAbility.MoOrDo();
+                abilities[0].abilityName = "Mo/Do";
                 break;
             case 1:
                 abilities[0] = new MovementAbility.GaeOrGirl();
+                abilities[0].abilityName = "Gae/Girl";
                 break;
 
             case 2:
                 abilities[0] = new MovementAbility.OnlyYut();
+                abilities[0].abilityName = "OnlyYut";
         }
 
         random = (int)(Math.random() * 3);
         switch (random){
             case 0:
                 abilities[1] = new LocationAbility.Exchange();
+                abilities[1].abilityName = "Swap";
                 break;
             case 1:
                 abilities[1] = new LocationAbility.GoHome();
+                abilities[1].abilityName = "GoHome";
                 break;
             case 2:
                 abilities[1] = new LocationAbility.UpSideDown();
+                abilities[1].abilityName = "Shuffle";
         }
 
-        abilities[1] = new LocationAbility.Exchange();
         score = 0;
         isMyTurn = false;
         isNowAbility1Use= false;

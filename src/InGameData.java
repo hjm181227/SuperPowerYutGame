@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class InGameData {
     public Player  leftPlayer, rightPlayer;
-    public Pawn    previewMovedPawn, focusedPawn;
+    public Pawn    focusedPawn;
     public int     throwResult;
     public BoardIndexData[] boardIndexer;
     public Point[] leftPawnWaiting, rightPawnWaiting;
@@ -266,7 +266,6 @@ public class InGameData {
         }
 
         activatedPlayer= leftPlayer;
-
 
     }
 
