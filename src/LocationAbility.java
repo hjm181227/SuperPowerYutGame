@@ -46,15 +46,14 @@ public class LocationAbility {
         }
     }
 
+
+
     public static class UpSideDown extends Ability {
         public int[] Destination = new int [8];
         @Override
         public void use() {
-
             //밥상뒤집기
             LeftUpSide();
-
-
         }
 
         public void LeftUpSide()
@@ -128,6 +127,9 @@ public class LocationAbility {
 
     }
 
+
+
+
     public static class Exchange extends Ability {
         Player opponent;
         SelectOpponent OpawnL;
@@ -172,13 +174,10 @@ public class LocationAbility {
 
             @Override
             public void mouseEntered(MouseEvent e) {}
-
             @Override
             public void mouseExited(MouseEvent e) {}
-
             @Override
             public void mouseClicked(MouseEvent e) { }
-
             @Override
             public void mousePressed(MouseEvent e) {}
         }
@@ -200,13 +199,10 @@ public class LocationAbility {
 
             @Override
             public void mouseEntered(MouseEvent e) {}
-
             @Override
             public void mouseExited(MouseEvent e) {}
-
             @Override
             public void mouseClicked(MouseEvent e) { }
-
             @Override
             public void mousePressed(MouseEvent e) {}
         }
