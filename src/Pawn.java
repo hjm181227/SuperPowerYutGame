@@ -7,7 +7,7 @@ public class Pawn extends JLabel {
     private String       pawnImg;
     public int pawnNumber;
 
-    public Pawn(){setBounds(0,0,79,68);}
+    public Pawn(){setBounds(0,0,90,80);}
     public Pawn(String img, int x, int y, int width, int height, int number){
         currentIndex = 0;
         isFinished = false;
