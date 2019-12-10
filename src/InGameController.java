@@ -245,7 +245,7 @@ public class InGameController {
             else if(obj ==_view.leftUserPanel.btnAbility2)
             {
                 if(_data.leftPlayer.abilities[1].isUsed() == false) {
-                    _data.activatedPlayer.isNowAbility2Use=true;
+//                    _data.activatedPlayer.isNowAbility2Use=true;
                     _data.leftPlayer.abilities[1].use();
                     _data.leftPlayer.abilities[1].setUsed(true);
                     _view.repaint();
