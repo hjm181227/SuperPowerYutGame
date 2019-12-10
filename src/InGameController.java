@@ -88,10 +88,11 @@ public class InGameController {
             //현재 플레이어의 말이 전부 완주하면 game end -> 대화상자
             if(_data.activatedPlayer.score ==4){
                 String str;
-                if(_data.activatedPlayer== _data.leftPlayer) str="Left Player Win!! \n Continue?" ;
-                else str= "Right Player Win!! \n Continue?";
+                if(_data.activatedPlayer== _data.leftPlayer) str="Left Player Win!! \n Do you want new Game?" ;
+                else str= "Right Player Win!! \n Do you want new Game?";
 
-                int result = JOptionPane.showConfirmDialog( _view, str);
+                JOptionPane dialog = new JOptionPane();
+                int result = JOptionPane.showConfirmDialog( _view, str,"Game End",JOptionPane.YES_NO_OPTION);
                 switch(result) {
                     case JOptionPane.NO_OPTION:
                         System.exit(0);
