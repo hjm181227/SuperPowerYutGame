@@ -49,7 +49,7 @@ public class InGameController {
                 data.preview.setVisible(false);
                 data.preview.setIcon(new ImageIcon(_data.focusedPawn.ImgSource()));
             }
-            _data.showAllPreviews();
+            showAllPreviews();
             _view.repaint();
         }
 
@@ -93,8 +93,11 @@ public class InGameController {
 
                 int result = JOptionPane.showConfirmDialog( _view, str);
                 switch(result) {
+                    case JOptionPane.NO_OPTION:
+                        System.exit(0);
+                        break;
                     case JOptionPane.YES_OPTION:
-
+                    default:
                         for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
                         if( _data.activatedPlayer == _data.rightPlayer) passPlayerTurn();
                         ready(_data.leftPlayer);
@@ -106,9 +109,6 @@ public class InGameController {
 
                         GameManager.getInstance().get_view().showMenu(); //메인메뉴로 넘어감
                         return;
-                    case JOptionPane.NO_OPTION:
-                        System.exit(0);
-                        break;
                 } // switch
             }
 
@@ -153,6 +153,7 @@ public class InGameController {
             JButton btn = (JButton) e.getSource();
             if ((_data.leftPlayer.isMyTurn && btn == _view.rightThrowBtn) || (_data.rightPlayer.isMyTurn && btn == _view.leftThrowBtn))
                 return;
+
             //Movement Ability Use
             if(_data.activatedPlayer.isNowAbility1Use==true)
                 _data.activatedPlayer.isNowAbility1Use=false;
@@ -160,9 +161,9 @@ public class InGameController {
             else{
                 YutResult = Math.random();
                 if (YutResult <= 0.1536)
-                    _data.throwResult =2;
+                    _data.throwResult =1;
                 else if (YutResult <= 0.4992)
-                    _data.throwResult = 4;
+                    _data.throwResult = 2;
                 else if (YutResult <= 0.7584)
                     _data.throwResult = 3;
                 else if (YutResult <= 0.8880)
@@ -172,7 +173,6 @@ public class InGameController {
                 else if (YutResult < 1)
                     _data.throwResult = 6;
             }
-
 
 
             _view.lblThrowing.start();
@@ -235,21 +235,13 @@ public class InGameController {
 
             if(obj ==_view.leftUserPanel.btnAbility1)
             {
-                if(_data.leftPlayer.abilities[0].isUsed() == false) {
-                    _data.activatedPlayer.isNowAbility1Use=true;
-                    _data.leftPlayer.abilities[0].use();
-                    _data.leftPlayer.abilities[0].setUsed(true);
-                    _view.repaint();
-                }
+                _data.leftPlayer.abilities[1].run();
+                _view.repaint();
             }
             else if(obj ==_view.leftUserPanel.btnAbility2)
             {
-                if(_data.leftPlayer.abilities[1].isUsed() == false) {
-                    _data.activatedPlayer.isNowAbility2Use=true;
-                    _data.leftPlayer.abilities[1].use();
-                    _data.leftPlayer.abilities[1].setUsed(true);
-                    _view.repaint();
-                }
+                _data.leftPlayer.abilities[0].run();
+                _view.repaint();
             }
         }
     }
@@ -301,6 +293,15 @@ public class InGameController {
 
         change_playerImgnLabel();
         ready(_data.activatedPlayer);
+    }
+
+    public void showAllPreviews(){
+        for(ThrowData data:_data.previewPawns) {
+            data.preview.setVisible(true);
+            if(data.result == 6 && _data.focusedPawn.getCurrentIndex() == 0) data.preview.setVisible(false);
+            else _data.findNextPoint(data);
+        }
+        GameManager.getInstance().get_inGame().repaint();
     }
 
     public void activate(){
