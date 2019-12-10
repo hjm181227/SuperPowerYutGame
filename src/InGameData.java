@@ -128,7 +128,7 @@ public class InGameData {
     ///말 이동 관련 메소드///
     ////////////////////
     public void findNextPoint(ThrowData data){
-
+        data.preview.setIcon(new ImageIcon(focusedPawn.ImgSource()));
         switch(focusedPawn.getCurrentIndex()) {
             case 0:
                 if(data.result == 6) {
@@ -191,17 +191,12 @@ public class InGameData {
                     break;
                 }
         }
-
-        data.preview.setLocation(boardIndexer[data.preview.getCurrentIndex()].p);
-    }
-
-    public void showAllPreviews(){
-        for(ThrowData data:previewPawns) {
-            data.preview.setVisible(true);
-            if(data.result == 6 && focusedPawn.getCurrentIndex() == 0) data.preview.setVisible(false);
-            else findNextPoint(data);
+        if(data.preview.getCurrentIndex() == 0) {
+            data.preview.setIcon(new ImageIcon("images/FinishedPawn.png"));
+            data.preview.setLocation(boardIndexer[20].p);
         }
-        GameManager.getInstance().get_inGame().repaint();
+        else
+            data.preview.setLocation(boardIndexer[data.preview.getCurrentIndex()].p);
     }
 
     public boolean moveOnePawn(Player owner, Pawn p, int end){

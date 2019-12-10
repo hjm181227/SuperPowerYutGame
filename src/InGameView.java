@@ -5,7 +5,6 @@ public class InGameView extends JPanel {
 
     public UserPanel leftUserPanel, rightUserPanel;
     private JLabel          gameBoard;
-    private JButton         btnThrow1, btnThrow2;
     public Yut              lblThrowing;
     private InGameData      _gameData;
     public JLabel          lblYutResult;
@@ -65,12 +64,6 @@ public class InGameView extends JPanel {
         add(lblYutResult);
 
 
-        //_gameData.previewMovedPawn = new Pawn();
-        //_gameData.previewMovedPawn.setEnabled(false);
-        //_gameData.previewMovedPawn.setVisible(false);
-
-        //add(_gameData.previewMovedPawn);
-        //setComponentZOrder(_gameData.previewMovedPawn, 0);
         repaint();
 
     }//constructor
