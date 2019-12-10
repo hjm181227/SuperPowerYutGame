@@ -25,9 +25,8 @@ public class Player {
         abilities = new Ability[2];
         int random;
 
+        random = (int)(Math.random() * 3);
 
-        /*
-        random = (int)(Math.random() * 4);
         switch (random){
             case 0:
                 abilities[0] = new MovementAbility.MoOrDo();
@@ -35,16 +34,12 @@ public class Player {
             case 1:
                 abilities[0] = new MovementAbility.GaeOrGirl();
                 break;
+
             case 2:
-                abilities[0] = new MovementAbility.BackStep();
-            case 3:
                 abilities[0] = new MovementAbility.OnlyYut();
         }
-        */
 
-
-        /*
-        random = (int)(Math.random() * 4);
+        random = (int)(Math.random() * 3);
         switch (random){
             case 0:
                 abilities[1] = new LocationAbility.Exchange();
@@ -56,9 +51,6 @@ public class Player {
                 abilities[1] = new LocationAbility.UpSideDown();
         }
 
-         */
-        abilities[0]= new MovementAbility.OnlyYut();
-//        abilities[1] = new LocationAbility.UpSideDown();
         abilities[1] = new LocationAbility.Exchange();
         score = 0;
         isMyTurn = false;

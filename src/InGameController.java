@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Scanner;
 
 public class InGameController {
 
@@ -25,14 +26,13 @@ public class InGameController {
         _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
         _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
 
+        _view.rightUserPanel.btnAbility1.addActionListener(new UseAbility());
+        _view.rightUserPanel.btnAbility2.addActionListener(new UseAbility());
 
         init_Game();
 
         change_playerImgnLabel();
         ready(_data.activatedPlayer);
-
-
-
 
     }
 
@@ -173,8 +173,12 @@ public class InGameController {
                 else if (YutResult < 1)
                     _data.throwResult = 6;
             }
-
-
+            //---윷 결과 조작
+            Scanner sc = new Scanner(System.in);
+            int inter;
+            inter = sc.nextInt();
+            _data.throwResult = inter;
+            //------------
             _view.lblThrowing.start();
             btn.setEnabled(false);
 
@@ -235,14 +239,21 @@ public class InGameController {
 
             if(obj ==_view.leftUserPanel.btnAbility1)
             {
-                _data.leftPlayer.abilities[0].run();
-                _view.repaint();
+                _data.leftPlayer.abilities[0].run(_data.leftPlayer);
             }
             else if(obj ==_view.leftUserPanel.btnAbility2)
             {
-                _data.leftPlayer.abilities[1].run();
-                _view.repaint();
+                _data.leftPlayer.abilities[1].run(_data.leftPlayer);
             }
+            else if(obj ==_view.rightUserPanel.btnAbility1)
+            {
+                _data.rightPlayer.abilities[0].run(_data.rightPlayer);
+            }
+            else if(obj ==_view.rightUserPanel.btnAbility2)
+            {
+                _data.rightPlayer.abilities[1].run(_data.rightPlayer);
+            }
+            _view.repaint();
         }
     }
 

@@ -154,6 +154,7 @@ public class LocationAbility {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Pawn obj = (Pawn)e.getSource();
+                System.out.println(obj.pawnNumber + "번 상대 말 선택");
                 for(Pawn p: opponent.pawns) {
                     if (obj.getCurrentIndex() == p.getCurrentIndex())
                         OpponentIdx = p.getCurrentIndex();
@@ -165,7 +166,7 @@ public class LocationAbility {
                         _data.activatedPlayer.pawns[i].setIndex(OpponentIdx);
                         _data.activatedPlayer.pawns[i].setLocation(_data.boardIndexer[OpponentIdx].p);
                     }
-                    else if(opponent.pawns[i].getCurrentIndex() == OpponentIdx) {
+                    if(opponent.pawns[i].getCurrentIndex() == OpponentIdx) {
                         opponent.pawns[i].setIndex(ActiveIdx);
                         opponent.pawns[i].setLocation(_data.boardIndexer[ActiveIdx].p);
                     }
@@ -187,6 +188,7 @@ public class LocationAbility {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Pawn obj = (Pawn)e.getSource();
+                System.out.println(obj.pawnNumber + "번 폰 선택됨");
                 for(Pawn p: _data.activatedPlayer.pawns) {
                     if (obj.getCurrentIndex() == p.getCurrentIndex())
                         ActiveIdx = p.getCurrentIndex();

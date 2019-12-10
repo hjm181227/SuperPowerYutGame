@@ -3,13 +3,13 @@ public abstract class Ability {
     public InGameData _data = GameManager.getInstance().get_gameData();
     public InGameView _view = GameManager.getInstance().get_inGame();
 
-    public void run()
+    public void run(Player user)
     {
+        if(user != _data.activatedPlayer) return;
         if(!isUsed) {
             use();
-            isUsed = true;
+            //isUsed = true;
         }
-        return;
     }
     public Ability(){
         isUsed = false;
