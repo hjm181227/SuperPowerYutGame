@@ -36,5 +36,4 @@ public class Pawn extends JLabel {
         this.currentIndex=0;
         this.isFinished=false;
     }
-
 }
