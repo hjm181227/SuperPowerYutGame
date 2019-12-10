@@ -31,21 +31,21 @@ public class MenuPanel extends JPanel {
         btnStart = new JButton("Start");
         btnStart.setBounds(300, 400, 400, 100);
         btnStart.setFont(new Font("OCR A Extended", Font.BOLD, 40));
-        GameManager.setBtnInit(btnStart);
+        GameManager.getInstance().setBtnInit(btnStart);
         add(btnStart);
 
         //게임방법 버튼 세팅
         btnExplain = new JButton("How to Play");
         btnExplain.setBounds(300, 500, 400, 100);
         btnExplain.setFont(new Font("OCR A Extended", Font.BOLD, 40));
-        GameManager.setBtnInit(btnExplain);
+        GameManager.getInstance().setBtnInit(btnExplain);
         add(btnExplain);
 
         //게임종료 버튼 세팅
         btnExit = new JButton("Exit");
         btnExit.setBounds(300, 600, 400, 100);
         btnExit.setFont(new Font("OCR A Extended", Font.BOLD, 40));
-        GameManager.setBtnInit(btnExit);
+        GameManager.getInstance().setBtnInit(btnExit);
 
         add(btnExit);
 

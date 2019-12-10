@@ -64,10 +64,6 @@ public class InGameController {
     private class MoveSelectedPawn implements MouseListener {
 
         @Override
-        public void mouseClicked(MouseEvent e) { }
-        @Override
-        public void mousePressed(MouseEvent e) { }
-        @Override
         public void mouseReleased(MouseEvent e) {
             Pawn p = (Pawn)e.getSource();
             ThrowData clicked = null;
@@ -142,9 +138,13 @@ public class InGameController {
         }
 
         @Override
-        public void mouseEntered(MouseEvent e) {        }
+        public void mouseEntered(MouseEvent e) { }
         @Override
-        public void mouseExited(MouseEvent e) {        }
+        public void mouseExited(MouseEvent e) { }
+        @Override
+        public void mouseClicked(MouseEvent e) { }
+        @Override
+        public void mousePressed(MouseEvent e) { }
     }
 
     private class ThrowingYut implements ActionListener {
@@ -173,12 +173,12 @@ public class InGameController {
                 else if (YutResult < 1)
                     _data.throwResult = 6;
             }
-            //---윷 결과 조작
+            /*//---윷 결과 조작
             Scanner sc = new Scanner(System.in);
             int inter;
             inter = sc.nextInt();
             _data.throwResult = inter;
-            //------------
+            //------------ */
             _view.lblThrowing.start();
             btn.setEnabled(false);
 

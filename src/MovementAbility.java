@@ -22,8 +22,8 @@ public class MovementAbility {
         public void use() {
             randomNum= (int)(Math.random()*2);
             System.out.println("GG randomNum >>" + randomNum);
-            if(randomNum==0){ _data.throwResult = 2;   }            //개
-            else{ _data.throwResult = 3;   }                        //걸
+            if(randomNum==0){   _data.throwResult = 2;   }            //개
+            else{   _data.throwResult = 3;   }                        //걸
         }
     }
 
