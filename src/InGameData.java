@@ -248,6 +248,8 @@ public class InGameData {
             }//출발지에 있는 말들 이동
         }
 
+
+
         if(boardIndexer[end].currentIndex != 0) return catchOpponentPawns(opponent, boardIndexer[end]);  //이동한 자리에 있는 상대말 잡기
         return false;
     }

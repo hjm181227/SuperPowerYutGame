@@ -17,7 +17,7 @@ public class UserPanel extends JPanel{
         btnAbility1.setLayout(null);
         add(btnAbility1);
 
-        btnAbility2 = new JButton("움직임 능력");
+        btnAbility2 = new JButton("위치 능력");
         btnAbility2.setBounds(100,350,100,50);
         btnAbility2.setLayout(null);
         add(btnAbility2);
