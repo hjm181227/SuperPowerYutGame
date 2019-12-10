@@ -25,6 +25,7 @@ public class InGameController {
         _view.leftUserPanel.btnAbility2.addActionListener(new UseAbility());
         _view.leftUserPanel.btnAbility1.addActionListener(new UseAbility());
 
+
         init_Game();
 
         change_playerImgnLabel();
@@ -43,9 +44,9 @@ public class InGameController {
         @Override
         public void mouseReleased(MouseEvent e) {
             _data.focusedPawn = (Pawn)e.getSource();
-            System.out.println("폰을 클릭했다");
+            System.out.println(_data.focusedPawn.pawnNumber + "번 폰을 클릭했다");
             for(ThrowData data:_data.previewPawns){
-                data.preview.setVisible(true);
+                data.preview.setVisible(false);
                 data.preview.setIcon(new ImageIcon(_data.focusedPawn.ImgSource()));
             }
             _data.showAllPreviews();
@@ -60,16 +61,14 @@ public class InGameController {
         public void mouseExited(MouseEvent e) {       }
     }
 
-
-
-
-
     private class MoveSelectedPawn implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) { }
+
         @Override
         public void mousePressed(MouseEvent e) { }
+
         @Override
         public void mouseReleased(MouseEvent e) {
             Pawn p = (Pawn)e.getSource();
@@ -124,7 +123,23 @@ public class InGameController {
                 for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
                 passPlayerTurn();
             }
-
+            else {
+                boolean flag = true;
+                for(ThrowData data:_data.previewPawns) {
+                    if(data.result != 6) flag = false;
+                }
+                if(flag == true){   //throw Result들이 모두 빽도인 경우
+                    for(Pawn pawn:_data.activatedPlayer.pawns){
+                        if(pawn.getCurrentIndex()!=0) flag = false;
+                    }
+                    if(flag == true){   //게임판에 올라온 말이 없는 경우(빽도 이동이 가능한 말이 없는 경우)
+                        for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        passPlayerTurn();
+                        _data.previewPawns.clear();
+                        _data.previewPawns.trimToSize();
+                    }
+                }
+            }
 
         }
 
@@ -152,7 +167,7 @@ public class InGameController {
             else if (YutResult <= 0.9136)
                 _data.throwResult = 5;
             else if (YutResult < 1)
-                _data.throwResult = 5;
+                _data.throwResult = 6;
 
             _view.lblThrowing.start();
             btn.setEnabled(false);
@@ -168,29 +183,37 @@ public class InGameController {
             _view.add(data.preview);
             _view.setComponentZOrder(data.preview, 0);
 
-
-            /*
-            if(_data.throwResult == 6) {
-                for(Pawn p:_data.activatedPlayer.pawns) {
-                    if(p.isFinished() == false && p.getCurrentIndex() != 0){
-                        for(Pawn P:_data.activatedPlayer.pawns) if(P.isFinished()==false) P.addMouseListener(_data.activatedPlayer==_data.leftPlayer ? leftPawnListener : rightPawnListener);
-                        return;
-                    }
-                }
-                if(_data.throwableNCnt==0) passPlayerTurn();
-            }
-            */
-
             System.out.println(_data.throwableNCnt);
-            if (_data.throwableNCnt == 0) {
-                for (Pawn P : _data.activatedPlayer.pawns) {
-                    if (P.isFinished() == false) {
-                        P.addMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+            if (_data.throwableNCnt == 0) { //윷 던질 기회 모두 사용한 경우
+                boolean flag = true;
+                for(ThrowData d:_data.previewPawns) {
+                    if(d.result != 6) flag = false;
+                }
+                if(flag == true){   //throw Result들이 모두 빽도인 경우 말을 이동할 준비
+                    for(Pawn pawn:_data.activatedPlayer.pawns){
+                        if(pawn.getCurrentIndex()!=0) flag = false;
+                    }
+                    if(flag == true){   //게임판에 올라온 말이 없는 경우(빽도 이동이 가능한 말이 없는 경우)
+                        for(Pawn pawn:_data.activatedPlayer.pawns) pawn.removeMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        passPlayerTurn();
+                        _data.previewPawns.clear();
+                        _data.previewPawns.trimToSize();
+                    }
+                    else{
+                        for (Pawn P : _data.activatedPlayer.pawns)
+                            if (P.isFinished() == false)
+                                P.addMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                    }
+                }
+                else {
+                    for (Pawn P : _data.activatedPlayer.pawns) {
+                        if (P.isFinished() == false) {
+                            P.addMouseListener(_data.activatedPlayer == _data.leftPlayer ? leftPawnListener : rightPawnListener);
+                        }
                     }
                 }
             }
-            else {
-                System.out.println("!23");
+            else {  //던질 기회가 남았다면 다시 던질 준비
                 ready(_data.activatedPlayer);
             }
         }
@@ -207,7 +230,7 @@ public class InGameController {
             {
                 if(_data.leftPlayer.abilities[1].isUsed() == false) {
                     _data.leftPlayer.abilities[1].use();
-                   // _data.leftPlayer.abilities[1].setUsed(true);
+                    _data.leftPlayer.abilities[1].setUsed(true);
                     _view.repaint();
                 }
             }
@@ -215,7 +238,7 @@ public class InGameController {
             {
                 if(_data.leftPlayer.abilities[0].isUsed() == false) {
                     _data.leftPlayer.abilities[0].use();
-                    //_data.leftPlayer.abilities[0].setUsed(true);
+                    _data.leftPlayer.abilities[0].setUsed(true);
                     _view.repaint();
                 }
             }
@@ -259,15 +282,8 @@ public class InGameController {
         _data.throwableNCnt = 1;
     }
 
-
-    /*
-    public void set_inGame(InGameView inGame){this._inGame = inGame;}
-      public void set_view(MainPanel view){this._view = view;}
-    public void set_explain(ExplainPanel explain){this._explain = explain;}
-    public void set_menu(MenuPanel menu){this._menu = menu;}
-    public void set_gameData(InGameData data){this._gameData = data;}
-     */
     public void passPlayerTurn(){
+
         _data.activatedPlayer.isMyTurn = false;
         _data.activatedPlayer = _data.activatedPlayer == _data.leftPlayer ? _data.rightPlayer : _data.leftPlayer;
         _data.activatedPlayer.isMyTurn = true;
@@ -281,10 +297,4 @@ public class InGameController {
     public void activate(){
 
     }
-
-    public void InGameController_init(){
-
-
-    }
-
 }
