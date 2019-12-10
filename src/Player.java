@@ -6,7 +6,7 @@ public class Player {
     public Pawn[]      pawns;
     public int         score;
     public Ability[]   abilities;
-    public boolean     isMyTurn;
+    public boolean     isMyTurn, isNowAbility1Use, isNowAbility2Use;
     public int        pawnImgWidth, pawnImgHeight;
 
     public JLabel       imgPlayer, lblTurn;
@@ -57,10 +57,13 @@ public class Player {
         }
 
          */
-        abilities[1] = new LocationAbility.UpSideDown();
-        abilities[0] = new LocationAbility.Exchange();
+        abilities[0]= new MovementAbility.OnlyYut();
+//        abilities[1] = new LocationAbility.UpSideDown();
+        abilities[1] = new LocationAbility.Exchange();
         score = 0;
         isMyTurn = false;
+        isNowAbility1Use= false;
+        isNowAbility2Use= false;
 
         iconPalyer = new ImageIcon[2];
         imgPlayer = new JLabel();
@@ -81,6 +84,8 @@ public class Player {
     public void Player_init(){
         this.score=0;
         this.isMyTurn=false;
+        this.isNowAbility1Use=false;
+        this.isNowAbility2Use=false;
         for(Pawn p:this.pawns){
             p.Pawn_init();
         }

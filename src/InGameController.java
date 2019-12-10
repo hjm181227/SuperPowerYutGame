@@ -65,10 +65,8 @@ public class InGameController {
 
         @Override
         public void mouseClicked(MouseEvent e) { }
-
         @Override
         public void mousePressed(MouseEvent e) { }
-
         @Override
         public void mouseReleased(MouseEvent e) {
             Pawn p = (Pawn)e.getSource();
@@ -155,19 +153,27 @@ public class InGameController {
             JButton btn = (JButton) e.getSource();
             if ((_data.leftPlayer.isMyTurn && btn == _view.rightThrowBtn) || (_data.rightPlayer.isMyTurn && btn == _view.leftThrowBtn))
                 return;
-            YutResult = Math.random();
-            if (YutResult <= 0.1536)
-                _data.throwResult =1;
-            else if (YutResult <= 0.4992)
-                _data.throwResult = 2;
-            else if (YutResult <= 0.7584)
-                _data.throwResult = 3;
-            else if (YutResult <= 0.8880)
-                _data.throwResult = 4;
-            else if (YutResult <= 0.9136)
-                _data.throwResult = 5;
-            else if (YutResult < 1)
-                _data.throwResult = 6;
+
+            //Movement Ability Use
+            if(_data.activatedPlayer.isNowAbility1Use==true)
+                _data.activatedPlayer.isNowAbility1Use=false;
+
+            else{
+                YutResult = Math.random();
+                if (YutResult <= 0.1536)
+                    _data.throwResult =1;
+                else if (YutResult <= 0.4992)
+                    _data.throwResult = 2;
+                else if (YutResult <= 0.7584)
+                    _data.throwResult = 3;
+                else if (YutResult <= 0.8880)
+                    _data.throwResult = 4;
+                else if (YutResult <= 0.9136)
+                    _data.throwResult = 5;
+                else if (YutResult < 1)
+                    _data.throwResult = 6;
+            }
+
 
             _view.lblThrowing.start();
             btn.setEnabled(false);
@@ -214,6 +220,7 @@ public class InGameController {
                 }
             }
             else {  //던질 기회가 남았다면 다시 던질 준비
+                //여기에 다시 던지세요 라벨 추가..?
                 ready(_data.activatedPlayer);
             }
         }
@@ -226,13 +233,12 @@ public class InGameController {
         public void actionPerformed(ActionEvent e) {
            Object obj = e.getSource();
 
-            if(obj ==_view.leftUserPanel.btnAbility2)
+            if(obj ==_view.leftUserPanel.btnAbility1)
             {
                 _data.leftPlayer.abilities[1].run();
                 _view.repaint();
-
             }
-            else if(obj ==_view.leftUserPanel.btnAbility1)
+            else if(obj ==_view.leftUserPanel.btnAbility2)
             {
                 _data.leftPlayer.abilities[0].run();
                 _view.repaint();
