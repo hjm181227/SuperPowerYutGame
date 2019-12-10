@@ -15,8 +15,6 @@ public class MovementAbility {
         }
     }
 
-
-
     public static class GaeOrGirl extends Ability{
         //개 아니면 걸
         int randomNum;

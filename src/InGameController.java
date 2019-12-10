@@ -235,12 +235,12 @@ public class InGameController {
 
             if(obj ==_view.leftUserPanel.btnAbility1)
             {
-                _data.leftPlayer.abilities[1].run();
+                _data.leftPlayer.abilities[0].run();
                 _view.repaint();
             }
             else if(obj ==_view.leftUserPanel.btnAbility2)
             {
-                _data.leftPlayer.abilities[0].run();
+                _data.leftPlayer.abilities[1].run();
                 _view.repaint();
             }
         }
