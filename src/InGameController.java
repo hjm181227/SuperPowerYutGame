@@ -180,6 +180,8 @@ public class InGameController {
             inter = sc.nextInt();
             _data.throwResult = inter;
             //------------ */
+
+            System.out.println("result >"+ _data.throwResult);
             _view.lblThrowing.start();
             btn.setEnabled(false);
 
