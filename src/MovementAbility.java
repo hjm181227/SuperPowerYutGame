@@ -8,6 +8,7 @@ public class MovementAbility {
         int randomNum;
         @Override
         public void use() {
+            _data.activatedPlayer.isNowAbility1Use=true;
             randomNum= (int)(Math.random()*2);
             System.out.println("MD randomNum >>" + randomNum);
             if(randomNum==0){ _data.throwResult = 5;   }            //모
@@ -20,6 +21,7 @@ public class MovementAbility {
         int randomNum;
         @Override
         public void use() {
+            _data.activatedPlayer.isNowAbility1Use=true;
             randomNum= (int)(Math.random()*2);
             System.out.println("GG randomNum >>" + randomNum);
             if(randomNum==0){   _data.throwResult = 2;   }            //개
@@ -31,6 +33,7 @@ public class MovementAbility {
         //던지면 무조건 윷
         @Override
         public void use(){
+            _data.activatedPlayer.isNowAbility1Use=true;
             System.out.println("only yut");
             _data.throwResult=4;
         }

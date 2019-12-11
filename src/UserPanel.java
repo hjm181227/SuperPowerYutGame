@@ -15,7 +15,7 @@ public class UserPanel extends JPanel{
         btnAbility1 = new JButton(user.abilities[0].abilityName);
         btnAbility1.setBounds(0,350,100,50);
         btnAbility1.setLayout(null);
-        btnAbility1.setFont(new Font("OCR A Extended", Font.BOLD, 15));
+        btnAbility1.setFont(new Font("OCR A Extended", Font.BOLD, 13));
         btnAbility1.setBorderPainted(false);  //외곽선
         btnAbility1.setFocusPainted(false);  //선택시 테두리 사용x
         btnAbility1.setBackground(new Color(225,213,191));
@@ -24,7 +24,7 @@ public class UserPanel extends JPanel{
         btnAbility2 = new JButton(user.abilities[1].abilityName);
         btnAbility2.setBounds(100,350,100,50);
         btnAbility2.setLayout(null);
-        btnAbility2.setFont(new Font("OCR A Extended", Font.BOLD, 15));
+        btnAbility2.setFont(new Font("OCR A Extended", Font.BOLD, 13));
         btnAbility2.setBorderPainted(false);  //외곽선
         btnAbility2.setFocusPainted(false);  //선택시 테두리 사용x
         btnAbility2.setBackground(new Color(225,213,191));

@@ -258,11 +258,11 @@ public class InGameData {
 
         for(Pawn p:leftPlayer.pawns){
             goWaitingRoom(p, leftPlayer);
-            p.setPawnImg("images/horsePawn.png");
+            p.setPawnImg("images/left_Pawn.png");
         }
         for(Pawn p:rightPlayer.pawns){
             goWaitingRoom(p, rightPlayer);
-            p.setPawnImg("images/pigPawn.png");
+            p.setPawnImg("images/right_Pawn.png");
         }
 
         activatedPlayer= leftPlayer;
